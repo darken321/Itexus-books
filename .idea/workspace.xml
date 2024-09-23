@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Books.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/books.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2mFQ4iWqAU9Xw5dkIhEVzDX7bk2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.24620306",
+    "project.structure.side.proportion": "0.42875317",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "spring.configuration.checksum": "92137cf399a0085c895c0a975cdfb449",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Books">
+    <configuration name="Books" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Books" />
+      <module name="Itexus-books.main" />
+      <option name="VM_PARAMETERS" value="-Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.MainMenu" />
+      <module name="Itexus-books.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.controller.Menu" />
+      <module name="Itexus-books.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBooksFromCSV" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.ReadBooksFromCSV" />
+      <module name="Itexus-books.main" />
+      <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WriteBooksToCSV" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.WriteBooksToCSV" />
+      <module name="Itexus-books.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MainMenu" />
+      <item itemvalue="Application.Books" />
+      <item itemvalue="Application.Menu" />
+      <item itemvalue="Application.ReadBooksFromCSV" />
+      <item itemvalue="Application.WriteBooksToCSV" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainMenu" />
+        <item itemvalue="Application.Books" />
+        <item itemvalue="Application.Menu" />
+        <item itemvalue="Application.ReadBooksFromCSV" />
+        <item itemvalue="Application.WriteBooksToCSV" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="" />
+      <created>1726669661154</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726669661154</updated>
+      <workItem from="1726669662556" duration="12396000" />
+      <workItem from="1726686637765" duration="2691000" />
+      <workItem from="1726815121965" duration="4448000" />
+      <workItem from="1726841914179" duration="33294000" />
+      <workItem from="1726984136279" duration="11500000" />
+      <workItem from="1727028497024" duration="1766000" />
+      <workItem from="1727077632700" duration="14070000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.github.evgenys91.machinet.common.dslhistory.DslHistoryState">
+    <option name="historyDtoById">
+      <map>
+        <entry key="609fb7">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                </list>
+              </option>
+              <option name="id" value="609fb7" />
+              <option name="initiateTms" value="1727092155742" />
+              <option name="request" value=" как посмотреть раскладку клавиатуры win 10" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="В Windows 10 вы можете проверить текущую раскладку клавиатуры несколькими способами. Вот несколько методов:&#10;&#10;### 1. Использование панели задач&#10;&#10;1. **Панель задач**: В правом нижнем углу экрана, на панели задач, вы увидите индикатор текущей раскладки клавиатуры. Это может быть, например, &quot;ENG&quot; для английской раскладки или &quot;РУС&quot; для русской раскладки.&#10;2. **Переключение раскладки**: Нажмите на этот индикатор, чтобы увидеть список доступных раскладок и переключиться между ними.&#10;&#10;### 2. Использование сочетания клавиш&#10;&#10;1. **Сочетание клавиш**: Вы можете использовать сочетание клавиш `Alt + Shift` или `Ctrl + Shift` для переключения между раскладками клавиатуры. Текущая раскладка будет отображаться на панели задач.&#10;&#10;### 3. Использование настроек Windows&#10;&#10;1. **Открытие настроек**: Нажмите `Win + I`, чтобы открыть окно настроек.&#10;2. **Время и язык**: Перейдите в раздел &quot;Время и язык&quot; (Time &amp; Language).&#10;3. **Язык**: В левой панели выберите &quot;Язык&quot; (Language).&#10;4. **Клавиатура**: В разделе &quot;Предпочитаемые языки&quot; (Preferred languages) выберите ваш язык и нажмите на него, затем выберите &quot;Параметры&quot; (Options).&#10;5. **Клавиатуры**: В разделе &quot;Клавиатуры&quot; (Keyboards) вы увидите список установленных раскладок клавиатуры. Здесь вы можете добавить или удалить раскладки.&#10;&#10;### 4. Использование панели управления&#10;&#10;1. **Открытие панели управления**: Нажмите `Win + R`, введите `control` и нажмите Enter, чтобы открыть Панель управления.&#10;2. **Часы, язык и регион**: Перейдите в раздел &quot;Часы, язык и регион&quot; (Clock, Language, and Region).&#10;3. **Язык**: Нажмите на &quot;Язык&quot; (Language).&#10;4. **Настройки клавиатуры**: В разделе &quot;Изменение методов ввода&quot; (Change input methods) вы увидите список установленных языков и раскладок клавиатуры. Нажмите &quot;Параметры&quot; (Options) рядом с вашим языком, чтобы увидеть и изменить раскладки клавиатуры.&#10;&#10;### 5. Использование командной строки&#10;&#10;1. **Открытие командной строки**: Нажмите `Win + R`, введите `cmd` и нажмите Enter, чтобы открыть командную строку.&#10;2. **Команда для проверки раскладки**: В командной строке введите следующую команду и нажмите Enter:&#10;   ```sh&#10;   powershell &quot;Get-WinUserLanguageList&quot;&#10;   ```&#10;   Эта команда покажет список установленных языков и раскладок клавиатуры.&#10;&#10;Эти методы помогут вам проверить и изменить текущую раскладку клавиатуры в Windows 10." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1727092167328" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="840834">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/resources/books.csv" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                </list>
+              </option>
+              <option name="id" value="840834" />
+              <option name="initiateTms" value="1727088566783" />
+              <option name="request" value=" почему         String title = readLine() в BookInputHandler читает &quot;&quot;�?&quot; вместо &quot;И&quot;" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="Проблема с некорректным отображением символов может быть связана с несколькими факторами, включая настройки консоли, из которой вы запускаете программу, и кодировку, используемую в вашей системе. Давайте рассмотрим несколько шагов, которые могут помочь решить эту проблему.&#10;&#10;### 1. Убедитесь, что консоль поддерживает UTF-8&#10;&#10;Некоторые консоли по умолчанию не поддерживают UTF-8. Например, в Windows командная строка (cmd) по умолчанию использует кодировку CP-1251 для русского языка. Вы можете изменить кодировку консоли на UTF-8 с помощью команды:&#10;&#10;```sh&#10;chcp 65001&#10;```&#10;&#10;### 2. Проверьте кодировку вашего IDE&#10;&#10;Если вы запускаете программу из IDE, убедитесь, что IDE настроена на использование UTF-8 для ввода и вывода.&#10;&#10;### 3. Убедитесь, что файл сохранен в UTF-8&#10;&#10;Убедитесь, что ваш исходный файл Java сохранен в кодировке UTF-8. В большинстве современных IDE это можно настроить в настройках проекта.&#10;&#10;### 4. Пример кода для проверки&#10;&#10;Вот пример кода, который включает все необходимые настройки для работы с UTF-8:&#10;&#10;```java&#10;package org.example.controller;&#10;&#10;import org.example.model.Book;&#10;import org.springframework.stereotype.Component;&#10;&#10;import java.io.BufferedReader;&#10;import java.io.InputStreamReader;&#10;import java.io.IOException;&#10;import java.nio.charset.StandardCharsets;&#10;&#10;/**&#10; * Класс для обработки ввода данных о книгах от пользователя.&#10; * Этот класс отвечает за получение данных о книгах от пользователя через консоль.&#10; */&#10;@Component&#10;public class BookInputHandler {&#10;&#10;    private final String red = &quot;\u001B[31m&quot;;&#10;    private final String reset = &quot;\u001B[0m&quot;;&#10;&#10;    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));&#10;&#10;    /**&#10;     * Получает данные о новой книге от пользователя.&#10;     *&#10;     * @return книгу {@link Book}, для добавления в файл&#10;     */&#10;    public Book newBookDetails() {&#10;        int id = getValidBookId(&quot;Введите ID добавляемой книги:&quot;);&#10;&#10;        System.out.println(&quot;Введите название книги:&quot;);&#10;        String title = readLine();&#10;&#10;        System.out.println(&quot;Введите автора книги:&quot;);&#10;        String author = readLine();&#10;&#10;        System.out.println(&quot;Введите описание книги:&quot;);&#10;        String description = readLine();&#10;&#10;        return new Book(id, title, author, description);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя данные для редактирования существующей книги.&#10;     *&#10;     * @return книгу {@link Book} с данными для изменения книги.&#10;     */&#10;    public Book updateBookDetails() {&#10;        int id = getValidBookId(&quot;Введите ID книги для редактирования:&quot;);&#10;&#10;        System.out.println(&quot;Введите новое название книги&quot;);&#10;        String title = readLine();&#10;&#10;        System.out.println(&quot;Введите нового автора книги&quot;);&#10;        String author = readLine();&#10;&#10;        System.out.println(&quot;Введите новое описание книги&quot;);&#10;        String description = readLine();&#10;&#10;        return new Book(id, title, author, description);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя ID книги для удаления.&#10;     *&#10;     * @return ID книги, введенный пользователем.&#10;     */&#10;    public int deleteBookDetails() {&#10;        return getValidBookId(&quot;Введите ID книги для удаления:&quot;);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя корректный ID книги,&#10;     * проверяет, что введенное значение является положительным числом.&#10;     *&#10;     * @param prompt сообщение, отображаемое пользователю для ввода ID.&#10;     * @return корректный ID книги.&#10;     */&#10;    private int getValidBookId(String prompt) {&#10;        int id = -1;&#10;        while (id &lt; 0) {&#10;            System.out.println(prompt);&#10;            try {&#10;                id = Integer.parseInt(readLine());&#10;                if (id &lt; 0) {&#10;                    System.out.println(red + &quot;ID книги не может быть отрицательным. Попробуйте снова.&quot; + reset);&#10;                }&#10;            } catch (NumberFormatException e) {&#10;                System.out.println(red + &quot;Неверный ввод. Пожалуйста, введите числовое значение для ID.&quot; + reset);&#10;            } catch (IOException e) {&#10;                System.out.println(red + &quot;Ошибка ввода. Попробуйте снова.&quot; + reset);&#10;            }&#10;        }&#10;        return id;&#10;    }&#10;&#10;    /**&#10;     * Читает строку из консоли.&#10;     *&#10;     * @return введенная строка.&#10;     */&#10;    private String readLine() {&#10;        try {&#10;            return reader.readLine();&#10;        } catch (IOException e) {&#10;            System.out.println(red + &quot;Ошибка ввода. Попробуйте снова.&quot; + reset);&#10;            return &quot;&quot;;&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;### 5. Запуск программы&#10;&#10;Запустите программу из консоли, предварительно установив кодировку UTF-8:&#10;&#10;```sh&#10;chcp 65001&#10;java -jar your-application.jar&#10;```&#10;&#10;### 6. Проверка&#10;&#10;Попробуйте ввести символ &quot;И&quot; и убедитесь, что он корректно отображается и сохраняется.&#10;&#10;Если проблема сохраняется, возможно, она связана с настройками вашей системы или консоли. В таком случае, попробуйте использовать другую консоль или терминал, который поддерживает UTF-8." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1727088583324" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/resources/books.csv" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="910ee8">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                </list>
+              </option>
+              <option name="id" value="910ee8" />
+              <option name="initiateTms" value="1727088068867" />
+              <option name="request" value=" замени Scanner в классе BookInputHandler на BufferedReader с указанием кодировки UTF-8" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="Для замены `Scanner` на `BufferedReader` с указанием кодировки UTF-8 в классе `BookInputHandler`, вам нужно внести следующие изменения:&#10;&#10;1. Импортировать необходимые классы.&#10;2. Инициализировать `BufferedReader` с указанием кодировки UTF-8.&#10;3. Заменить вызовы методов `scanner.nextLine()` на соответствующие методы `BufferedReader`.&#10;&#10;Вот обновленный код класса `BookInputHandler`:&#10;&#10;```java&#10;package org.example.controller;&#10;&#10;import org.example.model.Book;&#10;import org.springframework.stereotype.Component;&#10;&#10;import java.io.BufferedReader;&#10;import java.io.InputStreamReader;&#10;import java.io.IOException;&#10;import java.nio.charset.StandardCharsets;&#10;&#10;/**&#10; * Класс для обработки ввода данных о книгах от пользователя.&#10; * Этот класс отвечает за получение данных о книгах от пользователя через консоль.&#10; */&#10;@Component&#10;public class BookInputHandler {&#10;&#10;    private final String red = &quot;\u001B[31m&quot;;&#10;    private final String reset = &quot;\u001B[0m&quot;;&#10;&#10;    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));&#10;&#10;    /**&#10;     * Получает данные о новой книге от пользователя.&#10;     *&#10;     * @return книгу {@link Book}, для добавления в файл&#10;     */&#10;    public Book newBookDetails() {&#10;        int id = getValidBookId(&quot;Введите ID добавляемой книги:&quot;);&#10;&#10;        System.out.println(&quot;Введите название книги:&quot;);&#10;        String title = readLine();&#10;&#10;        System.out.println(&quot;Введите автора книги:&quot;);&#10;        String author = readLine();&#10;&#10;        System.out.println(&quot;Введите описание книги:&quot;);&#10;        String description = readLine();&#10;&#10;        return new Book(id, title, author, description);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя данные для редактирования существующей книги.&#10;     *&#10;     * @return книгу {@link Book} с данными для изменения книги.&#10;     */&#10;    public Book updateBookDetails() {&#10;        int id = getValidBookId(&quot;Введите ID книги для редактирования:&quot;);&#10;&#10;        System.out.println(&quot;Введите новое название книги&quot;);&#10;        String title = readLine();&#10;&#10;        System.out.println(&quot;Введите нового автора книги&quot;);&#10;        String author = readLine();&#10;&#10;        System.out.println(&quot;Введите новое описание книги&quot;);&#10;        String description = readLine();&#10;&#10;        return new Book(id, title, author, description);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя ID книги для удаления.&#10;     *&#10;     * @return ID книги, введенный пользователем.&#10;     */&#10;    public int deleteBookDetails() {&#10;        return getValidBookId(&quot;Введите ID книги для удаления:&quot;);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя корректный ID книги,&#10;     * проверяет, что введенное значение является положительным числом.&#10;     *&#10;     * @param prompt сообщение, отображаемое пользователю для ввода ID.&#10;     * @return корректный ID книги.&#10;     */&#10;    private int getValidBookId(String prompt) {&#10;        int id = -1;&#10;        while (id &lt; 0) {&#10;            System.out.println(prompt);&#10;            try {&#10;                id = Integer.parseInt(readLine());&#10;                if (id &lt; 0) {&#10;                    System.out.println(red + &quot;ID книги не может быть отрицательным. Попробуйте снова.&quot; + reset);&#10;                }&#10;            } catch (NumberFormatException e) {&#10;                System.out.println(red + &quot;Неверный ввод. Пожалуйста, введите числовое значение для ID.&quot; + reset);&#10;            } catch (IOException e) {&#10;                System.out.println(red + &quot;Ошибка ввода. Попробуйте снова.&quot; + reset);&#10;            }&#10;        }&#10;        return id;&#10;    }&#10;&#10;    /**&#10;     * Читает строку из консоли.&#10;     *&#10;     * @return введенная строка.&#10;     */&#10;    private String readLine() {&#10;        try {&#10;            return reader.readLine();&#10;        } catch (IOException e) {&#10;            System.out.println(red + &quot;Ошибка ввода. Попробуйте снова.&quot; + reset);&#10;            return &quot;&quot;;&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;В этом коде:&#10;- `BufferedReader` и `InputStreamReader` используются для чтения ввода с консоли с указанием кодировки UTF-8.&#10;- Метод `readLine()` обрабатывает возможные исключения `IOException` и возвращает введенную строку.&#10;- Все вызовы `scanner.nextLine()` заменены на `readLine()`." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1727088095802" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="ef5dff">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/resources/books.csv" />
+                </list>
+              </option>
+              <option name="id" value="ef5dff" />
+              <option name="initiateTms" value="1727087587991" />
+              <option name="request" value=" какой параметр отвечает за кодировку символов с консоли ввода?&#10;При вводе символа И он сохраняется как �?" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="Проблема, с которой вы столкнулись, связана с неправильной кодировкой символов при чтении или записи файла. В Java кодировка символов может быть указана при работе с файлами через различные параметры и методы.&#10;&#10;Для чтения и записи файлов с указанием кодировки символов можно использовать классы `BufferedReader`, `BufferedWriter`, `InputStreamReader`, и `OutputStreamWriter`. В вашем случае, если вы работаете с CSV-файлом, то вам нужно убедиться, что вы используете правильную кодировку, например, UTF-8.&#10;&#10;Вот пример, как можно читать CSV-файл с указанием кодировки UTF-8:&#10;&#10;```java&#10;import java.io.BufferedReader;&#10;import java.io.FileReader;&#10;import java.io.IOException;&#10;import java.nio.charset.StandardCharsets;&#10;&#10;public class ReadCSVWithEncoding {&#10;    public static void main(String[] args) {&#10;        String csvFile = &quot;src/main/resources/books.csv&quot;;&#10;        String line;&#10;        String csvSplitBy = &quot;,&quot;;&#10;&#10;        try (BufferedReader br = new BufferedReader(new FileReader(csvFile, StandardCharsets.UTF_8))) {&#10;            while ((line = br.readLine()) != null) {&#10;                String[] book = line.split(csvSplitBy);&#10;                System.out.println(&quot;ID: &quot; + book[0] + &quot;, Title: &quot; + book[1] + &quot;, Author: &quot; + book[2] + &quot;, Description: &quot; + book[3]);&#10;            }&#10;        } catch (IOException e) {&#10;            e.printStackTrace();&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;Для записи в CSV-файл с указанием кодировки UTF-8 можно использовать следующий пример:&#10;&#10;```java&#10;import java.io.BufferedWriter;&#10;import java.io.FileWriter;&#10;import java.io.IOException;&#10;import java.nio.charset.StandardCharsets;&#10;&#10;public class WriteCSVWithEncoding {&#10;    public static void main(String[] args) {&#10;        String csvFile = &quot;src/main/resources/books.csv&quot;;&#10;        String[] book = {&quot;123&quot;, &quot;Название&quot;, &quot;Автор&quot;, &quot;Описание&quot;};&#10;&#10;        try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile, StandardCharsets.UTF_8, true))) {&#10;            StringBuilder sb = new StringBuilder();&#10;            for (String field : book) {&#10;                sb.append(field).append(&quot;,&quot;);&#10;            }&#10;            sb.deleteCharAt(sb.length() - 1); // Удаляем последнюю запятую&#10;            bw.write(sb.toString());&#10;            bw.newLine();&#10;        } catch (IOException e) {&#10;            e.printStackTrace();&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;В этих примерах используется кодировка `UTF-8`, которая должна корректно обрабатывать русские символы. Убедитесь, что ваш CSV-файл также сохранен в кодировке UTF-8." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1727087598432" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/main/resources/books.csv" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

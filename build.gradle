@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = 'UTF-8'
+        }
+    }
+    tasks.withType(JavaExec).tap {
+        configureEach {
+            jvmArgs '-Dfile.encoding=UTF-8'
+        }
+    }
+}
+
+
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+dependencies {
+
+    implementation 'org.springframework:spring-context:6.1.13'
+    implementation 'org.springframework:spring-beans:6.1.13'
+    implementation 'org.springframework:spring-core:6.1.13'
+    testImplementation 'junit:junit:4.13.2'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.17.2'
+    implementation 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testImplementation 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
