@@ -1,40 +1,46 @@
 package org.example.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
-import org.springframework.stereotype.Component;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /**
  * Класс для обработки ввода данных о книгах от пользователя.
  * Этот класс отвечает за получение данных о книгах от пользователя через консоль.
  */
-@Component
+@Controller
+@RequiredArgsConstructor
 public class BookInputHandler {
-
     private final String red = "\u001B[31m";
     private final String reset = "\u001B[0m";
 
+    private final MessageSource messageSource;
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 
     /**
      * Получает данные о новой книге от пользователя.
      *
+     * @param currentLocale локаль языка, установленная пользователем.
      * @return книгу {@link Book}, для добавления в файл
      */
-    public Book newBookDetails() {
-        int id = getValidBookId("Введите ID добавляемой книги:");
+    public Book newBookDetails(Locale currentLocale) {
+        int id = getValidBookId(
+                messageSource.getMessage("handler.readAddId", null, currentLocale), currentLocale);
 
-        System.out.println("Введите название книги:");
+        System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
         String title = readLine();
 
-        System.out.println("Введите автора книги:");
+        System.out.println(messageSource.getMessage("handler.readAddAuthor", null, currentLocale));
         String author = readLine();
 
-        System.out.println("Введите описание книги:");
+        System.out.println(messageSource.getMessage("handler.readAddDescription", null, currentLocale));
         String description = readLine();
 
         return new Book(id, title, author, description);
@@ -43,19 +49,21 @@ public class BookInputHandler {
     /**
      * Запрашивает у пользователя данные для редактирования существующей книги.
      *
+     * @param currentLocale локаль языка, установленная пользователем.
      * @return книгу {@link Book} с данными для изменения книги.
      */
-    public Book updateBookDetails() {
+    public Book updateBookDetails(Locale currentLocale) {
 
-        int id = getValidBookId("Введите ID книги для редактирования:");
+        int id = getValidBookId(
+                messageSource.getMessage("handler.readNewId", null, currentLocale), currentLocale);
 
-        System.out.println("Введите новое название книги");
+        System.out.println(messageSource.getMessage("handler.readNewTitle", null, currentLocale));
         String title = readLine();
 
-        System.out.println("Введите нового автора книги");
+        System.out.println(messageSource.getMessage("handler.readNewAuthor", null, currentLocale));
         String author = readLine();
 
-        System.out.println("Введите новое описание книги");
+        System.out.println(messageSource.getMessage("handler.readNewDescription", null, currentLocale));
         String description = readLine();
 
         return new Book(id, title, author, description);
@@ -64,10 +72,12 @@ public class BookInputHandler {
     /**
      * Запрашивает у пользователя ID книги для удаления.
      *
+     * @param currentLocale локаль языка, установленная пользователем.
      * @return ID книги, введенный пользователем.
      */
-    public int deleteBookDetails() {
-        return getValidBookId("Введите ID книги для удаления:");
+    public int deleteBookDetails(Locale currentLocale) {
+        return getValidBookId(
+                messageSource.getMessage("handler.readDeleteId", null, currentLocale), currentLocale);
     }
 
     /**
@@ -75,19 +85,26 @@ public class BookInputHandler {
      * проверяет, что введенное значение является положительным числом.
      *
      * @param prompt сообщение, отображаемое пользователю для ввода ID.
+     * @param currentLocale локаль языка, установленная пользователем.
      * @return корректный ID книги.
      */
-    private int getValidBookId(String prompt) {
+    private int getValidBookId(String prompt, Locale currentLocale) {
         int id = -1;
         while (id < 0) {
             System.out.println(prompt);
             try {
                 id = Integer.parseInt(readLine());
                 if (id < 0) {
-                    System.out.println(red + "ID книги не может быть отрицательным. Попробуйте снова." + reset);
+                    System.out.println(
+                            red +
+                            messageSource.getMessage("handler.invalidId", null, currentLocale) +
+                            reset);
                 }
             } catch (NumberFormatException e) {
-                System.out.println(red + "Неверный ввод. Пожалуйста, введите числовое значение для ID." + reset);
+                System.out.println(
+                        red +
+                        messageSource.getMessage("handler.notNumber", null, currentLocale) +
+                        reset);
             }
         }
         return id;
@@ -102,7 +119,6 @@ public class BookInputHandler {
         try {
             return reader.readLine();
         } catch (IOException e) {
-            System.out.println(red + "Ошибка ввода. Попробуйте снова." + reset);
             return "";
         }
     }

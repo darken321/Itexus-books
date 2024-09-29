@@ -13,7 +13,7 @@ public class Books {
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class)) {
             MainMenu mainMenu = context.getBean(MainMenu.class);
-            mainMenu.run();
+            mainMenu.menu();
         }
     }
 }

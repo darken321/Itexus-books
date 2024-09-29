@@ -7,11 +7,12 @@ import lombok.Setter;
 
 /**
  * Класс {@code Book} представляет собой модель книги.
- * Переопределяет метод toString для корректного вывода книги
  */
 @Getter
 @Setter
 public class Book {
+    String yellow = "\u001B[93m";
+    String reset = "\u001B[0m";
 
     @JsonProperty("id")
     private int id;
@@ -35,15 +36,5 @@ public class Book {
         this.description = description;
         this.id = id;
         this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        String yellow = "\u001B[93m";
-        String reset = "\u001B[0m";
-        return yellow + "ID " + reset + this.getId() + ", " +
-                yellow + "Название "  + reset + this.getTitle() + ", " +
-                yellow + "Автор " + reset + this.getAuthor() + ", " +
-                yellow + "Описание " + reset + this.getDescription();
     }
 }
