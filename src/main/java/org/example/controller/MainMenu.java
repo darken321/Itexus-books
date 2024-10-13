@@ -2,61 +2,116 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.service.BookService;
-import org.springframework.stereotype.Component;
+import org.example.utils.BookUtils;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 /**
  * Класс {@code MainMenu} отвечает за отображение главного меню и обработку пользовательского ввода.
  */
-@Component
+@Controller
 @RequiredArgsConstructor
 public class MainMenu {
 
     private final BookService bookService;
     private final BookInputHandler bookInputHandler;
+    private final MessageSource messageSource;
 
     private final String red = "\u001B[31m";
     private final String reset = "\u001B[0m";
     private final String green = "\u001B[92m";
+    private final String yellow = "\u001B[93m";
+
+
+    private Locale currentLocale = Locale.getDefault();
+
+    public void menu() {
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            language(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Запускает меню выбора языка
+     */
+    public void language(BufferedReader reader) {
+
+        int input;
+        do {
+            System.out.println(green);
+            System.out.println(messageSource.getMessage("menu.language", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.option1", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.option2", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.exit", null, currentLocale));
+            System.out.println(reset);
+
+            try {
+                input = Integer.parseInt(reader.readLine());
+                switch (input) {
+                    case 1 -> {
+                        currentLocale = new Locale("ru");
+
+                        run(reader);
+                    }
+                    case 2 -> {
+                        currentLocale = Locale.ENGLISH;
+                        run(reader);
+                    }
+                    case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
+                    default -> System.out.println(messageSource.getMessage("menu.invalid", null, currentLocale));
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(messageSource.getMessage("menu.notNumber", null, currentLocale));
+                input = -1;
+            } catch (IOException e) {
+                throw new RuntimeException(e); //TODO доработать обработку ошибок
+            }
+        } while (input != 0);
+    }
 
     /**
      * Запускает главное меню и обрабатывает пользовательский ввод.
      * Пользователь может выбрать одну из доступных операций или выйти из программы.
      */
-    public void run() {
+    public void run(BufferedReader reader) {
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            int input;
-            do {
-                System.out.println(green);
-                System.out.println("Выберите действие:");
-                System.out.println("1. Вывести список книг");
-                System.out.println("2. Создать новую книгу");
-                System.out.println("3. Отредактировать книгу");
-                System.out.println("4. Удалить книгу");
-                System.out.println("0. Выйти");
-                System.out.println(reset);
+        int input;
+        do {
+            System.out.println(green);
+            System.out.println(messageSource.getMessage("menu.action", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.listBooks", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.createBook", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.editBook", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.deleteBook", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.exitAction", null, currentLocale));
+            System.out.println(reset);
 
-                try {
-                    input = Integer.parseInt(reader.readLine());
-                    switch (input) {
-                        case 1 -> bookService.listBooks();
-                        case 2 -> bookService.createBook(bookInputHandler.newBookDetails());
-                        case 3 -> bookService.editBook(bookInputHandler.updateBookDetails());
-                        case 4 -> bookService.deleteBook(bookInputHandler.deleteBookDetails());
-                        case 0 -> System.out.println("Выход...");
-                        default -> System.out.println(red + "Неверное число, попробуйте снова." + reset);
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println(red + "Вы ввели не число, попробуйте снова." + reset);
-                    input = -1;
+            try {
+                input = Integer.parseInt(reader.readLine());
+                switch (input) {
+                    case 1 -> BookUtils.listBooks(bookService.readBooks(currentLocale), messageSource, currentLocale);
+                    case 2 -> bookService.createBook(bookInputHandler.newBookDetails(currentLocale), currentLocale);
+                    case 3 -> bookService.editBook(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
+                    case 4 -> bookService.deleteBook(bookInputHandler.deleteBookDetails(currentLocale), currentLocale);
+                    case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
+                    default ->
+                            System.out.println(red + messageSource.getMessage("menu.invalid", null, currentLocale) + reset);
                 }
-            } while (input != 0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            } catch (NumberFormatException e) {
+                System.out.println(red + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
+                input = -1;
+            } catch (IOException e) {
+                throw new RuntimeException(e); //TODO доработать обработку ошибок
+            }
+        } while (input != 0);
     }
 }
