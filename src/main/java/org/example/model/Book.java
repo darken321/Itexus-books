@@ -11,8 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Book {
-    String yellow = "\u001B[93m";
-    String reset = "\u001B[0m";
 
     @JsonProperty("id")
     private int id;

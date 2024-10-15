@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
 import org.example.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,13 @@ import java.util.Locale;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-    private final String red = "\u001B[31m";
-    private final String reset = "\u001B[0m";
-    private final String yellow = "\u001B[93m";
+
+    @Value("${color.error}")
+    private String error;
+
+    @Value("${color.reset}")
+    private String reset;
+
 
     private final BookRepository bookRepository;
     private final MessageSource messageSource;
@@ -33,7 +38,7 @@ public class BookService {
      */
     public void createBook(Book book, Locale currentLocale) {
         if (bookRepository.addBook(book) == null) {
-            System.out.println(red +
+            System.out.println(error +
                     messageSource.getMessage("service.fileWriteError", null, currentLocale) +
                     reset);
         } else {
@@ -109,7 +114,7 @@ public class BookService {
                 return i;
             }
         }
-        System.out.println(red +
+        System.out.println(error +
                 messageSource.getMessage("service.notFoundBookById", null, currentLocale) +
                 reset);
         return null;
