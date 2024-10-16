@@ -25,10 +25,8 @@ public class BookService {
     @Value("${color.reset}")
     private String reset;
 
-
     private final BookRepository bookRepository;
     private final MessageSource messageSource;
-
 
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
@@ -62,7 +60,7 @@ public class BookService {
      * Редактирует существующую книгу.
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param updatedBook Обновленная книга.
+     * @param updatedBook   Обновленная книга.
      */
     public void editBook(Book updatedBook, Locale currentLocale) {
         List<Book> books = bookRepository.readBooks();
@@ -87,7 +85,7 @@ public class BookService {
      * Удаляет книгу из репозитория по ID.
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param id ID книги для удаления.
+     * @param id            ID книги для удаления.
      */
     public void deleteBook(int id, Locale currentLocale) {
         List<Book> books = bookRepository.readBooks();
@@ -103,9 +101,9 @@ public class BookService {
     /**
      * Находит индекс книги в списке по ID.
      *
-     * @param books Список книг.
+     * @param books         Список книг.
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param id    ID книги для поиска.
+     * @param id            ID книги для поиска.
      * @return Индекс книги в списке или null, если книга не найдена.
      */
     private Integer findBookById(List<Book> books, int id, Locale currentLocale) {
