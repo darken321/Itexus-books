@@ -47,4 +47,12 @@ public class LoggingAspect {
 
         return result;
     }
+
+    /**
+     * Логирует чтение из файла
+     */
+    @Before("execution(* org.example.repository.BookRepository.readBooks(..))")
+    public void logBeforeReadBooks() {
+        log.info("чтение из файла");
+    }
 }
