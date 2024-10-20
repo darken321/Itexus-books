@@ -99,6 +99,21 @@ public class BookService {
     }
 
     /**
+     * Возвращает список книг по названию книги.
+     *
+     * @param bookName      Название книги
+     * @return список книг с данным названием без учета заглавных букв.
+     */
+
+    public List<Book> findBooksByName(String bookName) {
+        List<Book> books = bookRepository.readBooks();
+
+        return  books.stream()
+                .filter(book -> book.getTitle()
+                .equalsIgnoreCase(bookName)).toList();
+    }
+
+    /**
      * Находит индекс книги в списке по ID.
      *
      * @param books         Список книг.

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.Book;
 import org.example.service.BookService;
 import org.example.utils.BookUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -80,7 +82,7 @@ public class MainMenu {
                 System.out.println(error + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
                 input = -1;
             } catch (IOException e) {
-                throw new RuntimeException(e); //TODO доработать обработку ошибок
+                throw new RuntimeException(e);
             }
         } while (input != 0);
     }
@@ -96,6 +98,7 @@ public class MainMenu {
             System.out.println(text);
             System.out.println(messageSource.getMessage("menu.action", null, currentLocale));
             System.out.println(messageSource.getMessage("menu.listBooks", null, currentLocale));
+            System.out.println(messageSource.getMessage("menu.findBook", null, currentLocale));
             System.out.println(messageSource.getMessage("menu.createBook", null, currentLocale));
             System.out.println(messageSource.getMessage("menu.editBook", null, currentLocale));
             System.out.println(messageSource.getMessage("menu.deleteBook", null, currentLocale));
@@ -106,9 +109,14 @@ public class MainMenu {
                 input = Integer.parseInt(reader.readLine());
                 switch (input) {
                     case 1 -> bookUtils.listBooks(bookService.readBooks(currentLocale), messageSource, currentLocale);
-                    case 2 -> bookService.createBook(bookInputHandler.newBookDetails(currentLocale), currentLocale);
-                    case 3 -> bookService.editBook(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
-                    case 4 -> bookService.deleteBook(bookInputHandler.deleteBookDetails(currentLocale), currentLocale);
+                    case 2 -> {
+                        String readBookName = bookInputHandler.findBookDetails(currentLocale);
+                        List<Book> foundBooks =bookService.findBooksByName(readBookName);
+                        bookUtils.listBooks(foundBooks,messageSource, currentLocale);
+                    }
+                    case 3 -> bookService.createBook(bookInputHandler.newBookDetails(currentLocale), currentLocale);
+                    case 4 -> bookService.editBook(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
+                    case 5 -> bookService.deleteBook(bookInputHandler.deleteBookDetails(currentLocale), currentLocale);
                     case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
                     default ->
                             System.out.println(error + messageSource.getMessage("menu.invalid", null, currentLocale) + reset);
@@ -117,7 +125,7 @@ public class MainMenu {
                 System.out.println(error + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
                 input = -1;
             } catch (IOException e) {
-                throw new RuntimeException(e); //TODO доработать обработку ошибок
+                throw new RuntimeException(e);
             }
         } while (input != 0);
     }

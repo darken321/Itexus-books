@@ -9,6 +9,9 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для логирования
+ */
 @Aspect
 @Component
 @Slf4j
@@ -16,14 +19,6 @@ public class LoggingAspect {
 
     @Pointcut("within(org.example.service..*)")
     public void servicePointcut() {
-    }
-
-    /**
-     * Логирует вызов любого сервисного метода в пакете org.example.service.
-     */
-    @Before("servicePointcut()")
-    public void logBeforeService() {
-        log.info("Вызов сервисного метода");
     }
 
     /**

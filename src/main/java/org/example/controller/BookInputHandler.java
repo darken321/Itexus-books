@@ -52,6 +52,17 @@ public class BookInputHandler {
     }
 
     /**
+     * Запрашивает у пользователя данные для поиска существующей книги по названию.
+     *
+     * @param currentLocale локаль языка, установленная пользователем.
+     * @return строку с названием книги.
+     */
+    public String findBookDetails(Locale currentLocale) {
+        System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
+        return readLine();
+    }
+
+    /**
      * Запрашивает у пользователя данные для редактирования существующей книги.
      *
      * @param currentLocale локаль языка, установленная пользователем.
@@ -122,7 +133,7 @@ public class BookInputHandler {
      */
     private String readLine() {
         try {
-            return reader.readLine();
+            return reader.readLine().trim();
         } catch (IOException e) {
             return "";
         }
