@@ -1,123 +1,140 @@
 package org.example.repository;
 
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
+import org.example.model.Author;
 import org.example.model.Book;
+import org.example.model.Genre;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Репозиторий для управления книгами в CSV файле.
+ * Репозиторий для управления книгами в SQL базе данных.
  * Предоставляет методы для добавления, редактирования, чтения и удаления книг.
  */
 @Repository
+@Profile("sql")
 public class BookRepository {
-    private final String filePath = "src/main/resources/books.csv";
 
-    CsvMapper mapper = new CsvMapper();
-    CsvSchema schema = CsvSchema.builder()
-            .addColumn("id")
-            .addColumn("title")
-            .addColumn("author")
-            .addColumn("description")
-            .setUseHeader(true)
-            .setQuoteChar('"')
-            .build();
+    private final JdbcTemplate jdbcTemplate;
 
-    /**
-     * Добавляет книгу в CSV файл.
-     *
-     * @param book Книга для добавления.
-     * @return Добавленная книга.
-     * @throws RuntimeException если произошла ошибка при записи в CSV файл.
-     */
-    public Book addBook(Book book) {
-        File csvFile = new File(filePath);
-        boolean isNewFile = !csvFile.exists();
+    @Autowired
+    public BookRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
-        try (FileWriter writer = new FileWriter(csvFile, true)) {
-            CsvSchema writeSchema = schema.withoutHeader();
-            if (isNewFile) {
-                writeSchema = schema;
-            }
-            mapper.writer(writeSchema).writeValue(writer, book);
+    private final RowMapper<Book> bookRowMapper = new RowMapper<>() {
+
+        @Override
+        public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Author author = new Author(
+                    rs.getInt("author_id"),
+                    rs.getString("author_name")
+            );
+
+            Genre genre = new Genre(
+                    rs.getInt("genre_id"),
+                    rs.getString("genre_name")
+            );
+
+
+            Book book = new Book(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    author.getName(),
+                    rs.getString("description"),
+                    genre.getName()
+            );
             return book;
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + e.getMessage(), e);
         }
+    };
+
+    public Book addBook(Book book) {
+        String sql = "INSERT INTO books (title, author_id, description, genre_id) VALUES (?, ?, ?, ?) RETURNING id";
+        int id = jdbcTemplate.queryForObject(
+                sql,
+                Integer.class,
+                book.getTitle(),
+                book.getAuthor().getId(),
+                book.getDescription(),
+                book.getGenre().getId()
+        );
+        book.setId(id);
+        return book;
     }
 
-    /**
-     * Записывает в файл список книг с измененной книгой
-     *
-     * @param updatedBooks Список книг с обновленной книгой.
-     */
-    public void editBook(List<Book> updatedBooks) {
-        writeBooks(updatedBooks);
-    }
-
-    /**
-     * Записывает список книг в CSV файл.
-     *
-     * @param books Список книг для записи.
-     * @throws RuntimeException если произошла ошибка при записи в CSV файл.
-     */
-    private void writeBooks(List<Book> books) {
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filePath), "UTF-8")) {
-            mapper.writer(schema).writeValues(writer).writeAll(books);
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Читает список книг из CSV файла.
-     *
-     * @return Список книг.
-     * @throws RuntimeException если произошла ошибка при чтении CSV файла.
-     */
     public List<Book> readBooks() {
-
-        File csvInputFile = new File(filePath);
-        if (!csvInputFile.exists()) {
-            try {
-                throw new IOException("CSV file not found: " + csvInputFile.getAbsolutePath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        Iterator<Book> bookIterator;
-        try {
-            bookIterator = mapper.readerFor(Book.class)
-                    .with(schema)
-                    .readValues(csvInputFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading CSV file: " + e.getMessage(), e);
-        }
-
-        List<Book> books = new ArrayList<>();
-        while (bookIterator.hasNext()) {
-            try {
-                books.add(bookIterator.next());
-            } catch (RuntimeException e) {
-                System.err.println("Error deserializing book: " + e.getMessage());
-            }
-        }
-        return books;
+        String sql = """
+                SELECT books.id, books.title, books.description, +
+                authors.id AS author_id, authors.name AS author_name, +
+                genres.id AS genre_id, genres.name AS genre_name
+                FROM books
+                JOIN authors ON books.author_id = authors.id
+                JOIN genres ON books.genre_id = genres.id
+                """;
+        List<Book> query = jdbcTemplate.query(sql, bookRowMapper);
+        return query;
     }
 
-    /**
-     * Записывает в файл список книг без удаленной книги
-     *
-     * @param books Список книг с уже удаленной книгой.
-     * @param id    ID книги для удаления.
-     */
-    public void deleteBook(List<Book> books, int id) {
-        writeBooks(books);
+    public void editBook(Book book) {
+        // Обновление данных автора
+        String updateAuthorSql = """
+        UPDATE authors
+        SET name = ?
+        WHERE id = ?
+    """;
+        jdbcTemplate.update(updateAuthorSql, book.getAuthor().getName(), book.getAuthor().getId());
+
+        // Обновление данных жанра
+        String updateGenreSql = """
+        UPDATE genres
+        SET name = ?
+        WHERE id = ?
+    """;
+        jdbcTemplate.update(updateGenreSql, book.getGenre().getName(), book.getGenre().getId());
+
+        // Обновление данных книги
+        String updateBookSql = """
+        UPDATE books
+        SET title = ?, author_id = ?, description = ?, genre_id = ?
+        WHERE id = ?
+    """;
+        jdbcTemplate.update(updateBookSql,
+                book.getTitle(),
+                book.getAuthor().getId(),
+                book.getDescription(),
+                book.getGenre().getId(),
+                book.getId()
+        );
+    }
+
+    public void deleteBook(int id) {
+        String sql = "DELETE FROM books WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    public boolean existById(int id) {
+        String sql = "SELECT COUNT(*) FROM books WHERE id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return count != null && count > 0;
+    }
+
+    public List<Book> findBooksByName(String name) {
+        String sql = """
+                SELECT books.id, books.title, books.description, +
+                authors.id AS author_id, authors.name AS author_name, +
+                genres.id AS genre_id, genres.name AS genre_name
+                FROM books
+                JOIN authors ON books.author_id = authors.id
+                JOIN genres ON books.genre_id = genres.id
+                WHERE title = ?
+                """;
+        return jdbcTemplate.query(sql, bookRowMapper, name);
     }
 }

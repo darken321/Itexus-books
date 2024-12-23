@@ -1,38 +1,46 @@
 package org.example.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Класс {@code Book} представляет собой модель книги.
+ * Класс {@code Book} представляет собой модель книги для БД SQL.
  */
 @Getter
 @Setter
 public class Book {
 
-    @JsonProperty("id")
-    private int id;
-
-    @JsonProperty("title")
+    private Integer id;
     private String title;
-
-    @JsonProperty("author")
-    private String author;
-
-    @JsonProperty("description")
     private String description;
+    private Author author;
+    private Genre genre;
 
-    @JsonCreator
-    public Book(
-            @JsonProperty("id") int id,
-            @JsonProperty("title") String title,
-            @JsonProperty("author") String author,
-            @JsonProperty("description") String description) {
-        this.author = author;
-        this.description = description;
-        this.id = id;
+    public Book(String title, String description) {
         this.title = title;
+        this.description = description;
+    }
+
+    public Book(int id, String title, String description) {
+        this(title,description);
+        this.id = id;
+    }
+
+    public Book(String title, String author, String description, String genre) {
+        this(title, description);
+        this.author = new Author(author);
+        this.genre = new Genre(genre);
+    }
+
+    public Book(int id, String title, String author, String description, String genre) {
+        this(title, author, description, genre);
+        this.id = id;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.setAuthor(new Author(authorId));
+    }
+    public void setGenreId(Integer genreId) {
+        this.setGenre(new Genre(genreId));
     }
 }

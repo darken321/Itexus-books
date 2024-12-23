@@ -75,8 +75,8 @@ public class MainMenu {
                     }
                     case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
                     default -> System.out.println(error +
-                                    messageSource.getMessage("menu.invalid", null, currentLocale) +
-                                    reset);
+                            messageSource.getMessage("menu.invalid", null, currentLocale) +
+                            reset);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(error + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
@@ -111,8 +111,8 @@ public class MainMenu {
                     case 1 -> bookUtils.listBooks(bookService.readBooks(currentLocale), messageSource, currentLocale);
                     case 2 -> {
                         String readBookName = bookInputHandler.findBookDetails(currentLocale);
-                        List<Book> foundBooks =bookService.findBooksByName(readBookName);
-                        bookUtils.listBooks(foundBooks,messageSource, currentLocale);
+                        List<Book> foundBooks = bookService.findBooksByName(readBookName);
+                        bookUtils.listBooks(foundBooks, messageSource, currentLocale);
                     }
                     case 3 -> bookService.createBook(bookInputHandler.newBookDetails(currentLocale), currentLocale);
                     case 4 -> bookService.editBook(bookInputHandler.updateBookDetails(currentLocale), currentLocale);

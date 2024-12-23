@@ -2,6 +2,7 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
+import org.example.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class BookInputHandler {
     private String reset;
 
     private final MessageSource messageSource;
+    private final BookRepository bookRepository;
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 
     /**
@@ -36,8 +38,6 @@ public class BookInputHandler {
      * @return книгу {@link Book}, для добавления в файл
      */
     public Book newBookDetails(Locale currentLocale) {
-        int id = getValidBookId(
-                messageSource.getMessage("handler.readAddId", null, currentLocale), currentLocale);
 
         System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
         String title = readLine();
@@ -48,7 +48,10 @@ public class BookInputHandler {
         System.out.println(messageSource.getMessage("handler.readAddDescription", null, currentLocale));
         String description = readLine();
 
-        return new Book(id, title, author, description);
+        System.out.println(messageSource.getMessage("handler.readAddGenre", null, currentLocale));
+        String genre = readLine();
+
+        return new Book(title, author, description, genre);
     }
 
     /**
@@ -64,6 +67,7 @@ public class BookInputHandler {
 
     /**
      * Запрашивает у пользователя данные для редактирования существующей книги.
+     * Если книги с таким id нет, то выводит ошибку и возвращает null
      *
      * @param currentLocale локаль языка, установленная пользователем.
      * @return книгу {@link Book} с данными для изменения книги.
@@ -73,16 +77,25 @@ public class BookInputHandler {
         int id = getValidBookId(
                 messageSource.getMessage("handler.readNewId", null, currentLocale), currentLocale);
 
-        System.out.println(messageSource.getMessage("handler.readNewTitle", null, currentLocale));
-        String title = readLine();
+        if (bookRepository.existById(id)) {
+            System.out.println(messageSource.getMessage("handler.readNewTitle", null, currentLocale));
+            String title = readLine();
 
-        System.out.println(messageSource.getMessage("handler.readNewAuthor", null, currentLocale));
-        String author = readLine();
+            System.out.println(messageSource.getMessage("handler.readNewAuthor", null, currentLocale));
+            String author = readLine();
 
-        System.out.println(messageSource.getMessage("handler.readNewDescription", null, currentLocale));
-        String description = readLine();
+            System.out.println(messageSource.getMessage("handler.readNewDescription", null, currentLocale));
+            String description = readLine();
 
-        return new Book(id, title, author, description);
+            System.out.println(messageSource.getMessage("handler.readNewGenre", null, currentLocale));
+            String genre = readLine();
+
+            return new Book(id, title, author, description, genre);
+        } else {
+            System.out.println(error + messageSource.getMessage("service.notFoundBookById",
+                    null, currentLocale) + reset);
+            return null;
+        }
     }
 
     /**
@@ -100,7 +113,7 @@ public class BookInputHandler {
      * Запрашивает у пользователя корректный ID книги,
      * проверяет, что введенное значение является положительным числом.
      *
-     * @param prompt сообщение, отображаемое пользователю для ввода ID.
+     * @param prompt        сообщение, отображаемое пользователю для ввода ID.
      * @param currentLocale локаль языка, установленная пользователем.
      * @return корректный ID книги.
      */
@@ -113,14 +126,14 @@ public class BookInputHandler {
                 if (id < 0) {
                     System.out.println(
                             error +
-                            messageSource.getMessage("handler.invalidId", null, currentLocale) +
-                            reset);
+                                    messageSource.getMessage("handler.invalidId", null, currentLocale) +
+                                    reset);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(
                         error +
-                        messageSource.getMessage("handler.notNumber", null, currentLocale) +
-                        reset);
+                                messageSource.getMessage("handler.notNumber", null, currentLocale) +
+                                reset);
             }
         }
         return id;
@@ -139,4 +152,3 @@ public class BookInputHandler {
         }
     }
 }
-

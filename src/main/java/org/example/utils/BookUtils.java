@@ -31,11 +31,18 @@ public class BookUtils {
             System.out.println(messageSource.getMessage("service.listBook", null, currentLocale));
         } else {
             for (Book book : books) {
+
                 System.out.println(
-                        listing + messageSource.getMessage("book.id", null, currentLocale) + ": " + reset + book.getId() + ", " +
-                                listing + messageSource.getMessage("book.title", null, currentLocale) + ": " + reset + book.getTitle() + ", " +
-                                listing + messageSource.getMessage("book.author", null, currentLocale) + ": " + reset + book.getAuthor() + ", " +
-                                listing + messageSource.getMessage("book.description", null, currentLocale) + ": " + reset + book.getDescription()
+                        listing + messageSource.getMessage("book.id", null, currentLocale) + ": " +
+                                reset + book.getId() + ", " +
+                        listing + messageSource.getMessage("book.title", null, currentLocale) + ": " +
+                                reset + book.getTitle() + ", " +
+                        listing + messageSource.getMessage("book.author", null, currentLocale) + ": " +
+                                reset + book.getAuthor().getName() + ", " +
+                        listing + messageSource.getMessage("book.description", null, currentLocale) + ": " +
+                                reset + book.getDescription()  + ", " +
+                        listing + messageSource.getMessage("book.genre", null, currentLocale) + ": " +
+                                reset + book.getGenre().getName()
                 );
             }
         }
