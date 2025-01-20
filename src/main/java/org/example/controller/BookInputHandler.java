@@ -3,6 +3,7 @@ package org.example.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
 import org.example.repository.BookRepository;
+import org.example.utils.MessageKeys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -39,16 +40,16 @@ public class BookInputHandler {
      */
     public Book newBookDetails(Locale currentLocale) {
 
-        System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
+        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_TITLE, null, currentLocale));
         String title = readLine();
 
-        System.out.println(messageSource.getMessage("handler.readAddAuthor", null, currentLocale));
+        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_AUTHOR, null, currentLocale));
         String author = readLine();
 
-        System.out.println(messageSource.getMessage("handler.readAddDescription", null, currentLocale));
+        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_DESCRIPTION, null, currentLocale));
         String description = readLine();
 
-        System.out.println(messageSource.getMessage("handler.readAddGenre", null, currentLocale));
+        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_GENRE, null, currentLocale));
         String genre = readLine();
 
         return new Book(title, author, description, genre);
@@ -61,7 +62,7 @@ public class BookInputHandler {
      * @return строку с названием книги.
      */
     public String findBookDetails(Locale currentLocale) {
-        System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
+        System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_TITLE, null, currentLocale));
         return readLine();
     }
 
@@ -75,24 +76,24 @@ public class BookInputHandler {
     public Book updateBookDetails(Locale currentLocale) {
 
         int id = getValidBookId(
-                messageSource.getMessage("handler.readNewId", null, currentLocale), currentLocale);
+                messageSource.getMessage(MessageKeys.READ_NEW_ID, null, currentLocale), currentLocale);
 
         if (bookRepository.existById(id)) {
-            System.out.println(messageSource.getMessage("handler.readNewTitle", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_TITLE, null, currentLocale));
             String title = readLine();
 
-            System.out.println(messageSource.getMessage("handler.readNewAuthor", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_AUTHOR, null, currentLocale));
             String author = readLine();
 
-            System.out.println(messageSource.getMessage("handler.readNewDescription", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_DESCRIPTION, null, currentLocale));
             String description = readLine();
 
-            System.out.println(messageSource.getMessage("handler.readNewGenre", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_GENRE, null, currentLocale));
             String genre = readLine();
 
             return new Book(id, title, author, description, genre);
         } else {
-            System.out.println(error + messageSource.getMessage("service.notFoundBookById",
+            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,
                     null, currentLocale) + reset);
             return null;
         }
@@ -106,7 +107,7 @@ public class BookInputHandler {
      */
     public int deleteBookDetails(Locale currentLocale) {
         return getValidBookId(
-                messageSource.getMessage("handler.readDeleteId", null, currentLocale), currentLocale);
+                messageSource.getMessage(MessageKeys.READ_DELETE_ID, null, currentLocale), currentLocale);
     }
 
     /**
@@ -126,13 +127,13 @@ public class BookInputHandler {
                 if (id < 0) {
                     System.out.println(
                             error +
-                                    messageSource.getMessage("handler.invalidId", null, currentLocale) +
+                                    messageSource.getMessage(MessageKeys.INVALID_ID, null, currentLocale) +
                                     reset);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(
                         error +
-                                messageSource.getMessage("handler.notNumber", null, currentLocale) +
+                                messageSource.getMessage(MessageKeys.NOT_NUMBER, null, currentLocale) +
                                 reset);
             }
         }

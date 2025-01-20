@@ -7,9 +7,9 @@ import org.example.model.Genre;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.GenreRepository;
+import org.example.utils.MessageKeys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +23,6 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-@Profile("sql")
 public class BookService {
 
     /**
@@ -61,10 +60,10 @@ public class BookService {
         //Пробую записать книгу через репозиторий или вывести ошибку записи
         if (bookRepository.addBook(book) == null) {
             System.out.println(error +
-                    messageSource.getMessage("service.fileWriteError", null, currentLocale) +
+                    messageSource.getMessage(MessageKeys.SERVICE_FILE_WRITE_ERROR, null, currentLocale) +
                     reset);
         } else {
-            System.out.println(messageSource.getMessage("service.addBook", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_ADD_BOOK, null, currentLocale));
         }
     }
 
@@ -91,7 +90,7 @@ public class BookService {
             checkAuthor(updatedBook);
             checkGenre(updatedBook);
             bookRepository.editBook(updatedBook);
-            System.out.println(messageSource.getMessage("service.editBook", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_BOOK, null, currentLocale));
         }
     }
 
@@ -104,9 +103,9 @@ public class BookService {
     public void deleteBook(int id, Locale currentLocale) {
         if (bookRepository.existById(id)) {
             bookRepository.deleteBook(id);
-            System.out.println(messageSource.getMessage("service.deleteBook", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_BOOK, null, currentLocale));
         } else {
-            System.out.println(error + messageSource.getMessage("service.notFoundBookById",
+            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,
                     null, currentLocale) + reset);
         }
     }

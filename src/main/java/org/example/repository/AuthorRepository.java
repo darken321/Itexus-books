@@ -3,7 +3,6 @@ package org.example.repository;
 
 import org.example.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -17,7 +16,6 @@ import java.util.List;
  * Предоставляет методы для добавления, редактирования, чтения и удаления книг.
  */
 @Repository
-@Profile("sql")
 public class AuthorRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -65,10 +63,10 @@ public class AuthorRepository {
         return jdbcTemplate.queryForObject(sql, authorRowMapper, authorName);
     }
 
-    public boolean existByAuthor(String  author) {
+    public boolean existByAuthor(String author) {
         String sql = "SELECT COUNT(*) FROM authors WHERE name = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, author);
-        return  count !=null && count>0;
+        return count != null && count > 0;
     }
 
     public Integer findAuthorId(String authorName) {

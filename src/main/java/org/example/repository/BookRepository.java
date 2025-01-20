@@ -5,7 +5,6 @@ import org.example.model.Author;
 import org.example.model.Book;
 import org.example.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,6 @@ import java.util.List;
  * Предоставляет методы для добавления, редактирования, чтения и удаления книг.
  */
 @Repository
-@Profile("sql")
 public class BookRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -77,7 +75,7 @@ public class BookRepository {
                 FROM books
                 JOIN authors ON books.author_id = authors.id
                 JOIN genres ON books.genre_id = genres.id
-                """;
+        """;
         List<Book> query = jdbcTemplate.query(sql, bookRowMapper);
         return query;
     }
@@ -85,26 +83,26 @@ public class BookRepository {
     public void editBook(Book book) {
         // Обновление данных автора
         String updateAuthorSql = """
-        UPDATE authors
-        SET name = ?
-        WHERE id = ?
-    """;
+                    UPDATE authors
+                    SET name = ?
+                    WHERE id = ?
+                """;
         jdbcTemplate.update(updateAuthorSql, book.getAuthor().getName(), book.getAuthor().getId());
 
         // Обновление данных жанра
         String updateGenreSql = """
-        UPDATE genres
-        SET name = ?
-        WHERE id = ?
-    """;
+                    UPDATE genres
+                    SET name = ?
+                    WHERE id = ?
+                """;
         jdbcTemplate.update(updateGenreSql, book.getGenre().getName(), book.getGenre().getId());
 
         // Обновление данных книги
         String updateBookSql = """
-        UPDATE books
-        SET title = ?, author_id = ?, description = ?, genre_id = ?
-        WHERE id = ?
-    """;
+                    UPDATE books
+                    SET title = ?, author_id = ?, description = ?, genre_id = ?
+                    WHERE id = ?
+                """;
         jdbcTemplate.update(updateBookSql,
                 book.getTitle(),
                 book.getAuthor().getId(),

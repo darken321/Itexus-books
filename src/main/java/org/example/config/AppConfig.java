@@ -19,9 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @RequiredArgsConstructor
 @ComponentScan(basePackages = "org.example")
-@PropertySource({"classpath:/color.properties"
-        , "classpath:/application.properties"
-        , "classpath:/application-sql.properties"})
+@PropertySource({"classpath:/color.properties", "classpath:/application.properties"})
 @EnableAspectJAutoProxy
 public class AppConfig {
 
