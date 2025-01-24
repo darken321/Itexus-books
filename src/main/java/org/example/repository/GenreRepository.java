@@ -1,70 +1,57 @@
 package org.example.repository;
 
 
+import lombok.RequiredArgsConstructor;
 import org.example.model.Genre;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Репозиторий для управления книгами в SQL базе данных.
  * Предоставляет методы для добавления, редактирования, чтения и удаления книг.
  */
 @Repository
+@RequiredArgsConstructor
 public class GenreRepository {
 
-    private final JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public GenreRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-    private final RowMapper<Genre> genreRowMapper = new RowMapper<>() {
-
-        @Override
-        public Genre mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Genre genre = new Genre(
-                    rs.getInt("id"),
-                    rs.getString("name")
-            );
-
-            return genre;
-        }
-    };
+    private final SessionFactory sessionFactory;
 
     public Genre addGenre(Genre genre) {
-        String sql = "INSERT INTO genres (name) VALUES (?) RETURNING id";
-        int id = jdbcTemplate.queryForObject(sql, Integer.class, genre.getName());
-        genre.setId(id);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(genre);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return genre;
     }
 
     public Genre findGenre(String genreName) {
-        String sql = """
-                SELECT *
-                FROM genres
-                WHERE name = ?
-                """;
-        return jdbcTemplate.queryForObject(sql, genreRowMapper, genreName);
+        Genre genre = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            genre = session.createQuery("from Genre where name = :genreName", Genre.class)
+                    .setParameter("genreName", genreName)
+                    .uniqueResult();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return genre;
     }
 
     public boolean existByGenre(String genre) {
-        String sql = "SELECT COUNT(*) FROM genres WHERE name = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, genre);
-        return count != null && count > 0;
-    }
-
-    public Integer findGenreId(String genreName) {
-        String sql = """
-                SELECT id
-                FROM genres
-                WHERE name = ?
-                """;
-        return jdbcTemplate.queryForObject(sql, Integer.class, genreName);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Long count = session.createQuery("select count(*) from Genre where name = :name", Long.class)
+                    .setParameter("name", genre)
+                    .uniqueResult();
+            return count != null && count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

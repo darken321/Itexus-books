@@ -1,15 +1,18 @@
 package org.example.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.SessionFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Properties;
 
 
 /**
@@ -19,8 +22,11 @@ import javax.sql.DataSource;
 @Configuration
 @RequiredArgsConstructor
 @ComponentScan(basePackages = "org.example")
-@PropertySource({"classpath:/color.properties", "classpath:/application.properties"})
+@PropertySource({"classpath:/color.properties"
+        , "classpath:/application.properties"
+        , "classpath:/hibernate.properties"})
 @EnableAspectJAutoProxy
+@EnableTransactionManagement
 public class AppConfig {
 
     private final Environment env;
@@ -48,30 +54,40 @@ public class AppConfig {
 
     @Bean
     public DataSource dataSource() {
-
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
-        hikariConfig.setJdbcUrl(env.getProperty("spring.datasource.url"));
-        hikariConfig.setUsername(env.getProperty("spring.datasource.username"));
-        hikariConfig.setPassword(env.getProperty("spring.datasource.password"));
-
-        hikariConfig.setMaximumPoolSize(3);
-        hikariConfig.setMinimumIdle(1);
-        hikariConfig.setIdleTimeout(30000);
-        hikariConfig.setMaxLifetime(1800000);
-        hikariConfig.setConnectionTimeout(30000);
-
-        return new HikariDataSource(hikariConfig);
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+        dataSource.setUrl(env.getProperty("spring.datasource.url"));
+        dataSource.setUsername(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        return dataSource;
     }
 
-    /**
-     * Создает и настраивает бин {@link JdbcTemplate} с использованием указанного {@link DataSource}.
-     *
-     * @param dataSource источник данных, который будет использоваться для настройки JdbcTemplate
-     * @return настроенный {@link JdbcTemplate}
-     */
+    private Properties getProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        hibernateProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        hibernateProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        return hibernateProperties;
+    }
+
     @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public SessionFactory sessionFactory(DataSource dataSource) throws IOException {
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource);
+        // пакеты, содержащие сущности
+        sessionFactoryBean.setPackagesToScan("org.example.model");
+        //устанавливаем свойства
+        sessionFactoryBean.setHibernateProperties(getProperties());
+        //завершение настройки и инициализация бина
+        sessionFactoryBean.afterPropertiesSet();
+        //извлечение объекта типа SessionFactory
+        return sessionFactoryBean.getObject();
     }
+
+//    @Bean
+//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+//        HibernateTransactionManager txManager = new HibernateTransactionManager();
+//        txManager.setSessionFactory(sessionFactory);
+//        return txManager;
+//    }
 }
