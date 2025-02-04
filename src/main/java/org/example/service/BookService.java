@@ -52,13 +52,12 @@ public class BookService {
      * @param currentLocale локаль языка, установленная пользователем.
      * @param book          Книга для добавления.
      */
-    public void createBook(Book book, Locale currentLocale) {
+    public void add(Book book, Locale currentLocale) {
 
         checkGenre(book);
         checkAuthor(book);
 
-        //Пробую записать книгу через репозиторий или вывести ошибку записи
-        if (bookRepository.addBook(book) == null) {
+        if (bookRepository.add(book) == null) {
             System.out.println(error +
                     messageSource.getMessage(MessageKeys.SERVICE_FILE_WRITE_ERROR, null, currentLocale) +
                     reset);
@@ -70,8 +69,8 @@ public class BookService {
     /**
      * Возвращает список всех книг или null если список пуст.
      */
-    public List<Book> readBooks(Locale currentLocale) {
-        List<Book> books = bookRepository.readBooks();
+    public List<Book> readAll(Locale currentLocale) {
+        List<Book> books = bookRepository.readAll();
         if (books.isEmpty()) {
             return null;
         } else {
@@ -85,11 +84,11 @@ public class BookService {
      * @param currentLocale локаль языка, установленная пользователем.
      * @param updatedBook   Книга, которую нужно обновить.
      */
-    public void editBook(Book updatedBook, Locale currentLocale) {
+    public void edit(Book updatedBook, Locale currentLocale) {
         if (updatedBook != null) {
             checkAuthor(updatedBook);
             checkGenre(updatedBook);
-            bookRepository.editBook(updatedBook);
+            bookRepository.edit(updatedBook);
             System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_BOOK, null, currentLocale));
         }
     }
@@ -100,12 +99,12 @@ public class BookService {
      * @param currentLocale локаль языка, установленная пользователем.
      * @param id            ID книги для удаления.
      */
-    public void deleteBook(int id, Locale currentLocale) {
+    public void delete(int id, Locale currentLocale) {
         if (bookRepository.existById(id)) {
-            bookRepository.deleteBook(id);
+            bookRepository.delete(id);
             System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_BOOK, null, currentLocale));
         } else {
-            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,
+            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BY_ID,
                     null, currentLocale) + reset);
         }
     }
@@ -116,8 +115,8 @@ public class BookService {
      * @param bookName Название книги
      * @return список книг с данным названием без учета заглавных букв.
      */
-    public List<Book> findBooksByName(String bookName) {
-        return bookRepository.findBooksByName(bookName);
+    public List<Book> findByName(String bookName) {
+        return bookRepository.findByName(bookName);
     }
 
     /**
@@ -127,11 +126,11 @@ public class BookService {
      * @param book Книга, для которой необходимо проверить и установить автора.
      */
     private void checkAuthor(Book book) {
-        if (!authorRepository.existByAuthor(book.getAuthor().getName())) {
-            Author newAuthor = authorRepository.addAuthor(book.getAuthor());
+        if (!authorRepository.existByName(book.getAuthor().getName())) {
+            Author newAuthor = authorRepository.add(book.getAuthor());
             book.setAuthor(newAuthor);
         } else {
-            Author oldAuthor = authorRepository.findAuthor(book.getAuthor().getName());
+            Author oldAuthor = authorRepository.findByName(book.getAuthor().getName());
             book.setAuthor(oldAuthor);
         }
     }
@@ -143,11 +142,11 @@ public class BookService {
      * @param book Книга, для которой необходимо проверить и установить жанр.
      */
     private void checkGenre(Book book) {
-        if (!genreRepository.existByGenre(book.getGenre().getName())) {
-            Genre newGenre = genreRepository.addGenre(book.getGenre());
+        if (!genreRepository.existByName(book.getGenre().getName())) {
+            Genre newGenre = genreRepository.add(book.getGenre());
             book.setGenre(newGenre);
         } else {
-            Genre oldGenre = genreRepository.findGenre(book.getGenre().getName());
+            Genre oldGenre = genreRepository.findByName(book.getGenre().getName());
             book.setGenre(oldGenre);
         }
     }

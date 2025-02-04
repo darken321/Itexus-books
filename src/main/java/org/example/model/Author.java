@@ -1,11 +1,10 @@
 package org.example.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс {@code Authors} представляет собой модель автора для БД SQL.
@@ -25,6 +24,10 @@ public class Author {
 
     @Column(name = "name")
     private String name;
+
+    //при удалении автора удаляются все его книги
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Book> books = new ArrayList<>();
 
     public Author(Integer id) {
         this.id = id;

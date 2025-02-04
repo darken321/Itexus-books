@@ -75,7 +75,7 @@ public class BookInputHandler {
      */
     public Book updateBookDetails(Locale currentLocale) {
 
-        int id = getValidBookId(
+        int id = getValidId(
                 messageSource.getMessage(MessageKeys.READ_NEW_ID, null, currentLocale), currentLocale);
 
         if (bookRepository.existById(id)) {
@@ -93,32 +93,32 @@ public class BookInputHandler {
 
             return new Book(id, title, author, description, genre);
         } else {
-            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,
+            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BY_ID,
                     null, currentLocale) + reset);
             return null;
         }
     }
 
     /**
-     * Запрашивает у пользователя ID книги для удаления.
+     * Запрашивает у пользователя валидный ID для удаления.
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @return ID книги, введенный пользователем.
+     * @return ID, введенный пользователем.
      */
-    public int deleteBookDetails(Locale currentLocale) {
-        return getValidBookId(
+    public int readDeleteDetails(Locale currentLocale) {
+        return getValidId(
                 messageSource.getMessage(MessageKeys.READ_DELETE_ID, null, currentLocale), currentLocale);
     }
 
     /**
-     * Запрашивает у пользователя корректный ID книги,
+     * Запрашивает у пользователя корректный ID,
      * проверяет, что введенное значение является положительным числом.
      *
      * @param prompt        сообщение, отображаемое пользователю для ввода ID.
      * @param currentLocale локаль языка, установленная пользователем.
-     * @return корректный ID книги.
+     * @return корректный ID.
      */
-    private int getValidBookId(String prompt, Locale currentLocale) {
+    private int getValidId(String prompt, Locale currentLocale) {
         int id = -1;
         while (id < 0) {
             System.out.println(prompt);

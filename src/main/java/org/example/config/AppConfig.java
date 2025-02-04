@@ -67,6 +67,7 @@ public class AppConfig {
         hibernateProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         hibernateProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         hibernateProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.put("hibernate.jdbc.batch_size", env.getProperty("hibernate.jdbc.batch_size"));
         return hibernateProperties;
     }
 
@@ -83,11 +84,4 @@ public class AppConfig {
         //извлечение объекта типа SessionFactory
         return sessionFactoryBean.getObject();
     }
-
-//    @Bean
-//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-//        HibernateTransactionManager txManager = new HibernateTransactionManager();
-//        txManager.setSessionFactory(sessionFactory);
-//        return txManager;
-//    }
 }

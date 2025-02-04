@@ -30,12 +30,10 @@ public class Book {
     private String description;
 
     @ManyToOne
-//    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
     @ManyToOne
-//    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 

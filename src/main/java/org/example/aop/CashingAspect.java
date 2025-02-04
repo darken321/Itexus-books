@@ -23,7 +23,7 @@ public class CashingAspect {
 
     private static final Map<String, List<Book>> cache = new HashMap<>();
 
-    @Pointcut("execution(* org.example.service.BookService.findBooksByName(..))")
+    @Pointcut("execution(* org.example.service.BookService.findByName(..))")
     public void findBooksPointcut() {
     }
 
@@ -64,9 +64,9 @@ public class CashingAspect {
      * Стирает информацию из кеша в случае изменения, добавления или удаления книги.
      */
     @AfterReturning(
-            "execution(* org.example.service.BookService.createBook(..)) || " +
-            "execution (* org.example.service.BookService.editBook(..)) ||" +
-            "execution(* org.example.service.BookService.deleteBook(..))")
+            "execution(* org.example.service.BookService.add(..)) || " +
+            "execution (* org.example.service.BookService.edit(..)) ||" +
+            "execution(* org.example.service.BookService.delete(..))")
     public void clearCacheAdvice() {
         log.info("Стираю кеш");
         cache.clear();

@@ -1,6 +1,7 @@
 package org.example.utils;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.Author;
 import org.example.model.Book;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -14,7 +15,7 @@ import java.util.Locale;
 public class BookUtils {
 
     @Value("${color.reset}")
-    private  String reset;
+    private String reset;
 
     @Value("${color.listing}")
     private String listing;
@@ -22,13 +23,13 @@ public class BookUtils {
     /**
      * Выводит список всех книг.
      *
-     * @param books список книг для вывода.
+     * @param books         список книг для вывода.
      * @param messageSource источник сообщений для интернационализации.
      * @param currentLocale текущая локаль.
      */
     public void listBooks(List<Book> books, MessageSource messageSource, Locale currentLocale) {
         if (books.isEmpty()) {
-            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_LIST_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_LIST_EMPTY, null, currentLocale));
         } else {
             for (Book book : books) {
                 System.out.println(
@@ -42,6 +43,28 @@ public class BookUtils {
                                 reset + book.getDescription() + ", " +
                                 listing + messageSource.getMessage(MessageKeys.BOOK_GENRE, null, currentLocale) + ": " +
                                 reset + book.getGenre().getName()
+                );
+            }
+        }
+    }
+
+    /**
+     * Выводит список всех авторов.
+     *
+     * @param authors       список авторов для вывода.
+     * @param messageSource источник сообщений для интернационализации.
+     * @param currentLocale текущая локаль.
+     */
+    public void listAuthors(List<Author> authors, MessageSource messageSource, Locale currentLocale) {
+        if (authors.isEmpty()) {
+            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_LIST_EMPTY, null, currentLocale));
+        } else {
+            for (Author author : authors) {
+                System.out.println(
+                        listing + messageSource.getMessage(MessageKeys.BOOK_ID, null, currentLocale) + ": " +
+                        reset + author.getId() + ", " +
+                        listing + messageSource.getMessage(MessageKeys.BOOK_AUTHOR, null, currentLocale) + ": " +
+                        reset + author.getName()
                 );
             }
         }

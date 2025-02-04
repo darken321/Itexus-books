@@ -17,7 +17,7 @@ public class GenreRepository {
 
     private final SessionFactory sessionFactory;
 
-    public Genre addGenre(Genre genre) {
+    public Genre add(Genre genre) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(genre);
@@ -28,7 +28,7 @@ public class GenreRepository {
         return genre;
     }
 
-    public Genre findGenre(String genreName) {
+    public Genre findByName(String genreName) {
         Genre genre = null;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -42,7 +42,7 @@ public class GenreRepository {
         return genre;
     }
 
-    public boolean existByGenre(String genre) {
+    public boolean existByName(String genre) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Long count = session.createQuery("select count(*) from Genre where name = :name", Long.class)

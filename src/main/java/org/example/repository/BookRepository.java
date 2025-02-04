@@ -20,7 +20,7 @@ public class BookRepository {
 
     private final SessionFactory sessionFactory;
 
-    public Book addBook(Book book) {
+    public Book add(Book book) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(book);
@@ -31,7 +31,7 @@ public class BookRepository {
         return book;
     }
 
-    public List<Book> readBooks() {
+    public List<Book> readAll() {
         List<Book> books = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -43,7 +43,7 @@ public class BookRepository {
         return books;
     }
 
-    public void editBook(Book book) {
+    public void edit(Book book) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.update(book);
@@ -53,7 +53,7 @@ public class BookRepository {
         }
     }
 
-    public void deleteBook(int id) {
+    public void delete(int id) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Book book = session.get(Book.class, id);
@@ -79,7 +79,7 @@ public class BookRepository {
         }
     }
 
-    public List<Book> findBooksByName(String name) {
+    public List<Book> findByName(String name) {
         List<Book> books = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
