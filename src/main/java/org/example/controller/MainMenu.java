@@ -6,6 +6,7 @@ import org.example.model.Book;
 import org.example.service.AuthorService;
 import org.example.service.BookService;
 import org.example.utils.BookUtils;
+import org.example.utils.DatabaseInitializer;
 import org.example.utils.MessageKeys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -24,6 +25,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class MainMenu {
 
+    private final DatabaseInitializer databaseInitializer;
     private final BookService bookService;
     private final AuthorService authorService;
     private final BookInputHandler bookInputHandler;
@@ -43,6 +45,8 @@ public class MainMenu {
     private Locale currentLocale = Locale.getDefault();
 
     public void menu() {
+        databaseInitializer.clearDatabase();
+        databaseInitializer.populateDatabase();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             language(reader);

@@ -54,4 +54,14 @@ public class GenreRepository {
             return false;
         }
     }
+
+    public void deleteAll() {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Genre").executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

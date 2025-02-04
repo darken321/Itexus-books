@@ -58,6 +58,18 @@ public class Book {
         this.id = id;
     }
 
+    public Book(String title, String description, Author author, Genre genre) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.genre = genre;
+    }
+
+    public Book(int id, String title, String description, Author author, Genre genre) {
+        this(title, description, author, genre);
+        this.id = id;
+    }
+
     public void setAuthorId(Integer authorId) {
         this.setAuthor(new Author(authorId));
     }

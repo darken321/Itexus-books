@@ -103,4 +103,14 @@ public class AuthorRepository {
             e.printStackTrace();
         }
     }
+
+    public void deleteAll() {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Author").executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

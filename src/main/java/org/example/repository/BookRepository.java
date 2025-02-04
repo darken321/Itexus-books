@@ -92,4 +92,14 @@ public class BookRepository {
         }
         return books;
     }
+
+    public void deleteAll() {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Book").executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
