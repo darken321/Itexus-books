@@ -34,6 +34,8 @@ public class GenreRepository {
             session.beginTransaction();
             genre = session.createQuery("from Genre where name = :genreName", Genre.class)
                     .setParameter("genreName", genreName)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .uniqueResult();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -47,6 +49,8 @@ public class GenreRepository {
             session.beginTransaction();
             Long count = session.createQuery("select count(*) from Genre where name = :name", Long.class)
                     .setParameter("name", genre)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .uniqueResult();
             return count != null && count > 0;
         } catch (Exception e) {

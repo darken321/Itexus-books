@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
 
@@ -18,6 +20,8 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @BatchSize(size = 10)
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Genre {
 
     @Id

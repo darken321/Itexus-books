@@ -35,7 +35,10 @@ public class BookRepository {
         List<Book> books = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            books = session.createQuery("from Book", Book.class).list();
+            books = session.createQuery("from Book", Book.class)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
+                    .list();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,6 +74,8 @@ public class BookRepository {
             session.beginTransaction();
             Long count = session.createQuery("select count(*) from Book where id = :id", Long.class)
                     .setParameter("id", id)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .uniqueResult();
             return count != null && count > 0;
         } catch (Exception e) {
@@ -85,6 +90,8 @@ public class BookRepository {
             session.beginTransaction();
             books = session.createQuery("from Book where title like :name", Book.class)
                     .setParameter("name", "%" + name + "%")
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .list();
             session.getTransaction().commit();
         } catch (Exception e) {

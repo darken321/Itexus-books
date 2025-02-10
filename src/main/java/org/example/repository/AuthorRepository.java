@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Репозиторий для управления Авторами в SQL базе данных.
+ * Репозиторий для управления авторами в SQL базе данных.
  * Предоставляет методы для добавления, редактирования, чтения и удаления Авторов.
  */
 @Repository
@@ -36,6 +36,8 @@ public class AuthorRepository {
             session.beginTransaction();
             Long count = session.createQuery("select count(*) from Author where name = :name", Long.class)
                     .setParameter("name", author)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .uniqueResult();
             return count != null && count > 0;
         } catch (Exception e) {
@@ -49,6 +51,8 @@ public class AuthorRepository {
             session.beginTransaction();
             Long count = session.createQuery("select count(*) from Author where id = :id", Long.class)
                     .setParameter("id", id)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .uniqueResult();
             return count != null && count > 0;
         } catch (Exception e) {
@@ -62,6 +66,8 @@ public class AuthorRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             authors = session.createQuery("from Author", Author.class)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -77,6 +83,8 @@ public class AuthorRepository {
             authors = session.createQuery(
                             "SELECT DISTINCT a from Author a LEFT JOIN FETCH a.books WHERE a.name LIKE :name", Author.class)
                     .setParameter("name", "%" + name + "%")
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
                     .list();
             session.getTransaction().commit();
         } catch (Exception e) {

@@ -62,26 +62,12 @@ public class AppConfig {
         return dataSource;
     }
 
-    private Properties getProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        hibernateProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        hibernateProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        hibernateProperties.put("hibernate.jdbc.batch_size", env.getProperty("hibernate.jdbc.batch_size"));
-        hibernateProperties.put("hibernate.order_inserts", env.getProperty("hibernate.order_inserts"));
-        hibernateProperties.put("hibernate.order_updates", env.getProperty("hibernate.order_updates"));
-        hibernateProperties.put("hibernate.use_sql_comments", env.getProperty("hibernate.use_sql_comments"));
-        return hibernateProperties;
-    }
-
     @Bean
     public SessionFactory sessionFactory(DataSource dataSource) throws IOException {
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         // пакеты, содержащие сущности
         sessionFactoryBean.setPackagesToScan("org.example.model");
-        //устанавливаем свойства
-        sessionFactoryBean.setHibernateProperties(getProperties());
         //завершение настройки и инициализация бина
         sessionFactoryBean.afterPropertiesSet();
         //извлечение объекта типа SessionFactory
