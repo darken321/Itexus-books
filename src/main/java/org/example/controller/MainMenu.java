@@ -45,8 +45,8 @@ public class MainMenu {
     private Locale currentLocale = Locale.getDefault();
 
     public void menu() {
-        databaseInitializer.clearDatabase();
-        databaseInitializer.populateDatabase();
+//        databaseInitializer.clearDatabase();
+//        databaseInitializer.populateDatabase();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             language(reader);
@@ -110,6 +110,7 @@ public class MainMenu {
             System.out.println(messageSource.getMessage(MessageKeys.MENU_CREATE_BOOK, null, currentLocale));
             System.out.println(messageSource.getMessage(MessageKeys.MENU_EDIT_BOOK, null, currentLocale));
             System.out.println(messageSource.getMessage(MessageKeys.MENU_DELETE_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_FIND_AUTHOR, null, currentLocale));
             System.out.println(messageSource.getMessage(MessageKeys.MENU_DELETE_AUTHOR, null, currentLocale));
             System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT_ACTION, null, currentLocale));
             System.out.println(reset);
@@ -119,7 +120,7 @@ public class MainMenu {
                 switch (input) {
                     case 1 -> bookUtils.listBooks(bookService.readAll(currentLocale), messageSource, currentLocale);
                     case 2 -> {
-                        String readBookName = bookInputHandler.findBookDetails(currentLocale);
+                        String readBookName = bookInputHandler.readDetails(currentLocale, MessageKeys.READ_ADD_TITLE);
                         List<Book> foundBooks = bookService.findByName(readBookName);
                         bookUtils.listBooks(foundBooks, messageSource, currentLocale);
                     }
@@ -127,6 +128,11 @@ public class MainMenu {
                     case 4 -> bookService.edit(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
                     case 5 -> bookService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);
                     case 6 -> {
+                        String readAuthorName = bookInputHandler.readDetails(currentLocale, MessageKeys.READ_ADD_AUTHOR);
+                        List<Author> foundAuthors = authorService.findByName(readAuthorName);
+                        bookUtils.listAuthorsAndBooks(foundAuthors, messageSource, currentLocale);
+                    }
+                    case 7 -> {
                         List<Author> authors = authorService.readAll(currentLocale);
                         bookUtils.listAuthors(authors, messageSource, currentLocale);
                         authorService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);

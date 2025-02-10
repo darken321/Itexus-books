@@ -110,9 +110,9 @@ public class BookService {
     }
 
     /**
-     * Возвращает список книг по названию книги.
+     * Возвращает список книг по части названию книги.
      *
-     * @param bookName Название книги
+     * @param bookName часть названия книги
      * @return список книг с данным названием без учета заглавных букв.
      */
     public List<Book> findByName(String bookName) {
@@ -130,7 +130,7 @@ public class BookService {
             Author newAuthor = authorRepository.add(book.getAuthor());
             book.setAuthor(newAuthor);
         } else {
-            Author oldAuthor = authorRepository.findByName(book.getAuthor().getName());
+            Author oldAuthor = authorRepository.findByName(book.getAuthor().getName()).get(0);
             book.setAuthor(oldAuthor);
         }
     }

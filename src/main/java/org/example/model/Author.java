@@ -26,7 +26,7 @@ public class Author {
     private String name;
 
     //при удалении автора удаляются все его книги
-    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Book> books = new ArrayList<>();
 
     public Author(Integer id) {

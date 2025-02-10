@@ -29,6 +29,7 @@ public abstract class MessageKeys {
     public static final String MENU_CREATE_BOOK = "menu.createBook";
     public static final String MENU_EDIT_BOOK = "menu.editBook";
     public static final String MENU_DELETE_BOOK = "menu.deleteBook";
+    public static final String MENU_FIND_AUTHOR = "menu.findAuthor";
     public static final String MENU_DELETE_AUTHOR = "menu.deleteAuthor";
     public static final String MENU_EXIT_ACTION = "menu.exitAction";
 

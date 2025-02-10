@@ -3,7 +3,6 @@ package org.example.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.Author;
-import org.example.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -25,20 +24,6 @@ public class AuthorRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(author);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return author;
-    }
-
-    public Author findByName(String authorName) {
-        Author author = null;
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            author = session.createQuery("from Author where name = :authorName", Author.class)
-                    .setParameter("authorName", authorName)
-                    .uniqueResult();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,13 +61,30 @@ public class AuthorRepository {
         List<Author> authors = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            authors = session.createQuery("from Author", Author.class).list();
+            authors = session.createQuery("from Author", Author.class)
+                    .list();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return authors;
     }
+
+    public List<Author> findByName(String name) {
+        List<Author> authors = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            authors = session.createQuery(
+                            "SELECT DISTINCT a from Author a LEFT JOIN FETCH a.books WHERE a.name LIKE :name", Author.class)
+                    .setParameter("name", "%" + name + "%")
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return authors;
+    }
+
     public void delete(int id) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();

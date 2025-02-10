@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 /**
- * Класс для обработки ввода данных о книгах от пользователя.
+ * Класс для обработки ввода данных от пользователя.
  * Этот класс отвечает за получение данных о книгах от пользователя через консоль.
  */
 @Controller
@@ -56,13 +56,14 @@ public class BookInputHandler {
     }
 
     /**
-     * Запрашивает у пользователя данные для поиска существующей книги по названию.
+     * Выводит сообщение message и
+     * запрашивает у пользователя данные
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @return строку с названием книги.
+     * @return строку с названием книги или именем автора.
      */
-    public String findBookDetails(Locale currentLocale) {
-        System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_TITLE, null, currentLocale));
+    public String readDetails(Locale currentLocale, String message) {
+        System.out.println(messageSource.getMessage(message, null, currentLocale));
         return readLine();
     }
 

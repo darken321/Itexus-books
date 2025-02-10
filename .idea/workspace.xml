@@ -4,24 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Обращение к CSV файлу заменено на работу с БД через Spring JDBC">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" afterDir="false" />
+    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/config/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/BookUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/BookUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-csv.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-sql.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/books.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/books.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_ru.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,44 +142,44 @@
       <recent name="C:\java\IdeaProjects\Itexus-books\src\main\resources\properties" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example" />
       <recent name="org.example.repository" />
       <recent name="org.example.model" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Books">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Application" />
+      <module name="Itexus-books.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Application1" />
+      <module name="Itexus-books.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Books" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Books" />
       <module name="Itexus-books.main" />
-      <option name="VM_PARAMETERS" value="-Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.config.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.MainMenu" />
-      <module name="Itexus-books.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.config.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Test" />
-      <module name="Itexus-books.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.config.*" />
+          <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -212,19 +208,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Test" />
-      <item itemvalue="Application.MainMenu" />
+      <item itemvalue="Application.Application1" />
       <item itemvalue="Application.Books" />
+      <item itemvalue="Application.Application" />
       <item itemvalue="Database Script.db.sql" />
       <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Books" />
+        <item itemvalue="Application.Application1" />
+        <item itemvalue="Application.Application" />
         <item itemvalue="Database Script.db.sql" />
         <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.MainMenu" />
-        <item itemvalue="Application.Books" />
       </list>
     </recent_temporary>
   </component>
@@ -301,7 +297,23 @@
       <workItem from="1736582050768" duration="591000" />
       <workItem from="1737097908414" duration="8831000" />
       <workItem from="1737183711849" duration="608000" />
-      <workItem from="1737353439886" duration="3211000" />
+      <workItem from="1737353439886" duration="7748000" />
+      <workItem from="1737440186822" duration="7755000" />
+      <workItem from="1737527578440" duration="16049000" />
+      <workItem from="1737624047583" duration="7454000" />
+      <workItem from="1737696992024" duration="11542000" />
+      <workItem from="1737973857328" duration="5320000" />
+      <workItem from="1738221368945" duration="18228000" />
+      <workItem from="1738260762419" duration="599000" />
+      <workItem from="1738304485253" duration="7680000" />
+      <workItem from="1738578596213" duration="7530000" />
+      <workItem from="1738651632889" duration="9004000" />
+      <workItem from="1738674163170" duration="11914000" />
+      <workItem from="1738776580056" duration="827000" />
+      <workItem from="1738822917983" duration="10174000" />
+      <workItem from="1738907875216" duration="16873000" />
+      <workItem from="1739086589390" duration="10392000" />
+      <workItem from="1739185933578" duration="1638000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1727095638353</created>
@@ -359,7 +371,35 @@
       <option name="project" value="LOCAL" />
       <updated>1734974956329</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Строки-ключи для сообщений messageSource.getMessage вынесены в одельный файл&#10;&#10;Создан абстрактный класс MessageKeys, в котором содержатся все строки-константы для сообщений messageSource.getMessage&#10;&#10;убраны упоминания про CSV и переключение профилей">
+      <created>1737373801941</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1737373801941</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Замена JDBC на Hibernate &#10;&#10;Добавлена конфигурация hibernate и создан бин SessionFactory в AppConfig &#10;&#10;Добавлены аннотации для мапинга сущностей.">
+      <created>1737739145583</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1737739145583</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Добавлено удаление автора&#10;&#10;Добавлен пункт меню &quot;удаление автора&quot;.&#10;При удалении автора из-за cascade = CascadeType.ALL удаляются все его книги &#10;Вынес CRUD методы автора в отдельный сервисный класс">
+      <created>1738670236996</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738670236996</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Добавлен класс для заполнения БД и проверки пакетного выполнения операций&#10;&#10;Добавлен класс DatabaseInitializer, в котором очищаются таблицы БД и заполняются 5 авторами, жанрами и книгами.">
+      <created>1738697032722</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1738697032722</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,12 +437,22 @@
     <MESSAGE value="Добавлено кеширование данных книги &#10;&#10;При поиске данных книги по ее имени эти данные кешируются в классе LoggingAspect в Map. При повторном запросе такой же книги, ее данные не читаются с диска, а выдаются из кеша. При изменении, добавлении или удалении книги кеш стирается" />
     <MESSAGE value="Добавлен инициализационный SQL-скрипт создания таблиц &#10;&#10;Три таблицы, авторы, жанры и книги" />
     <MESSAGE value="Обращение к CSV файлу заменено на работу с БД через Spring JDBC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обращение к CSV файлу заменено на работу с БД через Spring JDBC" />
+    <MESSAGE value="Строки-ключи для сообщений messageSource.getMessage вынесены в одельный файл&#10;&#10;Создан абстрактный класс MessageKeys, в котором содержатся все строки-константы для сообщений messageSource.getMessage&#10;&#10;убраны упоминания про CSV и переключение профилей" />
+    <MESSAGE value="Замена JDBC на Hibernate &#10;&#10;Добавлена конфигурация hibernate и создан бин SessionFactory в AppConfig &#10;&#10;Добавлены аннотации для мапинга сущностей." />
+    <MESSAGE value="Добавлено удаление автора&#10;&#10;Добавлен пункт меню &quot;удаление автора&quot;.&#10;При удалении автора из-за cascade = CascadeType.ALL удаляются все его книги &#10;Вынес CRUD методы автора в отдельный сервисный класс" />
+    <MESSAGE value="Добавлен класс для заполнения БД и проверки пакетного выполнения операций&#10;&#10;Добавлен класс DatabaseInitializer, в котором очищаются таблицы БД и заполняются 5 авторами, жанрами и книгами." />
+    <MESSAGE value="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях" />
   </component>
   <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.example.repository.AuthorRepository" memberName="sessionFactory" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="GradleRunConfiguration">
-        <watch expression="book.getGenre().getName()" language="JAVA" />
+        <watch expression="bookRepository.readAll().get(2)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -413,87 +463,89 @@
   <component name="com.github.evgenys91.machinet.common.dslhistory.DslHistoryState">
     <option name="historyDtoById">
       <map>
-        <entry key="551846">
+        <entry key="1f2a15">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" />
+                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
                 </list>
               </option>
-              <option name="id" value="551846" />
-              <option name="initiateTms" value="1737372264581" />
-              <option name="request" value=" почему при изменении поля private  String error на private final String error в классе BookInputHandler при компиляции просиходит ошибка Exception in thread &quot;main&quot; org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'bookInputHandler' defined in file [C:\java\IdeaProjects\Itexus-books\build\classes\java\main\org\example\controller\BookInputHandler.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'java.lang.String' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}" />
+              <option name="id" value="1f2a15" />
+              <option name="initiateTms" value="1739119255758" />
+              <option name="request" value=" При данном коде, сейчас не включен кеш 2 и 3 уровня. При первом запросе книги по части имени идет запрос в БД, но повторный такой же запрос книги по части имени через метод findByName класса BookRepository срабатывает без запроса в БД. То есть видимо через кеш. Через какой кеш, каким образом hibernate может брать данные List&lt;Book&gt;. В методе findByName класса BookRepository сессия каждый раз открывается и закрывается." />
               <option name="response" value="" />
-              <option name="responseDescription" value="Ошибка, которую вы наблюдаете, связана с тем, что Spring пытается внедрить значение для поля `error` через конструктор, но не может найти подходящий bean типа `String`. Когда вы делаете поле `error` `final`, Spring ожидает, что это значение будет передано через конструктор, так как `final` поля должны быть инициализированы при создании объекта.&#10;&#10;В вашем случае, вы используете аннотацию `@Value` для внедрения значения из конфигурации, и это значение должно быть установлено через сеттер или непосредственно в поле, а не через конструктор.&#10;&#10;### Решение&#10;&#10;1. Убедитесь, что поле `error` не является `final`.&#10;2. Используйте аннотацию `@Value` для внедрения значения в поле.&#10;&#10;### Обновленный класс `BookInputHandler`:&#10;&#10;```java&#10;package org.example.controller;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.model.Book;&#10;import org.example.repository.BookRepository;&#10;import org.example.utils.MessageKeys;&#10;import org.springframework.beans.factory.annotation.Value;&#10;import org.springframework.context.MessageSource;&#10;import org.springframework.stereotype.Controller;&#10;&#10;import java.io.BufferedReader;&#10;import java.io.IOException;&#10;import java.io.InputStreamReader;&#10;import java.nio.charset.StandardCharsets;&#10;import java.util.Locale;&#10;&#10;/**&#10; * Класс для обработки ввода данных о книгах от пользователя.&#10; * Этот класс отвечает за получение данных о книгах от пользователя через консоль.&#10; */&#10;@Controller&#10;@RequiredArgsConstructor&#10;public class BookInputHandler {&#10;&#10;    @Value(&quot;${color.error}&quot;)&#10;    private String error;&#10;&#10;    @Value(&quot;${color.reset}&quot;)&#10;    private String reset;&#10;&#10;    private final MessageSource messageSource;&#10;    private final BookRepository bookRepository;&#10;    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));&#10;&#10;    /**&#10;     * Получает данные о новой книге от пользователя.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @return книгу {@link Book}, для добавления в файл&#10;     */&#10;    public Book newBookDetails(Locale currentLocale) {&#10;&#10;        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_TITLE, null, currentLocale));&#10;        String title = readLine();&#10;&#10;        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_AUTHOR, null, currentLocale));&#10;        String author = readLine();&#10;&#10;        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_DESCRIPTION, null, currentLocale));&#10;        String description = readLine();&#10;&#10;        System.out.println(messageSource.getMessage(MessageKeys.READ_NEW_GENRE, null, currentLocale));&#10;        String genre = readLine();&#10;&#10;        return new Book(title, author, description, genre);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя данные для поиска существующей книги по названию.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @return строку с названием книги.&#10;     */&#10;    public String findBookDetails(Locale currentLocale) {&#10;        System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_TITLE, null, currentLocale));&#10;        return readLine();&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя данные для редактирования существующей книги.&#10;     * Если книги с таким id нет, то выводит ошибку и возвращает null&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @return книгу {@link Book} с данными для изменения книги.&#10;     */&#10;    public Book updateBookDetails(Locale currentLocale) {&#10;&#10;        int id = getValidBookId(&#10;                messageSource.getMessage(MessageKeys.READ_NEW_ID, null, currentLocale), currentLocale);&#10;&#10;        if (bookRepository.existById(id)) {&#10;            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_TITLE, null, currentLocale));&#10;            String title = readLine();&#10;&#10;            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_AUTHOR, null, currentLocale));&#10;            String author = readLine();&#10;&#10;            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_DESCRIPTION, null, currentLocale));&#10;            String description = readLine();&#10;&#10;            System.out.println(messageSource.getMessage(MessageKeys.READ_ADD_GENRE, null, currentLocale));&#10;            String genre = readLine();&#10;&#10;            return new Book(id, title, author, description, genre);&#10;        } else {&#10;            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,&#10;                    null, currentLocale) + reset);&#10;            return null;&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя ID книги для удаления.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @return ID книги, введенный пользователем.&#10;     */&#10;    public int deleteBookDetails(Locale currentLocale) {&#10;        return getValidBookId(&#10;                messageSource.getMessage(MessageKeys.READ_DELETE_ID, null, currentLocale), currentLocale);&#10;    }&#10;&#10;    /**&#10;     * Запрашивает у пользователя корректный ID книги,&#10;     * проверяет, что введенное значение является положительным числом.&#10;     *&#10;     * @param prompt        сообщение, отображаемое пользователю для ввода ID.&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @return корректный ID книги.&#10;     */&#10;    private int getValidBookId(String prompt, Locale currentLocale) {&#10;        int id = -1;&#10;        while (id &lt; 0) {&#10;            System.out.println(prompt);&#10;            try {&#10;                id = Integer.parseInt(readLine());&#10;                if (id &lt; 0) {&#10;                    System.out.println(&#10;                            error +&#10;                                    messageSource.getMessage(MessageKeys.INVALID_ID, null, currentLocale) +&#10;                                    reset);&#10;                }&#10;            } catch (NumberFormatException e) {&#10;                System.out.println(&#10;                        error +&#10;                                messageSource.getMessage(MessageKeys.NOT_NUMBER, null, currentLocale) +&#10;                                reset);&#10;            }&#10;        }&#10;        return id;&#10;    }&#10;&#10;    /**&#10;     * Читает строку из консоли.&#10;     *&#10;     * @return введенная строка.&#10;     */&#10;    private String readLine() {&#10;        try {&#10;            return reader.readLine().trim();&#10;        } catch (IOException e) {&#10;            return &quot;&quot;;&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;Теперь поле `error` не является `final`, и Spring сможет корректно внедрить значение из конфигурации." />
+              <option name="responseDescription" value="Если кэш второго и третьего уровня не включен, но повторный запрос через метод `findByName` возвращает данные без обращения к базе данных, это может быть связано с первичным кэшем (First-Level Cache). Однако, как вы правильно заметили, сессия каждый раз открывается и закрывается, что должно сбрасывать первичный кэш.&#10;&#10;В таком случае, вероятно, что Hibernate использует внутренние механизмы оптимизации, такие как контекст персистентности или кэширование на уровне JDBC драйвера. Давайте рассмотрим возможные причины более подробно:&#10;&#10;1. **Контекст персистентности (Persistence Context)**:&#10;   - Первичный кэш работает на уровне сессии (`Session`). Если сессия открыта и объект уже загружен в текущую сессию, Hibernate будет использовать его из кэша, а не загружать его заново из базы данных.&#10;   - Однако, в вашем случае сессия каждый раз открывается и закрывается, что должно сбрасывать первичный кэш.&#10;&#10;2. **Кэширование на уровне JDBC драйвера**:&#10;   - Некоторые JDBC драйверы могут кэшировать результаты запросов на уровне драйвера. Это может объяснить, почему повторный запрос возвращает данные без обращения к базе данных.&#10;   - Это поведение зависит от конкретного JDBC драйвера и его настроек.&#10;&#10;3. **Кэширование на уровне базы данных**:&#10;   - Некоторые базы данных могут кэшировать результаты запросов на уровне сервера базы данных. Это может объяснить, почему повторный запрос возвращает данные быстро.&#10;   - Это поведение зависит от конкретной базы данных и ее настроек.&#10;&#10;4. **Hibernate SessionFactory-level Caching**:&#10;   - Хотя это не является стандартным поведением, некоторые реализации могут использовать кэширование на уровне `SessionFactory` для оптимизации повторных запросов.&#10;&#10;### Проверка и диагностика&#10;&#10;Для точного определения причины, можно выполнить следующие шаги:&#10;&#10;1. **Включить логирование SQL запросов**:&#10;   - Убедитесь, что все SQL запросы логируются. Это поможет понять, выполняется ли фактически запрос к базе данных.&#10;   - В `hibernate.properties`:&#10;     ```properties&#10;     hibernate.show_sql=true&#10;     hibernate.format_sql=true&#10;     hibernate.use_sql_comments=true&#10;     ```&#10;&#10;2. **Проверить настройки JDBC драйвера**:&#10;   - Убедитесь, что JDBC драйвер не кэширует результаты запросов. Это можно сделать, проверив документацию и настройки драйвера.&#10;&#10;3. **Проверить настройки базы данных**:&#10;   - Убедитесь, что база данных не кэширует результаты запросов. Это можно сделать, проверив документацию и настройки базы данных.&#10;&#10;### Пример кода для логирования запросов&#10;&#10;```java&#10;public List&lt;Book&gt; findByName(String name) {&#10;    List&lt;Book&gt; books = new ArrayList&lt;&gt;();&#10;    try (Session session = sessionFactory.openSession()) {&#10;        session.beginTransaction();&#10;        books = session.createQuery(&quot;from Book where title like :name&quot;, Book.class)&#10;                       .setParameter(&quot;name&quot;, &quot;%&quot; + name + &quot;%&quot;)&#10;                       .list();&#10;        session.getTransaction().commit();&#10;    } catch (Exception e) {&#10;        e.printStackTrace();&#10;    }&#10;    return books;&#10;}&#10;```&#10;&#10;### Заключение&#10;&#10;Если кэш второго и третьего уровня не включен, но повторный запрос возвращает данные без обращения к базе данных, это может быть связано с кэшированием на уровне JDBC драйвера или базы данных. Включение логирования SQL запросов поможет точно определить, выполняется ли фактически запрос к базе данных." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1737372287705" />
+              <option name="responseTms" value="1739119268706" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
                 </list>
               </option>
             </ChatHistoryModel>
           </value>
         </entry>
-        <entry key="63a659">
+        <entry key="58e22b">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/Books.java" />
+                  <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.6.11.Final/f6332e6fbc4634e7aeccd24a5c527a2da31e9f11/hibernate-core-5.6.11.Final-sources.jar!/org/hibernate/graph/GraphSemantic.java" />
+                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
                 </list>
               </option>
-              <option name="id" value="63a659" />
-              <option name="initiateTms" value="1737372695455" />
-              <option name="request" value=" как должны называться таблицы в БД - в множественном числе или в единственном числе?&#10;books или book?" />
+              <option name="id" value="58e22b" />
+              <option name="initiateTms" value="1739117073582" />
+              <option name="request" value=" какие есть уровни кэшей в Hibernate?" />
               <option name="response" value="" />
-              <option name="responseDescription" value="Вопрос о том, как называть таблицы в базе данных — в единственном или множественном числе — является предметом стиля и соглашений, и нет строгого правила, которое бы диктовало один подход над другим. Однако, существуют некоторые общепринятые практики и рекомендации, которые могут помочь вам принять решение.&#10;&#10;### Общепринятые практики:&#10;&#10;1. **Множественное число**:&#10;   - **Преимущества**:&#10;     - Логически соответствует тому, что таблица содержит множество записей (строк).&#10;     - Часто используется в реляционных базах данных.&#10;   - **Примеры**:&#10;     - `books`&#10;     - `authors`&#10;     - `genres`&#10;&#10;2. **Единственное число**:&#10;   - **Преимущества**:&#10;     - Может быть более интуитивным при моделировании сущностей (например, таблица представляет собой сущность `book`).&#10;     - Часто используется в объектно-ориентированном программировании и некоторых ORM (Object-Relational Mapping) системах.&#10;   - **Примеры**:&#10;     - `book`&#10;     - `author`&#10;     - `genre`&#10;&#10;### Рекомендации:&#10;&#10;- **Согласованность**: Независимо от того, какой стиль вы выберете, важно придерживаться его последовательно во всей базе данных. Это поможет избежать путаницы и упростит поддержку кода.&#10;- **Соглашения команды**: Если вы работаете в команде, согласуйте стиль именования с коллегами и задокументируйте это соглашение.&#10;- **ORM и фреймворки**: Если вы используете ORM или фреймворки, такие как Hibernate, JPA, или Spring Data, обратите внимание на их рекомендации и соглашения по именованию.&#10;&#10;### Пример:&#10;&#10;Если вы решите использовать множественное число, ваши таблицы могут называться так:&#10;- `books`&#10;- `authors`&#10;- `genres`&#10;&#10;Если вы решите использовать единственное число, ваши таблицы могут называться так:&#10;- `book`&#10;- `author`&#10;- `genre`&#10;&#10;### Личный совет:&#10;&#10;В большинстве случаев, использование множественного числа для имен таблиц является более распространенной практикой в реляционных базах данных. Это делает структуру базы данных более интуитивной, особенно для новых разработчиков, которые могут присоединиться к проекту.&#10;&#10;Таким образом, я бы рекомендовал использовать множественное число для имен таблиц:&#10;- `books`&#10;- `authors`&#10;- `genres`&#10;&#10;Это поможет поддерживать согласованность и ясность в вашей базе данных." />
+              <option name="responseDescription" value="В Hibernate существует несколько уровней кэширования, которые помогают улучшить производительность за счет уменьшения количества обращений к базе данных. Основные уровни кэширования в Hibernate:&#10;&#10;1. **Первичный кэш (First-Level Cache)**:&#10;   - Это кэш, который встроен в Hibernate и работает на уровне сессии (`Session`). Он автоматически включен и не требует дополнительной настройки.&#10;   - Все объекты, загруженные в рамках одной сессии, хранятся в этом кэше. Если объект уже загружен в текущую сессию, Hibernate будет использовать его из кэша, а не загружать его заново из базы данных.&#10;   - Этот кэш действует только в пределах одной сессии и не доступен за ее пределами.&#10;&#10;2. **Вторичный кэш (Second-Level Cache)**:&#10;   - Это кэш, который работает на уровне сессии фабрики (`SessionFactory`). Он может быть настроен и включен отдельно.&#10;   - Вторичный кэш позволяет кэшировать объекты между сессиями, что может значительно улучшить производительность при многократном доступе к одним и тем же данным.&#10;   - Для использования второго уровня кэша необходимо настроить соответствующий провайдер кэша (например, EHCache, Infinispan и т.д.) и аннотировать сущности, которые должны кэшироваться.&#10;&#10;3. **Кэш запросов (Query Cache)**:&#10;   - Это кэш, который используется для кэширования результатов запросов. Он работает в связке с вторичным кэшем.&#10;   - Кэш запросов позволяет кэшировать результаты HQL или Criteria запросов, что может быть полезно для часто выполняемых запросов с неизменяющимися результатами.&#10;   - Для использования кэша запросов необходимо включить его в настройках Hibernate и явно указать, какие запросы должны кэшироваться.&#10;&#10;### Пример настройки второго уровня кэша и кэша запросов в Hibernate&#10;&#10;#### Включение второго уровня кэша в `hibernate.properties`:&#10;```properties&#10;# Включение второго уровня кэша&#10;hibernate.cache.use_second_level_cache=true&#10;&#10;# Указание провайдера кэша (например, EHCache)&#10;hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory&#10;&#10;# Включение кэша запросов&#10;hibernate.cache.use_query_cache=true&#10;```&#10;&#10;#### Аннотация сущностей для кэширования:&#10;```java&#10;import javax.persistence.Entity;&#10;import javax.persistence.Cacheable;&#10;import org.hibernate.annotations.Cache;&#10;import org.hibernate.annotations.CacheConcurrencyStrategy;&#10;&#10;@Entity&#10;@Cacheable&#10;@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)&#10;public class MyEntity {&#10;    // поля и методы&#10;}&#10;```&#10;&#10;#### Использование кэша запросов:&#10;```java&#10;List&lt;MyEntity&gt; results = session.createQuery(&quot;from MyEntity&quot;)&#10;                                .setCacheable(true)&#10;                                .list();&#10;```&#10;&#10;Эти уровни кэширования позволяют гибко настраивать производительность приложения, используя возможности Hibernate для уменьшения нагрузки на базу данных." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1737372708316" />
+              <option name="responseTms" value="1739117087536" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/Books.java" />
+                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
+                  <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.6.11.Final/f6332e6fbc4634e7aeccd24a5c527a2da31e9f11/hibernate-core-5.6.11.Final-sources.jar!/org/hibernate/graph/GraphSemantic.java" />
                 </list>
               </option>
             </ChatHistoryModel>
           </value>
         </entry>
-        <entry key="e1ed34">
+        <entry key="a213f8">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
                 </list>
               </option>
-              <option name="id" value="e1ed34" />
-              <option name="initiateTms" value="1737130124896" />
-              <option name="request" value=" вынеси все текстовые строки из messageSource.getMessage класса BookService в класс  MessageKeys" />
+              <option name="id" value="a213f8" />
+              <option name="initiateTms" value="1739118936065" />
+              <option name="request" value=" почему повторный запрос через метод findByName класса BookRepository происходит из кеша?" />
               <option name="response" value="" />
-              <option name="responseDescription" value="Для улучшения читаемости и поддержки кода, вынесем все текстовые строки из `messageSource.getMessage` класса `BookService` в класс `MessageKeys`. Это позволит централизовать управление ключами сообщений и упростит их изменение в будущем.&#10;&#10;### Обновленный класс `MessageKeys`:&#10;&#10;```java&#10;package org.example.utils;&#10;&#10;public abstract class MessageKeys {&#10;    public static final String READ_ADD_TITLE = &quot;handler.readAddTitle&quot;;&#10;    public static final String READ_ADD_AUTHOR = &quot;handler.readAddAuthor&quot;;&#10;    public static final String READ_ADD_DESCRIPTION = &quot;handler.readAddDescription&quot;;&#10;    public static final String READ_ADD_GENRE = &quot;handler.readAddGenre&quot;;&#10;    public static final String READ_NEW_TITLE = &quot;handler.readNewTitle&quot;;&#10;    public static final String READ_NEW_AUTHOR = &quot;handler.readNewAuthor&quot;;&#10;    public static final String READ_NEW_DESCRIPTION = &quot;handler.readNewDescription&quot;;&#10;    public static final String READ_NEW_GENRE = &quot;handler.readNewGenre&quot;;&#10;    public static final String READ_NEW_ID = &quot;handler.readNewId&quot;;&#10;    public static final String READ_DELETE_ID = &quot;handler.readDeleteId&quot;;&#10;    public static final String INVALID_ID = &quot;handler.invalidId&quot;;&#10;    public static final String NOT_NUMBER = &quot;handler.notNumber&quot;;&#10;    public static final String NOT_FOUND_BOOK_BY_ID = &quot;service.notFoundBookById&quot;;&#10;&#10;    public static final String MENU_LANGUAGE = &quot;menu.language&quot;;&#10;    public static final String MENU_OPTION1 = &quot;menu.option1&quot;;&#10;    public static final String MENU_OPTION2 = &quot;menu.option2&quot;;&#10;    public static final String MENU_EXIT = &quot;menu.exit&quot;;&#10;    public static final String MENU_EXIT_MESSAGE = &quot;menu.exitMessage&quot;;&#10;    public static final String MENU_INVALID = &quot;menu.invalid&quot;;&#10;    public static final String MENU_NOT_NUMBER = &quot;menu.notNumber&quot;;&#10;    public static final String MENU_ACTION = &quot;menu.action&quot;;&#10;    public static final String MENU_LIST_BOOKS = &quot;menu.listBooks&quot;;&#10;    public static final String MENU_FIND_BOOK = &quot;menu.findBook&quot;;&#10;    public static final String MENU_CREATE_BOOK = &quot;menu.createBook&quot;;&#10;    public static final String MENU_EDIT_BOOK = &quot;menu.editBook&quot;;&#10;    public static final String MENU_DELETE_BOOK = &quot;menu.deleteBook&quot;;&#10;    public static final String MENU_EXIT_ACTION = &quot;menu.exitAction&quot;;&#10;&#10;    public static final String SERVICE_LIST_BOOK = &quot;service.listBook&quot;;&#10;    public static final String BOOK_ID = &quot;book.id&quot;;&#10;    public static final String BOOK_TITLE = &quot;book.title&quot;;&#10;    public static final String BOOK_AUTHOR = &quot;book.author&quot;;&#10;    public static final String BOOK_DESCRIPTION = &quot;book.description&quot;;&#10;    public static final String BOOK_GENRE = &quot;book.genre&quot;;&#10;&#10;    // Новые ключи сообщений для BookService&#10;    public static final String SERVICE_FILE_WRITE_ERROR = &quot;service.fileWriteError&quot;;&#10;    public static final String SERVICE_ADD_BOOK = &quot;service.addBook&quot;;&#10;    public static final String SERVICE_EDIT_BOOK = &quot;service.editBook&quot;;&#10;    public static final String SERVICE_DELETE_BOOK = &quot;service.deleteBook&quot;;&#10;}&#10;```&#10;&#10;### Обновленный класс `BookService`:&#10;&#10;```java&#10;package org.example.service;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.model.Author;&#10;import org.example.model.Book;&#10;import org.example.model.Genre;&#10;import org.example.repository.AuthorRepository;&#10;import org.example.repository.BookRepository;&#10;import org.example.repository.GenreRepository;&#10;import org.example.utils.MessageKeys;&#10;import org.springframework.beans.factory.annotation.Value;&#10;import org.springframework.context.MessageSource;&#10;import org.springframework.stereotype.Service;&#10;&#10;import java.util.List;&#10;import java.util.Locale;&#10;&#10;/**&#10; * Сервис для управления книгами, хранящимися в БД postgreSQL&#10; * Предоставляет методы для создания, редактирования, удаления и вывода списка книг.&#10; */&#10;&#10;@Service&#10;@RequiredArgsConstructor&#10;public class BookService {&#10;&#10;    /**&#10;     * Цвет текста для отображения ошибок.&#10;     */&#10;    @Value(&quot;${color.error}&quot;)&#10;    private String error;&#10;&#10;    /**&#10;     * Цвет текста для сброса цвета.&#10;     */&#10;    @Value(&quot;${color.reset}&quot;)&#10;    private String reset;&#10;&#10;    /**&#10;     * Источник сообщений для локализации.&#10;     */&#10;    private final MessageSource messageSource;&#10;&#10;    private final BookRepository bookRepository;&#10;    private final GenreRepository genreRepository;&#10;    private final AuthorRepository authorRepository;&#10;&#10;    /**&#10;     * Создает новую книгу и добавляет ее в репозиторий.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @param book          Книга для добавления.&#10;     */&#10;    public void createBook(Book book, Locale currentLocale) {&#10;&#10;        checkGenre(book);&#10;        checkAuthor(book);&#10;&#10;        //Пробую записать книгу через репозиторий или вывести ошибку записи&#10;        if (bookRepository.addBook(book) == null) {&#10;            System.out.println(error +&#10;                    messageSource.getMessage(MessageKeys.SERVICE_FILE_WRITE_ERROR, null, currentLocale) +&#10;                    reset);&#10;        } else {&#10;            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_ADD_BOOK, null, currentLocale));&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Возвращает список всех книг или null если список пуст.&#10;     */&#10;    public List&lt;Book&gt; readBooks(Locale currentLocale) {&#10;        List&lt;Book&gt; books = bookRepository.readBooks();&#10;        if (books.isEmpty()) {&#10;            return null;&#10;        } else {&#10;            return books;&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Редактирует существующую книгу.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @param updatedBook   Книга, которую нужно обновить.&#10;     */&#10;    public void editBook(Book updatedBook, Locale currentLocale) {&#10;        if (updatedBook != null) {&#10;            checkAuthor(updatedBook);&#10;            checkGenre(updatedBook);&#10;            bookRepository.editBook(updatedBook);&#10;            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_BOOK, null, currentLocale));&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Удаляет книгу из репозитория по ID.&#10;     *&#10;     * @param currentLocale локаль языка, установленная пользователем.&#10;     * @param id            ID книги для удаления.&#10;     */&#10;    public void deleteBook(int id, Locale currentLocale) {&#10;        if (bookRepository.existById(id)) {&#10;            bookRepository.deleteBook(id);&#10;            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_BOOK, null, currentLocale));&#10;        } else {&#10;            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BOOK_BY_ID,&#10;                    null, currentLocale) + reset);&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Возвращает список книг по названию книги.&#10;     *&#10;     * @param bookName Название книги&#10;     * @return список книг с данным названием без учета заглавных букв.&#10;     */&#10;    public List&lt;Book&gt; findBooksByName(String bookName) {&#10;        return bookRepository.findBooksByName(bookName);&#10;    }&#10;&#10;    /**&#10;     * Проверяет наличие автора в базе данных. Если автор не существует, добавляет нового автора.&#10;     * Если автор существует, обновляет объект книги с данными существующего автора.&#10;     *&#10;     * @param book Книга, для которой необходимо проверить и установить автора.&#10;     */&#10;    private void checkAuthor(Book book) {&#10;        if (!authorRepository.existByAuthor(book.getAuthor().getName())) {&#10;            Author newAuthor = authorRepository.addAuthor(book.getAuthor());&#10;            book.setAuthor(newAuthor);&#10;        } else {&#10;            Author oldAuthor = authorRepository.findAuthor(book.getAuthor().getName());&#10;            book.setAuthor(oldAuthor);&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Проверяет наличие жанра в базе данных. Если жанр не существует, добавляет новый жанр.&#10;     * Если жанр существует, обновляет объект книги с данными существующего жанра.&#10;     *&#10;     * @param book Книга, для которой необходимо проверить и установить жанр.&#10;     */&#10;    private void checkGenre(Book book) {&#10;        if (!genreRepository.existByGenre(book.getGenre().getName())) {&#10;            Genre newGenre = genreRepository.addGenre(book.getGenre());&#10;            book.setGenre(newGenre);&#10;        } else {&#10;            Genre oldGenre = genreRepository.findGenre(book.getGenre().getName());&#10;            book.setGenre(oldGenre);&#10;        }&#10;    }&#10;}&#10;```&#10;&#10;Теперь все ключи сообщений вынесены в класс `MessageKeys`, что делает код более чистым и удобным для поддержки." />
+              <option name="responseDescription" value="Повторный запрос через метод `findByName` класса `BookRepository` может происходить из кэша по нескольким причинам, связанным с механизмами кэширования Hibernate. Рассмотрим основные из них:&#10;&#10;1. **Первичный кэш (First-Level Cache)**:&#10;   - Как уже упоминалось, первичный кэш работает на уровне сессии (`Session`). Если в рамках одной сессии вы выполняете несколько запросов, и один из них уже загрузил объект с определенным идентификатором, последующие запросы за этим объектом будут обслуживаться из первичного кэша.&#10;   - Например, если вы вызываете метод `findByName` несколько раз в одной и той же сессии, и объекты с соответствующими именами уже были загружены, Hibernate будет использовать объекты из первичного кэша.&#10;&#10;2. **Вторичный кэш (Second-Level Cache)**:&#10;   - Вторичный кэш работает на уровне сессии фабрики (`SessionFactory`) и позволяет кэшировать объекты между сессиями. Если сущности, возвращаемые методом `findByName`, аннотированы для кэширования во втором уровне кэша, и кэш настроен правильно, то повторные запросы могут обслуживаться из второго уровня кэша.&#10;   - Для этого необходимо, чтобы сущности `Book` были аннотированы для кэширования, и соответствующий провайдер кэша был настроен.&#10;&#10;3. **Кэш запросов (Query Cache)**:&#10;   - Кэш запросов позволяет кэшировать результаты HQL или Criteria запросов. Если метод `findByName` настроен для использования кэша запросов, и кэш запросов включен в настройках Hibernate, то результаты запроса могут быть кэшированы.&#10;   - Для этого необходимо явно указать, что запрос должен быть кэшируемым, используя метод `setCacheable(true)`.&#10;&#10;### Пример настройки кэширования для метода `findByName`&#10;&#10;#### Настройка второго уровня кэша и кэша запросов в `hibernate.properties`:&#10;```properties&#10;# Включение второго уровня кэша&#10;hibernate.cache.use_second_level_cache=true&#10;&#10;# Указание провайдера кэша (например, EHCache)&#10;hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory&#10;&#10;# Включение кэша запросов&#10;hibernate.cache.use_query_cache=true&#10;```&#10;&#10;#### Аннотация сущности `Book` для кэширования:&#10;```java&#10;import javax.persistence.Entity;&#10;import javax.persistence.Cacheable;&#10;import org.hibernate.annotations.Cache;&#10;import org.hibernate.annotations.CacheConcurrencyStrategy;&#10;&#10;@Entity&#10;@Cacheable&#10;@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)&#10;public class Book {&#10;    // поля и методы&#10;}&#10;```&#10;&#10;#### Изменение метода `findByName` для использования кэша запросов:&#10;```java&#10;public List&lt;Book&gt; findByName(String name) {&#10;    List&lt;Book&gt; books = new ArrayList&lt;&gt;();&#10;    try (Session session = sessionFactory.openSession()) {&#10;        session.beginTransaction();&#10;        books = session.createQuery(&quot;from Book where title like :name&quot;, Book.class)&#10;                       .setParameter(&quot;name&quot;, &quot;%&quot; + name + &quot;%&quot;)&#10;                       .setCacheable(true)  // Указываем, что запрос должен быть кэшируемым&#10;                       .list();&#10;        session.getTransaction().commit();&#10;    } catch (Exception e) {&#10;        e.printStackTrace();&#10;    }&#10;    return books;&#10;}&#10;```&#10;&#10;### Заключение&#10;Повторный запрос через метод `findByName` может происходить из кэша, если:&#10;- Запрос выполняется в рамках одной сессии, и объекты уже загружены в первичный кэш.&#10;- Сущности `Book` аннотированы для кэширования во втором уровне кэша, и кэш настроен правильно.&#10;- Кэш запросов включен и настроен, и запрос помечен как кэшируемый.&#10;&#10;Эти механизмы кэширования позволяют значительно улучшить производительность приложения, уменьшая количество обращений к базе данных." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1737130151900" />
+              <option name="responseTms" value="1739118951421" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
                 </list>
               </option>
             </ChatHistoryModel>

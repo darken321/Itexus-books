@@ -83,8 +83,8 @@ public class BookRepository {
         List<Book> books = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            books = session.createQuery("from Book where title = :name", Book.class)
-                    .setParameter("name", name)
+            books = session.createQuery("from Book where title like :name", Book.class)
+                    .setParameter("name", "%" + name + "%")
                     .list();
             session.getTransaction().commit();
         } catch (Exception e) {

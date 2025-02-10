@@ -70,6 +70,13 @@ public class AuthorService {
     }
 
     /**
+     * Возвращает список всех авторов или null если список пуст.
+     */
+    public List<Author> findByName(String name) {
+        return authorRepository.findByName(name);
+    }
+
+    /**
      * Редактирует существующего автора.
      *
      * @param currentLocale локаль языка, установленная пользователем.
