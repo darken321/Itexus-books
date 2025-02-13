@@ -67,6 +67,16 @@ public class BookService {
     }
 
     /**
+     * Возвращает список книг по части названию книги.
+     *
+     * @param bookName часть названия книги
+     * @return список книг с данным названием без учета заглавных букв.
+     */
+    public List<Book> findByName(String bookName) {
+        return bookRepository.findByName(bookName);
+    }
+
+    /**
      * Возвращает список всех книг или null если список пуст.
      */
     public List<Book> readAll(Locale currentLocale) {
@@ -107,16 +117,6 @@ public class BookService {
             System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BY_ID,
                     null, currentLocale) + reset);
         }
-    }
-
-    /**
-     * Возвращает список книг по части названию книги.
-     *
-     * @param bookName часть названия книги
-     * @return список книг с данным названием без учета заглавных букв.
-     */
-    public List<Book> findByName(String bookName) {
-        return bookRepository.findByName(bookName);
     }
 
     /**

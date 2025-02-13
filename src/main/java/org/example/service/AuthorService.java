@@ -41,7 +41,7 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
 
     /**
-     * Создает новую книгу и добавляет ее в репозиторий.
+     * Создает нового автора и добавляет ее в репозиторий.
      *
      * @param currentLocale локаль языка, установленная пользователем.
      * @param author        Автор для добавления.

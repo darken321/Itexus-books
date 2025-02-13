@@ -45,8 +45,8 @@ public class MainMenu {
     private Locale currentLocale = Locale.getDefault();
 
     public void menu() {
-//        databaseInitializer.clearDatabase();
-//        databaseInitializer.populateDatabase();
+        databaseInitializer.clearDatabase();
+        databaseInitializer.populateDatabase();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             language(reader);
@@ -54,7 +54,6 @@ public class MainMenu {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Запускает меню выбора языка
@@ -135,7 +134,7 @@ public class MainMenu {
                     case 7 -> {
                         List<Author> authors = authorService.readAll(currentLocale);
                         bookUtils.listAuthors(authors, messageSource, currentLocale);
-                        authorService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);
+                        if (authors!=null) authorService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);
                     }
                     case 0 -> System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT_MESSAGE, null, currentLocale));
                     default -> System.out.println(error + messageSource.getMessage(MessageKeys.MENU_INVALID, null, currentLocale) + reset);

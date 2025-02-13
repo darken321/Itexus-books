@@ -1,5 +1,9 @@
 package org.example.utils;
 
+/**
+ * Класс {@code MessageKeys} содержит константы строковых ключей для сообщений.
+ * Эти ключи используются для локализации сообщений в приложении.
+ */
 public abstract class MessageKeys {
     public static final String READ_ADD_TITLE = "handler.readAddTitle";
     public static final String READ_ADD_AUTHOR = "handler.readAddAuthor";

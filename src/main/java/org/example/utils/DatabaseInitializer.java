@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+/**
+ * Удаляет все записи в БД и заполняет ее новыми записями
+ */
 public class DatabaseInitializer {
 
     private final AuthorRepository authorRepository;
