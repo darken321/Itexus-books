@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
 import org.example.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,15 @@ import java.util.Locale;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-    private final String red = "\u001B[31m";
-    private final String reset = "\u001B[0m";
-    private final String yellow = "\u001B[93m";
+
+    @Value("${color.error}")
+    private String error;
+
+    @Value("${color.reset}")
+    private String reset;
 
     private final BookRepository bookRepository;
     private final MessageSource messageSource;
-
 
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
@@ -33,7 +36,7 @@ public class BookService {
      */
     public void createBook(Book book, Locale currentLocale) {
         if (bookRepository.addBook(book) == null) {
-            System.out.println(red +
+            System.out.println(error +
                     messageSource.getMessage("service.fileWriteError", null, currentLocale) +
                     reset);
         } else {
@@ -57,7 +60,7 @@ public class BookService {
      * Редактирует существующую книгу.
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param updatedBook Обновленная книга.
+     * @param updatedBook   Обновленная книга.
      */
     public void editBook(Book updatedBook, Locale currentLocale) {
         List<Book> books = bookRepository.readBooks();
@@ -82,7 +85,7 @@ public class BookService {
      * Удаляет книгу из репозитория по ID.
      *
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param id ID книги для удаления.
+     * @param id            ID книги для удаления.
      */
     public void deleteBook(int id, Locale currentLocale) {
         List<Book> books = bookRepository.readBooks();
@@ -96,11 +99,26 @@ public class BookService {
     }
 
     /**
+     * Возвращает список книг по названию книги.
+     *
+     * @param bookName      Название книги
+     * @return список книг с данным названием без учета заглавных букв.
+     */
+
+    public List<Book> findBooksByName(String bookName) {
+        List<Book> books = bookRepository.readBooks();
+
+        return  books.stream()
+                .filter(book -> book.getTitle()
+                .equalsIgnoreCase(bookName)).toList();
+    }
+
+    /**
      * Находит индекс книги в списке по ID.
      *
-     * @param books Список книг.
+     * @param books         Список книг.
      * @param currentLocale локаль языка, установленная пользователем.
-     * @param id    ID книги для поиска.
+     * @param id            ID книги для поиска.
      * @return Индекс книги в списке или null, если книга не найдена.
      */
     private Integer findBookById(List<Book> books, int id, Locale currentLocale) {
@@ -109,7 +127,7 @@ public class BookService {
                 return i;
             }
         }
-        System.out.println(red +
+        System.out.println(error +
                 messageSource.getMessage("service.notFoundBookById", null, currentLocale) +
                 reset);
         return null;

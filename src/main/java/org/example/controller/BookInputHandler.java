@@ -2,6 +2,7 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 
@@ -18,8 +19,12 @@ import java.util.Locale;
 @Controller
 @RequiredArgsConstructor
 public class BookInputHandler {
-    private final String red = "\u001B[31m";
-    private final String reset = "\u001B[0m";
+
+    @Value("${color.error}")
+    private String error;
+
+    @Value("${color.reset}")
+    private String reset;
 
     private final MessageSource messageSource;
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
@@ -44,6 +49,17 @@ public class BookInputHandler {
         String description = readLine();
 
         return new Book(id, title, author, description);
+    }
+
+    /**
+     * Запрашивает у пользователя данные для поиска существующей книги по названию.
+     *
+     * @param currentLocale локаль языка, установленная пользователем.
+     * @return строку с названием книги.
+     */
+    public String findBookDetails(Locale currentLocale) {
+        System.out.println(messageSource.getMessage("handler.readAddTitle", null, currentLocale));
+        return readLine();
     }
 
     /**
@@ -96,13 +112,13 @@ public class BookInputHandler {
                 id = Integer.parseInt(readLine());
                 if (id < 0) {
                     System.out.println(
-                            red +
+                            error +
                             messageSource.getMessage("handler.invalidId", null, currentLocale) +
                             reset);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(
-                        red +
+                        error +
                         messageSource.getMessage("handler.notNumber", null, currentLocale) +
                         reset);
             }
@@ -117,7 +133,7 @@ public class BookInputHandler {
      */
     private String readLine() {
         try {
-            return reader.readLine();
+            return reader.readLine().trim();
         } catch (IOException e) {
             return "";
         }
