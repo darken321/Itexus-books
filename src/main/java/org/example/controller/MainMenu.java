@@ -1,9 +1,13 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.Author;
 import org.example.model.Book;
+import org.example.service.AuthorService;
 import org.example.service.BookService;
 import org.example.utils.BookUtils;
+import org.example.utils.DatabaseInitializer;
+import org.example.utils.MessageKeys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -21,7 +25,9 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class MainMenu {
 
+    private final DatabaseInitializer databaseInitializer;
     private final BookService bookService;
+    private final AuthorService authorService;
     private final BookInputHandler bookInputHandler;
     private final MessageSource messageSource;
     private final BookUtils bookUtils;
@@ -39,6 +45,8 @@ public class MainMenu {
     private Locale currentLocale = Locale.getDefault();
 
     public void menu() {
+        databaseInitializer.clearDatabase();
+        databaseInitializer.populateDatabase();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             language(reader);
@@ -46,7 +54,6 @@ public class MainMenu {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Запускает меню выбора языка
@@ -56,10 +63,10 @@ public class MainMenu {
         int input;
         do {
             System.out.println(text);
-            System.out.println(messageSource.getMessage("menu.language", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.option1", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.option2", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.exit", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_LANGUAGE, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_OPTION1, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_OPTION2, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT, null, currentLocale));
             System.out.println(reset);
 
             try {
@@ -73,13 +80,13 @@ public class MainMenu {
                         currentLocale = Locale.ENGLISH;
                         run(reader);
                     }
-                    case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
+                    case 0 -> System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT_MESSAGE, null, currentLocale));
                     default -> System.out.println(error +
-                                    messageSource.getMessage("menu.invalid", null, currentLocale) +
-                                    reset);
+                            messageSource.getMessage(MessageKeys.MENU_INVALID, null, currentLocale) +
+                            reset);
                 }
             } catch (NumberFormatException e) {
-                System.out.println(error + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
+                System.out.println(error + messageSource.getMessage(MessageKeys.MENU_NOT_NUMBER, null, currentLocale) + reset);
                 input = -1;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -96,33 +103,44 @@ public class MainMenu {
         int input;
         do {
             System.out.println(text);
-            System.out.println(messageSource.getMessage("menu.action", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.listBooks", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.findBook", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.createBook", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.editBook", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.deleteBook", null, currentLocale));
-            System.out.println(messageSource.getMessage("menu.exitAction", null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_ACTION, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_LIST_BOOKS, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_FIND_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_CREATE_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_EDIT_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_DELETE_BOOK, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_FIND_AUTHOR, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_DELETE_AUTHOR, null, currentLocale));
+            System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT_ACTION, null, currentLocale));
             System.out.println(reset);
 
             try {
                 input = Integer.parseInt(reader.readLine());
                 switch (input) {
-                    case 1 -> bookUtils.listBooks(bookService.readBooks(currentLocale), messageSource, currentLocale);
+                    case 1 -> bookUtils.listBooks(bookService.readAll(currentLocale), messageSource, currentLocale);
                     case 2 -> {
-                        String readBookName = bookInputHandler.findBookDetails(currentLocale);
-                        List<Book> foundBooks =bookService.findBooksByName(readBookName);
-                        bookUtils.listBooks(foundBooks,messageSource, currentLocale);
+                        String readBookName = bookInputHandler.readDetails(currentLocale, MessageKeys.READ_ADD_TITLE);
+                        List<Book> foundBooks = bookService.findByName(readBookName);
+                        bookUtils.listBooks(foundBooks, messageSource, currentLocale);
                     }
-                    case 3 -> bookService.createBook(bookInputHandler.newBookDetails(currentLocale), currentLocale);
-                    case 4 -> bookService.editBook(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
-                    case 5 -> bookService.deleteBook(bookInputHandler.deleteBookDetails(currentLocale), currentLocale);
-                    case 0 -> System.out.println(messageSource.getMessage("menu.exitMessage", null, currentLocale));
-                    default ->
-                            System.out.println(error + messageSource.getMessage("menu.invalid", null, currentLocale) + reset);
+                    case 3 -> bookService.add(bookInputHandler.newBookDetails(currentLocale), currentLocale);
+                    case 4 -> bookService.edit(bookInputHandler.updateBookDetails(currentLocale), currentLocale);
+                    case 5 -> bookService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);
+                    case 6 -> {
+                        String readAuthorName = bookInputHandler.readDetails(currentLocale, MessageKeys.READ_ADD_AUTHOR);
+                        List<Author> foundAuthors = authorService.findByName(readAuthorName);
+                        bookUtils.listAuthorsAndBooks(foundAuthors, messageSource, currentLocale);
+                    }
+                    case 7 -> {
+                        List<Author> authors = authorService.readAll(currentLocale);
+                        bookUtils.listAuthors(authors, messageSource, currentLocale);
+                        if (authors!=null) authorService.delete(bookInputHandler.readDeleteDetails(currentLocale), currentLocale);
+                    }
+                    case 0 -> System.out.println(messageSource.getMessage(MessageKeys.MENU_EXIT_MESSAGE, null, currentLocale));
+                    default -> System.out.println(error + messageSource.getMessage(MessageKeys.MENU_INVALID, null, currentLocale) + reset);
                 }
             } catch (NumberFormatException e) {
-                System.out.println(error + messageSource.getMessage("menu.notNumber", null, currentLocale) + reset);
+                System.out.println(error + messageSource.getMessage(MessageKeys.MENU_NOT_NUMBER, null, currentLocale) + reset);
                 input = -1;
             } catch (IOException e) {
                 throw new RuntimeException(e);

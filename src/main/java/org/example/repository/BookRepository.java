@@ -1,123 +1,159 @@
 package org.example.repository;
 
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
+import lombok.RequiredArgsConstructor;
 import org.example.model.Book;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * Репозиторий для управления книгами в CSV файле.
+ * Репозиторий для управления книгами в SQL базе данных.
  * Предоставляет методы для добавления, редактирования, чтения и удаления книг.
  */
 @Repository
+@RequiredArgsConstructor
 public class BookRepository {
-    private final String filePath = "src/main/resources/books.csv";
 
-    CsvMapper mapper = new CsvMapper();
-    CsvSchema schema = CsvSchema.builder()
-            .addColumn("id")
-            .addColumn("title")
-            .addColumn("author")
-            .addColumn("description")
-            .setUseHeader(true)
-            .setQuoteChar('"')
-            .build();
+    private final SessionFactory sessionFactory;
 
     /**
-     * Добавляет книгу в CSV файл.
+     * Добавляет новую книгу в базу данных.
      *
-     * @param book Книга для добавления.
-     * @return Добавленная книга.
-     * @throws RuntimeException если произошла ошибка при записи в CSV файл.
+     * @param book объект книги для добавления
+     * @return добавленный объект книги
      */
-    public Book addBook(Book book) {
-        File csvFile = new File(filePath);
-        boolean isNewFile = !csvFile.exists();
-
-        try (FileWriter writer = new FileWriter(csvFile, true)) {
-            CsvSchema writeSchema = schema.withoutHeader();
-            if (isNewFile) {
-                writeSchema = schema;
-            }
-            mapper.writer(writeSchema).writeValue(writer, book);
-            return book;
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + e.getMessage(), e);
+    public Book add(Book book) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return book;
     }
 
     /**
-     * Записывает в файл список книг с измененной книгой
+     * Возвращает список всех книг из базы данных.
      *
-     * @param updatedBooks Список книг с обновленной книгой.
+     * @return список всех книг
      */
-    public void editBook(List<Book> updatedBooks) {
-        writeBooks(updatedBooks);
-    }
-
-    /**
-     * Записывает список книг в CSV файл.
-     *
-     * @param books Список книг для записи.
-     * @throws RuntimeException если произошла ошибка при записи в CSV файл.
-     */
-    private void writeBooks(List<Book> books) {
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filePath), "UTF-8")) {
-            mapper.writer(schema).writeValues(writer).writeAll(books);
-        } catch (IOException e) {
-            throw new RuntimeException("Error writing to CSV file: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Читает список книг из CSV файла.
-     *
-     * @return Список книг.
-     * @throws RuntimeException если произошла ошибка при чтении CSV файла.
-     */
-    public List<Book> readBooks() {
-
-        File csvInputFile = new File(filePath);
-        if (!csvInputFile.exists()) {
-            try {
-                throw new IOException("CSV file not found: " + csvInputFile.getAbsolutePath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        Iterator<Book> bookIterator;
-        try {
-            bookIterator = mapper.readerFor(Book.class)
-                    .with(schema)
-                    .readValues(csvInputFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading CSV file: " + e.getMessage(), e);
-        }
-
+    public List<Book> readAll() {
         List<Book> books = new ArrayList<>();
-        while (bookIterator.hasNext()) {
-            try {
-                books.add(bookIterator.next());
-            } catch (RuntimeException e) {
-                System.err.println("Error deserializing book: " + e.getMessage());
-            }
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            books = session.createQuery("from Book", Book.class)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return books;
     }
 
     /**
-     * Записывает в файл список книг без удаленной книги
+     * Ищет книги по части названия и возвращает список книг.
      *
-     * @param books Список книг с уже удаленной книгой.
-     * @param id    ID книги для удаления.
+     * @param name часть названия книги для поиска
+     * @return список книг, соответствующих критерию поиска
      */
-    public void deleteBook(List<Book> books, int id) {
-        writeBooks(books);
+    public List<Book> findByName(String name) {
+        List<Book> books = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            books = session.createQuery("from Book where title like :name", Book.class)
+                    .setParameter("name", "%" + name + "%")
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return books;
     }
+
+    /**
+     * Проверяет, существует ли книга с заданным идентификатором.
+     *
+     * @param id идентификатор книги для проверки
+     * @return true, если книга с таким идентификатором существует, иначе false
+     */
+    public boolean existById(int id) {
+        return findById(id) != null;
+    }
+
+    /**
+     * Обновляет информацию о книге в базе данных.
+     *
+     * @param book объект книги с обновленными данными
+     */
+    public void edit(Book book) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Возвращает книгу с заданным идентификатором.
+     *
+     * @param id идентификатор книги для проверки
+     * @return найденную книгу, если книга с таким идентификатором существует, иначе null
+     */
+    private Book findById(int id) {
+        Book book = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            book = session.createQuery("from Book where id = :id", Book.class)
+                    .setParameter("id", id)
+                    .setHint("org.hibernate.cacheable", true)
+                    .setHint("org.hibernate.readOnly", true)
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
+    /**
+     * Удаляет книгу с заданным идентификатором из базы данных.
+     *
+     * @param id идентификатор книги для удаления
+     */
+    public void delete(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Book book = session.get(Book.class, id);
+            if (book != null) {
+                session.delete(book);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Удаляет все книги из базы данных.
+     */
+    public void deleteAll() {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Book").executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
