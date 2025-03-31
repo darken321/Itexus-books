@@ -4,20 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях">
+    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Добавлено использование запросов с помощью criteria&#10;&#10;В класс AuthorRepository запросы чтения заменены на запросы criteria.&#10;Произведен рефакторинг кода.&#10;Добавлены JavaDoc.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/BooksApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/DatabaseInitializerRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Books.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/config/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/BookInputHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainMenu.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/BookUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/BookUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/BookUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +89,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="task4" />
+        <entry key="$PROJECT_DIR$" value="task6" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,6 +105,12 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -105,10 +123,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.24620306&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.42875317&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;ac44b2ac458e8730ee368923faff3492&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -147,13 +165,13 @@
       <recent name="org.example.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Books">
+  <component name="RunManager" selected="Spring Boot.BooksApplication">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Application" />
       <module name="Itexus-books.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,7 +184,7 @@
       <module name="Itexus-books.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -179,7 +197,7 @@
       <module name="Itexus-books.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -187,11 +205,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="db.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/src/main/resources/db.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="d5713719-c2f9-4ddb-a945-f804c02cd21f" />
-      <method v="2" />
+    <configuration name="BooksApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Itexus-books.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.BooksApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
@@ -211,16 +236,16 @@
       <item itemvalue="Application.Application1" />
       <item itemvalue="Application.Books" />
       <item itemvalue="Application.Application" />
-      <item itemvalue="Database Script.db.sql" />
       <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+      <item itemvalue="Spring Boot.BooksApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Books" />
+        <item itemvalue="Spring Boot.BooksApplication" />
         <item itemvalue="Application.Application1" />
-        <item itemvalue="Application.Application" />
-        <item itemvalue="Database Script.db.sql" />
         <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Application.Books" />
+        <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
   </component>
@@ -313,7 +338,28 @@
       <workItem from="1738822917983" duration="10174000" />
       <workItem from="1738907875216" duration="16873000" />
       <workItem from="1739086589390" duration="10392000" />
-      <workItem from="1739185933578" duration="1638000" />
+      <workItem from="1739185933578" duration="11737000" />
+      <workItem from="1739248912685" duration="22344000" />
+      <workItem from="1739334633437" duration="13399000" />
+      <workItem from="1739431517150" duration="8320000" />
+      <workItem from="1739472734896" duration="3386000" />
+      <workItem from="1739521501572" duration="14260000" />
+      <workItem from="1739883235792" duration="921000" />
+      <workItem from="1740502212947" duration="1389000" />
+      <workItem from="1740559326079" duration="4166000" />
+      <workItem from="1740714675677" duration="6288000" />
+      <workItem from="1740832971906" duration="2163000" />
+      <workItem from="1740899195210" duration="2174000" />
+      <workItem from="1740983983077" duration="6215000" />
+      <workItem from="1741633755419" duration="24000" />
+      <workItem from="1741681851205" duration="27000" />
+      <workItem from="1742476519725" duration="1170000" />
+      <workItem from="1742792600671" duration="586000" />
+      <workItem from="1742919383385" duration="4893000" />
+      <workItem from="1742987927912" duration="5260000" />
+      <workItem from="1743055804766" duration="49060000" />
+      <workItem from="1743253899935" duration="6085000" />
+      <workItem from="1743262674626" duration="11381000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1727095638353</created>
@@ -399,7 +445,28 @@
       <option name="project" value="LOCAL" />
       <updated>1738697032722</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях">
+      <created>1739195018365</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739195018365</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Добавлено кеширование 2 уровня и кеширование запросов &#10;&#10;В методы чтения из БД всех трех репозиториев добавлено кеширование кеширование запросов.   &#10;В классы сущностей добавлены аннотации кеширования 2 уровня">
+      <created>1739211443801</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1739211443801</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Добавлено использование запросов с помощью criteria&#10;&#10;В класс AuthorRepository запросы чтения заменены на запросы criteria.&#10;Произведен рефакторинг кода.&#10;Добавлены JavaDoc.">
+      <created>1739439099723</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1739439099723</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,17 +509,20 @@
     <MESSAGE value="Добавлено удаление автора&#10;&#10;Добавлен пункт меню &quot;удаление автора&quot;.&#10;При удалении автора из-за cascade = CascadeType.ALL удаляются все его книги &#10;Вынес CRUD методы автора в отдельный сервисный класс" />
     <MESSAGE value="Добавлен класс для заполнения БД и проверки пакетного выполнения операций&#10;&#10;Добавлен класс DatabaseInitializer, в котором очищаются таблицы БД и заполняются 5 авторами, жанрами и книгами." />
     <MESSAGE value="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен метод для поиска и вывода всех книг по части имени автора. Поиск по части книги.&#10;&#10;Добавлен BatchSize к сущности Genre&#10;Добавлен поиск по части имени или части названия книги - в соответствующих репозиториях" />
+    <MESSAGE value="Добавлено кеширование 2 уровня и кеширование запросов &#10;&#10;В методы чтения из БД всех трех репозиториев добавлено кеширование кеширование запросов.   &#10;В классы сущностей добавлены аннотации кеширования 2 уровня" />
+    <MESSAGE value="Добавлено использование запросов с помощью criteria&#10;&#10;В класс AuthorRepository запросы чтения заменены на запросы criteria.&#10;Произведен рефакторинг кода.&#10;Добавлены JavaDoc." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлено использование запросов с помощью criteria&#10;&#10;В класс AuthorRepository запросы чтения заменены на запросы criteria.&#10;Произведен рефакторинг кода.&#10;Добавлены JavaDoc." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.example.repository.AuthorRepository" memberName="sessionFactory" />
+        <PinnedItemInfo parentTag="org.example.model.Book" memberName="title" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>
-      <configuration name="GradleRunConfiguration">
-        <watch expression="bookRepository.readAll().get(2)" language="JAVA" />
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="bookRepository.existsById(id)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -461,91 +531,104 @@
     <select />
   </component>
   <component name="com.github.evgenys91.machinet.common.dslhistory.DslHistoryState">
+    <option name="memoryInstruction" value="Приводи все ответы на русском языке, для java17 и для dradle&#10;" />
     <option name="historyDtoById">
       <map>
-        <entry key="1f2a15">
+        <entry key="412c5f">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" />
                 </list>
               </option>
-              <option name="id" value="1f2a15" />
-              <option name="initiateTms" value="1739119255758" />
-              <option name="request" value=" При данном коде, сейчас не включен кеш 2 и 3 уровня. При первом запросе книги по части имени идет запрос в БД, но повторный такой же запрос книги по части имени через метод findByName класса BookRepository срабатывает без запроса в БД. То есть видимо через кеш. Через какой кеш, каким образом hibernate может брать данные List&lt;Book&gt;. В методе findByName класса BookRepository сессия каждый раз открывается и закрывается." />
+              <option name="id" value="412c5f" />
+              <option name="initiateTms" value="1743275779449" />
+              <option name="request" value=" напиши javaDoc для AuthorController и BookController" />
               <option name="response" value="" />
-              <option name="responseDescription" value="Если кэш второго и третьего уровня не включен, но повторный запрос через метод `findByName` возвращает данные без обращения к базе данных, это может быть связано с первичным кэшем (First-Level Cache). Однако, как вы правильно заметили, сессия каждый раз открывается и закрывается, что должно сбрасывать первичный кэш.&#10;&#10;В таком случае, вероятно, что Hibernate использует внутренние механизмы оптимизации, такие как контекст персистентности или кэширование на уровне JDBC драйвера. Давайте рассмотрим возможные причины более подробно:&#10;&#10;1. **Контекст персистентности (Persistence Context)**:&#10;   - Первичный кэш работает на уровне сессии (`Session`). Если сессия открыта и объект уже загружен в текущую сессию, Hibernate будет использовать его из кэша, а не загружать его заново из базы данных.&#10;   - Однако, в вашем случае сессия каждый раз открывается и закрывается, что должно сбрасывать первичный кэш.&#10;&#10;2. **Кэширование на уровне JDBC драйвера**:&#10;   - Некоторые JDBC драйверы могут кэшировать результаты запросов на уровне драйвера. Это может объяснить, почему повторный запрос возвращает данные без обращения к базе данных.&#10;   - Это поведение зависит от конкретного JDBC драйвера и его настроек.&#10;&#10;3. **Кэширование на уровне базы данных**:&#10;   - Некоторые базы данных могут кэшировать результаты запросов на уровне сервера базы данных. Это может объяснить, почему повторный запрос возвращает данные быстро.&#10;   - Это поведение зависит от конкретной базы данных и ее настроек.&#10;&#10;4. **Hibernate SessionFactory-level Caching**:&#10;   - Хотя это не является стандартным поведением, некоторые реализации могут использовать кэширование на уровне `SessionFactory` для оптимизации повторных запросов.&#10;&#10;### Проверка и диагностика&#10;&#10;Для точного определения причины, можно выполнить следующие шаги:&#10;&#10;1. **Включить логирование SQL запросов**:&#10;   - Убедитесь, что все SQL запросы логируются. Это поможет понять, выполняется ли фактически запрос к базе данных.&#10;   - В `hibernate.properties`:&#10;     ```properties&#10;     hibernate.show_sql=true&#10;     hibernate.format_sql=true&#10;     hibernate.use_sql_comments=true&#10;     ```&#10;&#10;2. **Проверить настройки JDBC драйвера**:&#10;   - Убедитесь, что JDBC драйвер не кэширует результаты запросов. Это можно сделать, проверив документацию и настройки драйвера.&#10;&#10;3. **Проверить настройки базы данных**:&#10;   - Убедитесь, что база данных не кэширует результаты запросов. Это можно сделать, проверив документацию и настройки базы данных.&#10;&#10;### Пример кода для логирования запросов&#10;&#10;```java&#10;public List&lt;Book&gt; findByName(String name) {&#10;    List&lt;Book&gt; books = new ArrayList&lt;&gt;();&#10;    try (Session session = sessionFactory.openSession()) {&#10;        session.beginTransaction();&#10;        books = session.createQuery(&quot;from Book where title like :name&quot;, Book.class)&#10;                       .setParameter(&quot;name&quot;, &quot;%&quot; + name + &quot;%&quot;)&#10;                       .list();&#10;        session.getTransaction().commit();&#10;    } catch (Exception e) {&#10;        e.printStackTrace();&#10;    }&#10;    return books;&#10;}&#10;```&#10;&#10;### Заключение&#10;&#10;Если кэш второго и третьего уровня не включен, но повторный запрос возвращает данные без обращения к базе данных, это может быть связано с кэшированием на уровне JDBC драйвера или базы данных. Включение логирования SQL запросов поможет точно определить, выполняется ли фактически запрос к базе данных." />
+              <option name="responseDescription" value="Конечно, вот пример JavaDoc для классов `AuthorController` и `BookController`:&#10;&#10;### AuthorController.java&#10;```java&#10;package org.example.controller;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.DTO.BookDto;&#10;import org.example.mapper.BookMapper;&#10;import org.example.model.Book;&#10;import org.example.service.AuthorService;&#10;import org.example.service.BookService;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.*;&#10;&#10;import java.util.List;&#10;import java.util.Locale;&#10;&#10;/**&#10; * Контроллер для управления авторами.&#10; * Предоставляет API для получения книг по автору и удаления авторов.&#10; */&#10;@RestController&#10;@RequiredArgsConstructor&#10;@RequestMapping(&quot;api/v1/author&quot;)&#10;public class AuthorController {&#10;    private final AuthorService authorService;&#10;    private final BookService bookService;&#10;    private final Locale currentLocale = Locale.getDefault();&#10;&#10;    /**&#10;     * Получает список книг по имени автора.&#10;     * Если имя автора не указано, возвращает все книги.&#10;     *&#10;     * @param name имя автора (необязательный параметр)&#10;     * @return список книг в формате DTO&#10;     */&#10;    @GetMapping&#10;    public ResponseEntity&lt;List&lt;BookDto&gt;&gt; getBooksByAuthor(@RequestParam(required = false) String name) {&#10;        List&lt;Book&gt; books;&#10;        if (name == null) {&#10;            books = bookService.readAll(currentLocale);&#10;        } else {&#10;            books = bookService.findByAuthorName(name);&#10;        }&#10;        List&lt;BookDto&gt; bookDTOs = books.stream()&#10;                .map(BookMapper::toDTO)&#10;                .toList();&#10;        return ResponseEntity.ok(bookDTOs);&#10;    }&#10;&#10;    /**&#10;     * Удаляет автора по его идентификатору.&#10;     *&#10;     * @param id идентификатор автора&#10;     * @return пустой ответ с кодом 204 (No Content)&#10;     */&#10;    @DeleteMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;Void&gt; deleteAuthor(@PathVariable int id) {&#10;        authorService.delete(id, currentLocale);&#10;        return ResponseEntity.noContent().build();&#10;    }&#10;}&#10;```&#10;&#10;### BookController.java&#10;```java&#10;package org.example.controller;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.DTO.BookDto;&#10;import org.example.mapper.BookMapper;&#10;import org.example.model.Book;&#10;import org.example.repository.BookRepository;&#10;import org.example.service.BookService;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.*;&#10;&#10;import java.util.List;&#10;import java.util.Locale;&#10;import java.util.Optional;&#10;&#10;/**&#10; * Контроллер для управления книгами.&#10; * Предоставляет API для создания, обновления, удаления и получения книг.&#10; */&#10;@RestController&#10;@RequiredArgsConstructor&#10;@RequestMapping(&quot;/api/v1/books&quot;)&#10;public class BookController {&#10;&#10;    private final BookService bookService;&#10;    private final BookRepository bookRepository;&#10;    private final Locale currentLocale = Locale.getDefault();&#10;&#10;    /**&#10;     * Получает книгу по её идентификатору.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @return книга в формате DTO или ответ с кодом 404 (Not Found), если книга не найдена&#10;     */&#10;    @GetMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;BookDto&gt; getBookById(@PathVariable int id) {&#10;        Optional&lt;Book&gt; optionalBook = bookRepository.findById(id);&#10;        if (optionalBook.isPresent()) {&#10;            BookDto bookDTO = BookMapper.toDTO(optionalBook.get());&#10;            return ResponseEntity.ok(bookDTO);&#10;        } else {&#10;            return ResponseEntity.notFound().build();&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Получает список книг по названию.&#10;     * Если название не указано, возвращает все книги.&#10;     *&#10;     * @param title название книги (необязательный параметр)&#10;     * @return список книг в формате DTO&#10;     */&#10;    @GetMapping&#10;    public ResponseEntity&lt;List&lt;BookDto&gt;&gt; getBookByName(@RequestParam(required = false) String title) {&#10;        List&lt;Book&gt; books;&#10;        if (title == null) {&#10;            books = bookService.readAll(currentLocale);&#10;        } else {&#10;            books = bookService.findByName(title);&#10;        }&#10;        List&lt;BookDto&gt; bookDTOs = books.stream()&#10;                .map(BookMapper::toDTO)&#10;                .toList();&#10;        return ResponseEntity.ok(bookDTOs);&#10;    }&#10;&#10;    /**&#10;     * Создает новую книгу.&#10;     *&#10;     * @param bookDTO данные книги в формате DTO&#10;     * @return созданная книга в формате DTO с кодом 201 (Created)&#10;     */&#10;    @PostMapping&#10;    public ResponseEntity&lt;BookDto&gt; createBook(@RequestBody BookDto bookDTO) {&#10;        Book book = BookMapper.fromDTO(bookDTO);&#10;        Book createdBook = bookService.add(book, currentLocale);&#10;        BookDto returnDTO = BookMapper.toDTO(createdBook);&#10;        return ResponseEntity.status(201).body(returnDTO);&#10;    }&#10;&#10;    /**&#10;     * Обновляет существующую книгу.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @param bookDTO данные книги в формате DTO&#10;     * @return обновленная книга в формате DTO&#10;     */&#10;    @PutMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;BookDto&gt; updateBook(@PathVariable int id, @RequestBody BookDto bookDTO) {&#10;        Book book = BookMapper.fromDTO(bookDTO);&#10;        book.setId(id);&#10;        Book updatedBook = bookService.edit(book, currentLocale);&#10;        BookDto updatedDto = BookMapper.toDTO(updatedBook);&#10;        return ResponseEntity.ok(updatedDto);&#10;    }&#10;&#10;    /**&#10;     * Удаляет книгу по её идентификатору.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @return пустой ответ с кодом 204 (No Content)&#10;     */&#10;    @DeleteMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;Void&gt; deleteBook(@PathVariable int id) {&#10;        bookService.delete(id, currentLocale);&#10;        return ResponseEntity.noContent().build();&#10;    }&#10;}&#10;```&#10;&#10;Эти JavaDoc комментарии описывают назначение каждого контроллера и его методов, что помогает разработчикам и пользователям API лучше понимать функциональность и использование этих классов." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1739119268706" />
+              <option name="responseTms" value="1743406421142" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
                 </list>
               </option>
             </ChatHistoryModel>
           </value>
         </entry>
-        <entry key="58e22b">
+        <entry key="7c2cb3">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.6.11.Final/f6332e6fbc4634e7aeccd24a5c527a2da31e9f11/hibernate-core-5.6.11.Final-sources.jar!/org/hibernate/graph/GraphSemantic.java" />
-                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
                 </list>
               </option>
-              <option name="id" value="58e22b" />
-              <option name="initiateTms" value="1739117073582" />
-              <option name="request" value=" какие есть уровни кэшей в Hibernate?" />
+              <option name="id" value="7c2cb3" />
+              <option name="initiateTms" value="1743421208154" />
+              <option name="request" value=" напиши javadoc для BookDto" />
               <option name="response" value="" />
-              <option name="responseDescription" value="В Hibernate существует несколько уровней кэширования, которые помогают улучшить производительность за счет уменьшения количества обращений к базе данных. Основные уровни кэширования в Hibernate:&#10;&#10;1. **Первичный кэш (First-Level Cache)**:&#10;   - Это кэш, который встроен в Hibernate и работает на уровне сессии (`Session`). Он автоматически включен и не требует дополнительной настройки.&#10;   - Все объекты, загруженные в рамках одной сессии, хранятся в этом кэше. Если объект уже загружен в текущую сессию, Hibernate будет использовать его из кэша, а не загружать его заново из базы данных.&#10;   - Этот кэш действует только в пределах одной сессии и не доступен за ее пределами.&#10;&#10;2. **Вторичный кэш (Second-Level Cache)**:&#10;   - Это кэш, который работает на уровне сессии фабрики (`SessionFactory`). Он может быть настроен и включен отдельно.&#10;   - Вторичный кэш позволяет кэшировать объекты между сессиями, что может значительно улучшить производительность при многократном доступе к одним и тем же данным.&#10;   - Для использования второго уровня кэша необходимо настроить соответствующий провайдер кэша (например, EHCache, Infinispan и т.д.) и аннотировать сущности, которые должны кэшироваться.&#10;&#10;3. **Кэш запросов (Query Cache)**:&#10;   - Это кэш, который используется для кэширования результатов запросов. Он работает в связке с вторичным кэшем.&#10;   - Кэш запросов позволяет кэшировать результаты HQL или Criteria запросов, что может быть полезно для часто выполняемых запросов с неизменяющимися результатами.&#10;   - Для использования кэша запросов необходимо включить его в настройках Hibernate и явно указать, какие запросы должны кэшироваться.&#10;&#10;### Пример настройки второго уровня кэша и кэша запросов в Hibernate&#10;&#10;#### Включение второго уровня кэша в `hibernate.properties`:&#10;```properties&#10;# Включение второго уровня кэша&#10;hibernate.cache.use_second_level_cache=true&#10;&#10;# Указание провайдера кэша (например, EHCache)&#10;hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory&#10;&#10;# Включение кэша запросов&#10;hibernate.cache.use_query_cache=true&#10;```&#10;&#10;#### Аннотация сущностей для кэширования:&#10;```java&#10;import javax.persistence.Entity;&#10;import javax.persistence.Cacheable;&#10;import org.hibernate.annotations.Cache;&#10;import org.hibernate.annotations.CacheConcurrencyStrategy;&#10;&#10;@Entity&#10;@Cacheable&#10;@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)&#10;public class MyEntity {&#10;    // поля и методы&#10;}&#10;```&#10;&#10;#### Использование кэша запросов:&#10;```java&#10;List&lt;MyEntity&gt; results = session.createQuery(&quot;from MyEntity&quot;)&#10;                                .setCacheable(true)&#10;                                .list();&#10;```&#10;&#10;Эти уровни кэширования позволяют гибко настраивать производительность приложения, используя возможности Hibernate для уменьшения нагрузки на базу данных." />
+              <option name="responseDescription" value="Конечно, вот пример JavaDoc для класса `BookDto`:&#10;&#10;```java&#10;package org.example.DTO;&#10;&#10;import lombok.Data;&#10;&#10;/**&#10; * Data Transfer Object (DTO) для представления книги.&#10; * Этот класс используется для передачи данных о книге между слоями приложения.&#10; */&#10;@Data&#10;public class BookDto {&#10;    /**&#10;     * Идентификатор книги.&#10;     */&#10;    private Integer id;&#10;&#10;    /**&#10;     * Название книги.&#10;     */&#10;    private String title;&#10;&#10;    /**&#10;     * Описание книги.&#10;     */&#10;    private String description;&#10;&#10;    /**&#10;     * Имя автора книги.&#10;     */&#10;    private String authorName;&#10;&#10;    /**&#10;     * Жанр книги.&#10;     */&#10;    private String genreName;&#10;}&#10;```&#10;&#10;Этот JavaDoc предоставляет описание класса `BookDto` и его полей, что помогает разработчикам лучше понимать назначение и использование этого класса." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1739117087536" />
+              <option name="responseTms" value="1743421212346" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
-                  <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.6.11.Final/f6332e6fbc4634e7aeccd24a5c527a2da31e9f11/hibernate-core-5.6.11.Final-sources.jar!/org/hibernate/graph/GraphSemantic.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
                 </list>
               </option>
             </ChatHistoryModel>
           </value>
         </entry>
-        <entry key="a213f8">
+        <entry key="cc7f65">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
                 </list>
               </option>
-              <option name="id" value="a213f8" />
-              <option name="initiateTms" value="1739118936065" />
-              <option name="request" value=" почему повторный запрос через метод findByName класса BookRepository происходит из кеша?" />
+              <option name="id" value="cc7f65" />
+              <option name="initiateTms" value="1743421260137" />
+              <option name="request" value=" напиши javadoc для BookMapper" />
               <option name="response" value="" />
-              <option name="responseDescription" value="Повторный запрос через метод `findByName` класса `BookRepository` может происходить из кэша по нескольким причинам, связанным с механизмами кэширования Hibernate. Рассмотрим основные из них:&#10;&#10;1. **Первичный кэш (First-Level Cache)**:&#10;   - Как уже упоминалось, первичный кэш работает на уровне сессии (`Session`). Если в рамках одной сессии вы выполняете несколько запросов, и один из них уже загрузил объект с определенным идентификатором, последующие запросы за этим объектом будут обслуживаться из первичного кэша.&#10;   - Например, если вы вызываете метод `findByName` несколько раз в одной и той же сессии, и объекты с соответствующими именами уже были загружены, Hibernate будет использовать объекты из первичного кэша.&#10;&#10;2. **Вторичный кэш (Second-Level Cache)**:&#10;   - Вторичный кэш работает на уровне сессии фабрики (`SessionFactory`) и позволяет кэшировать объекты между сессиями. Если сущности, возвращаемые методом `findByName`, аннотированы для кэширования во втором уровне кэша, и кэш настроен правильно, то повторные запросы могут обслуживаться из второго уровня кэша.&#10;   - Для этого необходимо, чтобы сущности `Book` были аннотированы для кэширования, и соответствующий провайдер кэша был настроен.&#10;&#10;3. **Кэш запросов (Query Cache)**:&#10;   - Кэш запросов позволяет кэшировать результаты HQL или Criteria запросов. Если метод `findByName` настроен для использования кэша запросов, и кэш запросов включен в настройках Hibernate, то результаты запроса могут быть кэшированы.&#10;   - Для этого необходимо явно указать, что запрос должен быть кэшируемым, используя метод `setCacheable(true)`.&#10;&#10;### Пример настройки кэширования для метода `findByName`&#10;&#10;#### Настройка второго уровня кэша и кэша запросов в `hibernate.properties`:&#10;```properties&#10;# Включение второго уровня кэша&#10;hibernate.cache.use_second_level_cache=true&#10;&#10;# Указание провайдера кэша (например, EHCache)&#10;hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory&#10;&#10;# Включение кэша запросов&#10;hibernate.cache.use_query_cache=true&#10;```&#10;&#10;#### Аннотация сущности `Book` для кэширования:&#10;```java&#10;import javax.persistence.Entity;&#10;import javax.persistence.Cacheable;&#10;import org.hibernate.annotations.Cache;&#10;import org.hibernate.annotations.CacheConcurrencyStrategy;&#10;&#10;@Entity&#10;@Cacheable&#10;@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)&#10;public class Book {&#10;    // поля и методы&#10;}&#10;```&#10;&#10;#### Изменение метода `findByName` для использования кэша запросов:&#10;```java&#10;public List&lt;Book&gt; findByName(String name) {&#10;    List&lt;Book&gt; books = new ArrayList&lt;&gt;();&#10;    try (Session session = sessionFactory.openSession()) {&#10;        session.beginTransaction();&#10;        books = session.createQuery(&quot;from Book where title like :name&quot;, Book.class)&#10;                       .setParameter(&quot;name&quot;, &quot;%&quot; + name + &quot;%&quot;)&#10;                       .setCacheable(true)  // Указываем, что запрос должен быть кэшируемым&#10;                       .list();&#10;        session.getTransaction().commit();&#10;    } catch (Exception e) {&#10;        e.printStackTrace();&#10;    }&#10;    return books;&#10;}&#10;```&#10;&#10;### Заключение&#10;Повторный запрос через метод `findByName` может происходить из кэша, если:&#10;- Запрос выполняется в рамках одной сессии, и объекты уже загружены в первичный кэш.&#10;- Сущности `Book` аннотированы для кэширования во втором уровне кэша, и кэш настроен правильно.&#10;- Кэш запросов включен и настроен, и запрос помечен как кэшируемый.&#10;&#10;Эти механизмы кэширования позволяют значительно улучшить производительность приложения, уменьшая количество обращений к базе данных." />
+              <option name="responseDescription" value="Конечно, вот пример JavaDoc для класса `BookMapper`:&#10;&#10;```java&#10;package org.example.mapper;&#10;&#10;import org.example.DTO.BookDto;&#10;import org.example.model.Author;&#10;import org.example.model.Book;&#10;import org.example.model.Genre;&#10;&#10;/**&#10; * Класс {@code BookMapper} предоставляет методы для преобразования между&#10; * объектами модели {@link Book} и объектами передачи данных {@link BookDto}.&#10; * Этот класс используется для упрощения передачи данных между слоями приложения.&#10; */&#10;public class BookMapper {&#10;&#10;    /**&#10;     * Преобразует объект модели {@link Book} в объект передачи данных {@link BookDto}.&#10;     *&#10;     * @param book объект модели {@link Book}, который нужно преобразовать&#10;     * @return объект {@link BookDto}, представляющий данные книги&#10;     */&#10;    public static BookDto toDTO(Book book) {&#10;        BookDto dto = new BookDto();&#10;        dto.setId(book.getId());&#10;        dto.setTitle(book.getTitle());&#10;        dto.setDescription(book.getDescription());&#10;        dto.setAuthorName(book.getAuthor().getName());&#10;        dto.setGenreName(book.getGenre().getName());&#10;        return dto;&#10;    }&#10;&#10;    /**&#10;     * Преобразует объект передачи данных {@link BookDto} в объект модели {@link Book}.&#10;     *&#10;     * @param dto объект {@link BookDto}, который нужно преобразовать&#10;     * @return объект {@link Book}, представляющий данные книги&#10;     */&#10;    public static Book fromDTO(BookDto dto) {&#10;        Book book = new Book();&#10;        book.setId(dto.getId());&#10;        book.setTitle(dto.getTitle());&#10;        book.setDescription(dto.getDescription());&#10;        book.setAuthor(new Author(dto.getAuthorName()));&#10;        book.setGenre(new Genre(dto.getGenreName()));&#10;        return book;&#10;    }&#10;}&#10;```&#10;&#10;Этот JavaDoc предоставляет описание класса `BookMapper` и его методов, что помогает разработчикам лучше понимать назначение и использование этого класса." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1739118951421" />
+              <option name="responseTms" value="1743421266222" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
                   <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
                 </list>
               </option>
             </ChatHistoryModel>

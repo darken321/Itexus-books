@@ -8,7 +8,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Класс {@code Genres} представляет собой модель жанра для БД SQL.

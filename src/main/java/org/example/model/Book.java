@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Класс {@code Book} представляет собой модель книги для БД SQL.
@@ -33,7 +33,7 @@ public class Book {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
 
