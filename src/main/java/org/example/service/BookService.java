@@ -10,7 +10,6 @@ import org.example.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -30,10 +29,9 @@ public class BookService {
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
      * @param book          Книга для добавления.
      */
-    public Book add(Book book, Locale currentLocale) {
+    public Book add(Book book) {
 
         checkGenre(book);
         checkAuthor(book);
@@ -73,17 +71,16 @@ public class BookService {
     /**
      * Возвращает список всех книг, отсортированный по ID
      */
-    public List<Book> readAll(Locale currentLocale) {
+    public List<Book> readAll() {
         return bookRepository.findAllOrderByIdAsc();
     }
 
     /**
      * Редактирует существующую книгу.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
      * @param book          Книга, которую нужно обновить.
      */
-    public Book edit(Book book, Locale currentLocale) {
+    public Book edit(Book book) {
         Book updated = null;
         if (book != null) {
             checkAuthor(book);
@@ -97,10 +94,9 @@ public class BookService {
     /**
      * Удаляет книгу из репозитория по ID.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
      * @param id            ID книги для удаления.
      */
-    public void delete(int id, Locale currentLocale) {
+    public void delete(int id) {
         if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
 //            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_BOOK, null, currentLocale));

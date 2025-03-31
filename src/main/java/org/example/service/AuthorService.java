@@ -6,8 +6,6 @@ import org.example.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
-
 
 /**
  * Сервис для управления авторами, хранящимися в БД postgreSQL
@@ -32,7 +30,7 @@ public class AuthorService {
     /**
      * Возвращает список всех авторов
      */
-    public List<Author> readAll(Locale currentLocale) {
+    public List<Author> readAll() {
         return authorRepository.findAll();
     }
 
@@ -46,10 +44,9 @@ public class AuthorService {
     /**
      * Редактирует существующего автора.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
      * @param author        Книга, которую нужно обновить.
      */
-    public void edit(Author author, Locale currentLocale) {
+    public void edit(Author author) {
         if (author != null) {
             authorRepository.save(author);
 //            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_AUTHOR, null, currentLocale));
@@ -59,10 +56,9 @@ public class AuthorService {
     /**
      * Удаляет автора из репозитория по ID.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
      * @param id            ID автора для удаления.
      */
-    public void delete(int id, Locale currentLocale) {
+    public void delete(int id) {
         if (authorRepository.existsById(id)) {
             try {
                 authorRepository.deleteById(id);

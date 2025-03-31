@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -25,7 +24,6 @@ public class BookController {
 
     private final BookService bookService;
     private final BookRepository bookRepository;
-    private final Locale currentLocale = Locale.getDefault();
 
     /**
      * Получает книгу по её идентификатору.
@@ -55,7 +53,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getBookByName(@RequestParam(required = false) String title) {
         List<Book> books;
         if (title == null) {
-            books = bookService.readAll(currentLocale);
+            books = bookService.readAll();
         } else {
             books = bookService.findByName(title);
         }
@@ -72,7 +70,7 @@ public class BookController {
     @PostMapping
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDTO) {
         Book book = BookMapper.fromDTO(bookDTO);
-        Book createdBook = bookService.add(book, currentLocale);
+        Book createdBook = bookService.add(book);
         BookDto returnDTO = BookMapper.toDTO(createdBook);
         return ResponseEntity.status(201).body(returnDTO);
     }
@@ -88,7 +86,7 @@ public class BookController {
     public ResponseEntity<BookDto> updateBook(@PathVariable int id, @RequestBody BookDto bookDTO) {
         Book book = BookMapper.fromDTO(bookDTO);
         book.setId(id);
-        Book updatedBook = bookService.edit(book, currentLocale);
+        Book updatedBook = bookService.edit(book);
         BookDto updatedDto = BookMapper.toDTO(updatedBook);
         return ResponseEntity.ok(updatedDto);
     }
@@ -101,7 +99,7 @@ public class BookController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable int id) {
-        bookService.delete(id, currentLocale);
+        bookService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

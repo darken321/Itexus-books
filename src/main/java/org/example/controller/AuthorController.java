@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 /**
  * Контроллер для управления авторами.
  * Предоставляет API для получения книг по автору и удаления авторов.
@@ -22,7 +21,6 @@ import java.util.Locale;
 public class AuthorController {
     private final AuthorService authorService;
     private final BookService bookService;
-    private final Locale currentLocale = Locale.getDefault();
 
     /**
      * Получает список книг по имени автора.
@@ -35,7 +33,7 @@ public class AuthorController {
     public ResponseEntity<List<BookDto>> getBooksByAuthor(@RequestParam(required = false) String name) {
         List<Book> books;
         if (name == null) {
-            books = bookService.readAll(currentLocale);
+            books = bookService.readAll();
         } else {
             books = bookService.findByAuthorName(name);
         }
@@ -53,7 +51,7 @@ public class AuthorController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable int id) {
-        authorService.delete(id, currentLocale);
+        authorService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
