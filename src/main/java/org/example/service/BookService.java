@@ -10,6 +10,8 @@ import org.example.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 /**
@@ -29,22 +31,22 @@ public class BookService {
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
      *
-     * @param book          Книга для добавления.
+     * @param book Книга для добавления.
      */
     public Book add(Book book) {
-
         checkGenre(book);
         checkAuthor(book);
-        //TODO пофиксить проверку на ошибку и по else вернуть 200
-        Book savedBook = bookRepository.save(book);
-        if (savedBook == null) {
-//            System.out.println(error +
-//                    messageSource.getMessage(MessageKeys.SERVICE_FILE_WRITE_ERROR, null, currentLocale) +
-//                    reset);
-        } else {
-//            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_ADD_BOOK, null, currentLocale));
-        }
-        return savedBook;
+        return bookRepository.save(book);
+    }
+
+    /**
+     * Возвращает список книг по id книги.
+     *
+     * @param id идентификатор книги
+     * @return список книг с данным названием без учета заглавных букв.
+     */
+    public Optional<Book> findById(int id) {
+        return bookRepository.findById(id);
     }
 
     /**
@@ -56,7 +58,6 @@ public class BookService {
     public List<Book> findByName(String bookName) {
         return bookRepository.findByTitleContainingIgnoreCase(bookName);
     }
-
 
     /**
      * Возвращает список книг по части имени автора.
@@ -78,32 +79,33 @@ public class BookService {
     /**
      * Редактирует существующую книгу.
      *
-     * @param book          Книга, которую нужно обновить.
+     * @param book Книга, которую нужно обновить.
      */
     public Book edit(Book book) {
-        Book updated = null;
-        if (book != null) {
-            checkAuthor(book);
-            checkGenre(book);
-            updated = bookRepository.save(book);
-//            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_BOOK, null, currentLocale));
+        if (!bookRepository.existsById(book.getId())) {
+            throw new NoSuchElementException("Book with ID " + book.getId() + " not found");
         }
-        return updated;
+        checkAuthor(book);
+        checkGenre(book);
+        return bookRepository.save(book);
     }
 
     /**
      * Удаляет книгу из репозитория по ID.
      *
-     * @param id            ID книги для удаления.
+     * @param id ID книги для удаления.
      */
     public void delete(int id) {
-        if (bookRepository.existsById(id)) {
-            bookRepository.deleteById(id);
-//            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_BOOK, null, currentLocale));
-        } else {
-//            System.out.println(error + messageSource.getMessage(MessageKeys.NOT_FOUND_BY_ID,
-//                    null, currentLocale) + reset);
-        }
+        bookRepository.deleteById(id);
+    }
+
+    /**
+     * Проверяет наличие книги по id в базе данных
+     *
+     * @param id идентификатор книги
+     */
+    public boolean existsById(int id) {
+        return bookRepository.existsById(id);
     }
 
     /**

@@ -20,6 +20,7 @@ public class AuthorService {
 
     /**
      * Сохраняет автора в БД
+     *
      * @param author автор, которого нужно сохранить
      * @return сохраненный автор
      */
@@ -44,33 +45,28 @@ public class AuthorService {
     /**
      * Редактирует существующего автора.
      *
-     * @param author        Книга, которую нужно обновить.
+     * @param author Книга, которую нужно обновить.
      */
-    public void edit(Author author) {
-        if (author != null) {
-            authorRepository.save(author);
-//            System.out.println(messageSource.getMessage(MessageKeys.SERVICE_EDIT_AUTHOR, null, currentLocale));
-        }
+    public Author edit(Author author) {
+        return authorRepository.save(author);
     }
 
     /**
      * Удаляет автора из репозитория по ID.
      *
-     * @param id            ID автора для удаления.
+     * @param id ID автора для удаления.
      */
     public void delete(int id) {
-        if (authorRepository.existsById(id)) {
-            try {
-                authorRepository.deleteById(id);
-//                System.out.println(messageSource.getMessage(MessageKeys.SERVICE_DELETE_AUTHOR, null, currentLocale));
-            } catch (Exception e) {
-//                System.out.println(error + messageSource.getMessage(MessageKeys.DB_ERROR,null, currentLocale) +
-//                        reset);
-            }
-        } else {
-//            System.out.println(error +
-//                    messageSource.getMessage(MessageKeys.NOT_FOUND_BY_ID, null, currentLocale) +
-//                    reset);
-        }
+        authorRepository.deleteById(id);
+
+    }
+
+    /**
+     * Проверяет есть ли автор по ID.
+     *
+     * @param id ID автора для проверки.
+     */
+    public boolean existsById(int id) {
+        return authorRepository.existsById(id);
     }
 }

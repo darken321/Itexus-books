@@ -1,10 +1,7 @@
 package org.example.repository;
 
 
-import lombok.RequiredArgsConstructor;
 import org.example.model.Genre;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +10,9 @@ import org.springframework.stereotype.Repository;
  * Предоставляет методы для добавления, редактирования, чтения и удаления жанров.
  */
 @Repository
-public interface GenreRepository extends JpaRepository <Genre, Integer> {
+public interface GenreRepository extends JpaRepository<Genre, Integer> {
 
     Genre findByName(String genreName);
+
     Integer countAllByName(String genreName);
 }

@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Переход с ввода данных с консоли на API и SpringBoot&#10;&#10;Созданы контроллеры книг и авторов. Изменены репозитории. Добавлены DTO и маппер для них.">
+    <list default="true" id="4dd75353-39b3-45fe-bbf3-c9665db43041" name="Changes" comment="Удалил локаль из сервисов и контроллеров">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DTO/ExceptionDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mapper/ExceptionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/MessageKeys.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BooksApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BooksApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/AuthorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +348,7 @@
       <workItem from="1742987927912" duration="5260000" />
       <workItem from="1743055804766" duration="49060000" />
       <workItem from="1743253899935" duration="6085000" />
-      <workItem from="1743262674626" duration="13051000" />
+      <workItem from="1743262674626" duration="45046000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1727095638353</created>
@@ -453,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1743423233787</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Удалил локаль из сервисов и контроллеров">
+      <created>1743424532133</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1743424532133</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +515,8 @@
     <MESSAGE value="Добавлено кеширование 2 уровня и кеширование запросов &#10;&#10;В методы чтения из БД всех трех репозиториев добавлено кеширование кеширование запросов.   &#10;В классы сущностей добавлены аннотации кеширования 2 уровня" />
     <MESSAGE value="Добавлено использование запросов с помощью criteria&#10;&#10;В класс AuthorRepository запросы чтения заменены на запросы criteria.&#10;Произведен рефакторинг кода.&#10;Добавлены JavaDoc." />
     <MESSAGE value="Переход с ввода данных с консоли на API и SpringBoot&#10;&#10;Созданы контроллеры книг и авторов. Изменены репозитории. Добавлены DTO и маппер для них." />
-    <option name="LAST_COMMIT_MESSAGE" value="Переход с ввода данных с консоли на API и SpringBoot&#10;&#10;Созданы контроллеры книг и авторов. Изменены репозитории. Добавлены DTO и маппер для них." />
+    <MESSAGE value="Удалил локаль из сервисов и контроллеров" />
+    <option name="LAST_COMMIT_MESSAGE" value="Удалил локаль из сервисов и контроллеров" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -522,101 +539,29 @@
     <option name="memoryInstruction" value="Приводи все ответы на русском языке, для java17 и для dradle&#10;" />
     <option name="historyDtoById">
       <map>
-        <entry key="412c5f">
+        <entry key="636df3">
           <value>
             <ChatHistoryModel>
               <option name="contextFilesPaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/handler/GlobalExceptionHandler.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/ExceptionDto.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/ExceptionMapper.java" />
                 </list>
               </option>
-              <option name="id" value="412c5f" />
-              <option name="initiateTms" value="1743275779449" />
-              <option name="request" value=" напиши javaDoc для AuthorController и BookController" />
+              <option name="id" value="636df3" />
+              <option name="initiateTms" value="1743600513813" />
+              <option name="request" value=" напиши javadoc для class GlobalExceptionHandler" />
               <option name="response" value="" />
-              <option name="responseDescription" value="Конечно, вот пример JavaDoc для классов `AuthorController` и `BookController`:&#10;&#10;### AuthorController.java&#10;```java&#10;package org.example.controller;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.DTO.BookDto;&#10;import org.example.mapper.BookMapper;&#10;import org.example.model.Book;&#10;import org.example.service.AuthorService;&#10;import org.example.service.BookService;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.*;&#10;&#10;import java.util.List;&#10;import java.util.Locale;&#10;&#10;/**&#10; * Контроллер для управления авторами.&#10; * Предоставляет API для получения книг по автору и удаления авторов.&#10; */&#10;@RestController&#10;@RequiredArgsConstructor&#10;@RequestMapping(&quot;api/v1/author&quot;)&#10;public class AuthorController {&#10;    private final AuthorService authorService;&#10;    private final BookService bookService;&#10;    private final Locale currentLocale = Locale.getDefault();&#10;&#10;    /**&#10;     * Получает список книг по имени автора.&#10;     * Если имя автора не указано, возвращает все книги.&#10;     *&#10;     * @param name имя автора (необязательный параметр)&#10;     * @return список книг в формате DTO&#10;     */&#10;    @GetMapping&#10;    public ResponseEntity&lt;List&lt;BookDto&gt;&gt; getBooksByAuthor(@RequestParam(required = false) String name) {&#10;        List&lt;Book&gt; books;&#10;        if (name == null) {&#10;            books = bookService.readAll(currentLocale);&#10;        } else {&#10;            books = bookService.findByAuthorName(name);&#10;        }&#10;        List&lt;BookDto&gt; bookDTOs = books.stream()&#10;                .map(BookMapper::toDTO)&#10;                .toList();&#10;        return ResponseEntity.ok(bookDTOs);&#10;    }&#10;&#10;    /**&#10;     * Удаляет автора по его идентификатору.&#10;     *&#10;     * @param id идентификатор автора&#10;     * @return пустой ответ с кодом 204 (No Content)&#10;     */&#10;    @DeleteMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;Void&gt; deleteAuthor(@PathVariable int id) {&#10;        authorService.delete(id, currentLocale);&#10;        return ResponseEntity.noContent().build();&#10;    }&#10;}&#10;```&#10;&#10;### BookController.java&#10;```java&#10;package org.example.controller;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.DTO.BookDto;&#10;import org.example.mapper.BookMapper;&#10;import org.example.model.Book;&#10;import org.example.repository.BookRepository;&#10;import org.example.service.BookService;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.*;&#10;&#10;import java.util.List;&#10;import java.util.Locale;&#10;import java.util.Optional;&#10;&#10;/**&#10; * Контроллер для управления книгами.&#10; * Предоставляет API для создания, обновления, удаления и получения книг.&#10; */&#10;@RestController&#10;@RequiredArgsConstructor&#10;@RequestMapping(&quot;/api/v1/books&quot;)&#10;public class BookController {&#10;&#10;    private final BookService bookService;&#10;    private final BookRepository bookRepository;&#10;    private final Locale currentLocale = Locale.getDefault();&#10;&#10;    /**&#10;     * Получает книгу по её идентификатору.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @return книга в формате DTO или ответ с кодом 404 (Not Found), если книга не найдена&#10;     */&#10;    @GetMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;BookDto&gt; getBookById(@PathVariable int id) {&#10;        Optional&lt;Book&gt; optionalBook = bookRepository.findById(id);&#10;        if (optionalBook.isPresent()) {&#10;            BookDto bookDTO = BookMapper.toDTO(optionalBook.get());&#10;            return ResponseEntity.ok(bookDTO);&#10;        } else {&#10;            return ResponseEntity.notFound().build();&#10;        }&#10;    }&#10;&#10;    /**&#10;     * Получает список книг по названию.&#10;     * Если название не указано, возвращает все книги.&#10;     *&#10;     * @param title название книги (необязательный параметр)&#10;     * @return список книг в формате DTO&#10;     */&#10;    @GetMapping&#10;    public ResponseEntity&lt;List&lt;BookDto&gt;&gt; getBookByName(@RequestParam(required = false) String title) {&#10;        List&lt;Book&gt; books;&#10;        if (title == null) {&#10;            books = bookService.readAll(currentLocale);&#10;        } else {&#10;            books = bookService.findByName(title);&#10;        }&#10;        List&lt;BookDto&gt; bookDTOs = books.stream()&#10;                .map(BookMapper::toDTO)&#10;                .toList();&#10;        return ResponseEntity.ok(bookDTOs);&#10;    }&#10;&#10;    /**&#10;     * Создает новую книгу.&#10;     *&#10;     * @param bookDTO данные книги в формате DTO&#10;     * @return созданная книга в формате DTO с кодом 201 (Created)&#10;     */&#10;    @PostMapping&#10;    public ResponseEntity&lt;BookDto&gt; createBook(@RequestBody BookDto bookDTO) {&#10;        Book book = BookMapper.fromDTO(bookDTO);&#10;        Book createdBook = bookService.add(book, currentLocale);&#10;        BookDto returnDTO = BookMapper.toDTO(createdBook);&#10;        return ResponseEntity.status(201).body(returnDTO);&#10;    }&#10;&#10;    /**&#10;     * Обновляет существующую книгу.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @param bookDTO данные книги в формате DTO&#10;     * @return обновленная книга в формате DTO&#10;     */&#10;    @PutMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;BookDto&gt; updateBook(@PathVariable int id, @RequestBody BookDto bookDTO) {&#10;        Book book = BookMapper.fromDTO(bookDTO);&#10;        book.setId(id);&#10;        Book updatedBook = bookService.edit(book, currentLocale);&#10;        BookDto updatedDto = BookMapper.toDTO(updatedBook);&#10;        return ResponseEntity.ok(updatedDto);&#10;    }&#10;&#10;    /**&#10;     * Удаляет книгу по её идентификатору.&#10;     *&#10;     * @param id идентификатор книги&#10;     * @return пустой ответ с кодом 204 (No Content)&#10;     */&#10;    @DeleteMapping(&quot;/{id}&quot;)&#10;    public ResponseEntity&lt;Void&gt; deleteBook(@PathVariable int id) {&#10;        bookService.delete(id, currentLocale);&#10;        return ResponseEntity.noContent().build();&#10;    }&#10;}&#10;```&#10;&#10;Эти JavaDoc комментарии описывают назначение каждого контроллера и его методов, что помогает разработчикам и пользователям API лучше понимать функциональность и использование этих классов." />
+              <option name="responseDescription" value="Конечно, вот пример Javadoc для класса `GlobalExceptionHandler`:&#10;&#10;```java&#10;package org.example.handler;&#10;&#10;import lombok.RequiredArgsConstructor;&#10;import org.example.DTO.ExceptionDto;&#10;import org.example.mapper.ExceptionMapper;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.ControllerAdvice;&#10;import org.springframework.web.bind.annotation.ExceptionHandler;&#10;&#10;import java.util.NoSuchElementException;&#10;&#10;/**&#10; * Глобальный обработчик исключений для приложения.&#10; * Этот класс перехватывает исключения, возникающие в приложении, и преобразует их в объекты {@link ExceptionDto}.&#10; * Использует {@link ExceptionMapper} для преобразования исключений.&#10; */&#10;@ControllerAdvice&#10;@RequiredArgsConstructor&#10;public class GlobalExceptionHandler {&#10;&#10;    private final ExceptionMapper exceptionMapper;&#10;&#10;    /**&#10;     * Обрабатывает все исключения типа {@link Exception}.&#10;     *&#10;     * @param exception исключение, которое было выброшено&#10;     * @return объект {@link ExceptionDto}, содержащий информацию об исключении&#10;     */&#10;    @ExceptionHandler(Exception.class)&#10;    public ExceptionDto handleException(Exception exception) {&#10;        return exceptionMapper.exceptionToDto(exception);&#10;    }&#10;&#10;    /**&#10;     * Обрабатывает исключения типа {@link NoSuchElementException}.&#10;     *&#10;     * @param e исключение, которое было выброшено&#10;     * @return объект {@link ResponseEntity}, содержащий {@link ExceptionDto} и HTTP статус 404&#10;     */&#10;    @ExceptionHandler(NoSuchElementException.class)&#10;    public ResponseEntity&lt;ExceptionDto&gt; handleNotFoundException(Exception e) {&#10;        ExceptionDto dto = exceptionMapper.exceptionToDto(e);&#10;        return ResponseEntity.status(404).body(dto);&#10;    }&#10;}&#10;```&#10;&#10;Этот Javadoc предоставляет описание класса и его методов, объясняя их назначение и параметры." />
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1743406421142" />
+              <option name="responseTms" value="1743600520508" />
               <option name="usedLocalFilePaths">
                 <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/GenreRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/BookRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/service/BookService.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/BookController.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/controller/AuthorController.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/repository/AuthorRepository.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
-                </list>
-              </option>
-            </ChatHistoryModel>
-          </value>
-        </entry>
-        <entry key="7c2cb3">
-          <value>
-            <ChatHistoryModel>
-              <option name="contextFilesPaths">
-                <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                </list>
-              </option>
-              <option name="id" value="7c2cb3" />
-              <option name="initiateTms" value="1743421208154" />
-              <option name="request" value=" напиши javadoc для BookDto" />
-              <option name="response" value="" />
-              <option name="responseDescription" value="Конечно, вот пример JavaDoc для класса `BookDto`:&#10;&#10;```java&#10;package org.example.DTO;&#10;&#10;import lombok.Data;&#10;&#10;/**&#10; * Data Transfer Object (DTO) для представления книги.&#10; * Этот класс используется для передачи данных о книге между слоями приложения.&#10; */&#10;@Data&#10;public class BookDto {&#10;    /**&#10;     * Идентификатор книги.&#10;     */&#10;    private Integer id;&#10;&#10;    /**&#10;     * Название книги.&#10;     */&#10;    private String title;&#10;&#10;    /**&#10;     * Описание книги.&#10;     */&#10;    private String description;&#10;&#10;    /**&#10;     * Имя автора книги.&#10;     */&#10;    private String authorName;&#10;&#10;    /**&#10;     * Жанр книги.&#10;     */&#10;    private String genreName;&#10;}&#10;```&#10;&#10;Этот JavaDoc предоставляет описание класса `BookDto` и его полей, что помогает разработчикам лучше понимать назначение и использование этого класса." />
-              <option name="responseFileName" value="" />
-              <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1743421212346" />
-              <option name="usedLocalFilePaths">
-                <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                </list>
-              </option>
-            </ChatHistoryModel>
-          </value>
-        </entry>
-        <entry key="cc7f65">
-          <value>
-            <ChatHistoryModel>
-              <option name="contextFilesPaths">
-                <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                </list>
-              </option>
-              <option name="id" value="cc7f65" />
-              <option name="initiateTms" value="1743421260137" />
-              <option name="request" value=" напиши javadoc для BookMapper" />
-              <option name="response" value="" />
-              <option name="responseDescription" value="Конечно, вот пример JavaDoc для класса `BookMapper`:&#10;&#10;```java&#10;package org.example.mapper;&#10;&#10;import org.example.DTO.BookDto;&#10;import org.example.model.Author;&#10;import org.example.model.Book;&#10;import org.example.model.Genre;&#10;&#10;/**&#10; * Класс {@code BookMapper} предоставляет методы для преобразования между&#10; * объектами модели {@link Book} и объектами передачи данных {@link BookDto}.&#10; * Этот класс используется для упрощения передачи данных между слоями приложения.&#10; */&#10;public class BookMapper {&#10;&#10;    /**&#10;     * Преобразует объект модели {@link Book} в объект передачи данных {@link BookDto}.&#10;     *&#10;     * @param book объект модели {@link Book}, который нужно преобразовать&#10;     * @return объект {@link BookDto}, представляющий данные книги&#10;     */&#10;    public static BookDto toDTO(Book book) {&#10;        BookDto dto = new BookDto();&#10;        dto.setId(book.getId());&#10;        dto.setTitle(book.getTitle());&#10;        dto.setDescription(book.getDescription());&#10;        dto.setAuthorName(book.getAuthor().getName());&#10;        dto.setGenreName(book.getGenre().getName());&#10;        return dto;&#10;    }&#10;&#10;    /**&#10;     * Преобразует объект передачи данных {@link BookDto} в объект модели {@link Book}.&#10;     *&#10;     * @param dto объект {@link BookDto}, который нужно преобразовать&#10;     * @return объект {@link Book}, представляющий данные книги&#10;     */&#10;    public static Book fromDTO(BookDto dto) {&#10;        Book book = new Book();&#10;        book.setId(dto.getId());&#10;        book.setTitle(dto.getTitle());&#10;        book.setDescription(dto.getDescription());&#10;        book.setAuthor(new Author(dto.getAuthorName()));&#10;        book.setGenre(new Genre(dto.getGenreName()));&#10;        return book;&#10;    }&#10;}&#10;```&#10;&#10;Этот JavaDoc предоставляет описание класса `BookMapper` и его методов, что помогает разработчикам лучше понимать назначение и использование этого класса." />
-              <option name="responseFileName" value="" />
-              <option name="responseFilePath" value="" />
-              <option name="responseTms" value="1743421266222" />
-              <option name="usedLocalFilePaths">
-                <list>
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Book.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/BookDto.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Genre.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/model/Author.java" />
-                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/BookMapper.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/mapper/ExceptionMapper.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/handler/GlobalExceptionHandler.java" />
+                  <option value="$PROJECT_DIR$/src/main/java/org/example/DTO/ExceptionDto.java" />
                 </list>
               </option>
             </ChatHistoryModel>

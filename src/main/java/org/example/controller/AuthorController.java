@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 /**
  * Контроллер для управления авторами.
  * Предоставляет API для получения книг по автору и удаления авторов.
@@ -38,7 +40,7 @@ public class AuthorController {
             books = bookService.findByAuthorName(name);
         }
         List<BookDto> bookDTOs = books.stream()
-                .map(BookMapper::toDTO)
+                .map(BookMapper::toDto)
                 .toList();
         return ResponseEntity.ok(bookDTOs);
     }
@@ -51,6 +53,9 @@ public class AuthorController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable int id) {
+        if (!authorService.existsById(id)) {
+            throw new NoSuchElementException("Author with ID " + id + " not found");
+        }
         authorService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -20,7 +20,7 @@ public class BookMapper {
      * @param book объект модели {@link Book}, который нужно преобразовать
      * @return объект {@link BookDto}, представляющий данные книги
      */
-    public static BookDto toDTO(Book book) {
+    public static BookDto toDto(Book book) {
         BookDto dto = new BookDto();
         dto.setId(book.getId());
         dto.setTitle(book.getTitle());
@@ -30,8 +30,14 @@ public class BookMapper {
         return dto;
     }
 
+    /**
+     * Преобразует список моделей {@link Book} в список объектов передачи данных {@link BookDto}.
+     *
+     * @param books</books> список книг {@link Book}, который нужно преобразовать
+     * @return объект {@link BookDto}, представляющий данные книги
+     */
     public static List<BookDto> AllToBookDto(List<Book> books) {
-        return books.stream().map(BookMapper::toDTO).toList();
+        return books.stream().map(BookMapper::toDto).toList();
     }
 
     /**

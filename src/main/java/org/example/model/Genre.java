@@ -1,14 +1,12 @@
 package org.example.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
-
-import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**

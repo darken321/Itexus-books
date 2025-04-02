@@ -1,16 +1,15 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-
 import org.example.DTO.BookDto;
 import org.example.mapper.BookMapper;
 import org.example.model.Book;
-import org.example.repository.BookRepository;
 import org.example.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -23,7 +22,6 @@ import java.util.Optional;
 public class BookController {
 
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
     /**
      * Получает книгу по её идентификатору.
@@ -33,12 +31,12 @@ public class BookController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable int id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
+        Optional<Book> optionalBook = bookService.findById(id);
         if (optionalBook.isPresent()) {
-            BookDto bookDTO = BookMapper.toDTO(optionalBook.get());
+            BookDto bookDTO = BookMapper.toDto(optionalBook.get());
             return ResponseEntity.ok(bookDTO);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NoSuchElementException("Book with ID " + id + " not found");
         }
     }
 
@@ -71,14 +69,14 @@ public class BookController {
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDTO) {
         Book book = BookMapper.fromDTO(bookDTO);
         Book createdBook = bookService.add(book);
-        BookDto returnDTO = BookMapper.toDTO(createdBook);
+        BookDto returnDTO = BookMapper.toDto(createdBook);
         return ResponseEntity.status(201).body(returnDTO);
     }
 
     /**
      * Обновляет существующую книгу.
      *
-     * @param id идентификатор книги
+     * @param id      идентификатор книги
      * @param bookDTO данные книги в формате DTO
      * @return обновленная книга в формате DTO
      */
@@ -87,7 +85,10 @@ public class BookController {
         Book book = BookMapper.fromDTO(bookDTO);
         book.setId(id);
         Book updatedBook = bookService.edit(book);
-        BookDto updatedDto = BookMapper.toDTO(updatedBook);
+        if (updatedBook == null) {
+            throw new NoSuchElementException("Book with ID " + id + " not found");
+        }
+        BookDto updatedDto = BookMapper.toDto(updatedBook);
         return ResponseEntity.ok(updatedDto);
     }
 
@@ -99,6 +100,9 @@ public class BookController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable int id) {
+        if (!bookService.existsById(id)) {
+            throw new NoSuchElementException("Book with ID " + id + " not found");
+        }
         bookService.delete(id);
         return ResponseEntity.noContent().build();
     }
