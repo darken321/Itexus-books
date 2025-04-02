@@ -1,17 +1,21 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.Author;
 import org.example.model.Book;
+import org.example.model.Genre;
+import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
+import org.example.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 
 /**
- * Сервис для управления книгами.
+ * Сервис для управления книгами, хранящимися в БД postgreSQL
  * Предоставляет методы для создания, редактирования, удаления и вывода списка книг.
  */
 
@@ -19,117 +23,121 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class BookService {
 
-    @Value("${color.error}")
-    private String error;
-
-    @Value("${color.reset}")
-    private String reset;
-
     private final BookRepository bookRepository;
-    private final MessageSource messageSource;
+    private final GenreRepository genreRepository;
+    private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
 
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
-     * @param book          Книга для добавления.
+     * @param book Книга для добавления.
      */
-    public void createBook(Book book, Locale currentLocale) {
-        if (bookRepository.addBook(book) == null) {
-            System.out.println(error +
-                    messageSource.getMessage("service.fileWriteError", null, currentLocale) +
-                    reset);
-        } else {
-            System.out.println(messageSource.getMessage("service.addBook", null, currentLocale));
-        }
+    public Book add(Book book) {
+        checkGenre(book);
+        checkAuthor(book);
+        return bookRepository.save(book);
     }
 
     /**
-     * Возвращает список всех книг или null если список пуст.
+     * Возвращает список книг по id книги.
+     *
+     * @param id идентификатор книги
+     * @return список книг с данным названием без учета заглавных букв.
      */
-    public List<Book> readBooks(Locale currentLocale) {
-        List<Book> books = bookRepository.readBooks();
-        if (books.isEmpty()) {
-            return null;
-        } else {
-            return books;
-        }
+    public Optional<Book> findById(int id) {
+        return bookRepository.findById(id);
+    }
+
+    /**
+     * Возвращает список книг по части названию книги.
+     *
+     * @param bookName часть названия книги
+     * @return список книг с данным названием без учета заглавных букв.
+     */
+    public List<Book> findByName(String bookName) {
+        return bookRepository.findByTitleContainingIgnoreCase(bookName);
+    }
+
+    /**
+     * Возвращает список книг по части имени автора.
+     *
+     * @param authorName часть имени автора
+     * @return
+     */
+    public List<Book> findByAuthorName(String authorName) {
+        return bookRepository.findByAuthorNameContainingIgnoreCase(authorName);
+    }
+
+    /**
+     * Возвращает список всех книг, отсортированный по ID
+     */
+    public List<Book> readAll() {
+        return bookRepository.findAllOrderByIdAsc();
     }
 
     /**
      * Редактирует существующую книгу.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
-     * @param updatedBook   Обновленная книга.
+     * @param book Книга, которую нужно обновить.
      */
-    public void editBook(Book updatedBook, Locale currentLocale) {
-        List<Book> books = bookRepository.readBooks();
-        Integer index = findBookById(books, updatedBook.getId(), currentLocale);
-        if (index == null) {
-            return;
+    public Book edit(Book book) {
+        if (!bookRepository.existsById(book.getId())) {
+            throw new NoSuchElementException("Book with ID " + book.getId() + " not found");
         }
-
-        for (Book book : books) {
-            if (book.getId() == updatedBook.getId()) {
-                book.setTitle(updatedBook.getTitle());
-                book.setAuthor(updatedBook.getAuthor());
-                book.setDescription(updatedBook.getDescription());
-                break;
-            }
-        }
-        bookRepository.editBook(books);
-        System.out.println(messageSource.getMessage("service.editBook", null, currentLocale));
+        checkAuthor(book);
+        checkGenre(book);
+        return bookRepository.save(book);
     }
 
     /**
      * Удаляет книгу из репозитория по ID.
      *
-     * @param currentLocale локаль языка, установленная пользователем.
-     * @param id            ID книги для удаления.
+     * @param id ID книги для удаления.
      */
-    public void deleteBook(int id, Locale currentLocale) {
-        List<Book> books = bookRepository.readBooks();
-        Integer index = findBookById(books, id, currentLocale);
-        if (index == null) {
-            return;
-        }
-        books.remove((int) index);
-        bookRepository.deleteBook(books, id);
-        System.out.println(messageSource.getMessage("service.deleteBook", null, currentLocale));
+    public void delete(int id) {
+        bookRepository.deleteById(id);
     }
 
     /**
-     * Возвращает список книг по названию книги.
+     * Проверяет наличие книги по id в базе данных
      *
-     * @param bookName      Название книги
-     * @return список книг с данным названием без учета заглавных букв.
+     * @param id идентификатор книги
      */
-
-    public List<Book> findBooksByName(String bookName) {
-        List<Book> books = bookRepository.readBooks();
-
-        return  books.stream()
-                .filter(book -> book.getTitle()
-                .equalsIgnoreCase(bookName)).toList();
+    public boolean existsById(int id) {
+        return bookRepository.existsById(id);
     }
 
     /**
-     * Находит индекс книги в списке по ID.
+     * Проверяет наличие автора в базе данных. Если автор не существует, добавляет нового автора.
+     * Если автор существует, обновляет объект книги с данными существующего автора.
      *
-     * @param books         Список книг.
-     * @param currentLocale локаль языка, установленная пользователем.
-     * @param id            ID книги для поиска.
-     * @return Индекс книги в списке или null, если книга не найдена.
+     * @param book Книга, для которой необходимо проверить и установить автора.
      */
-    private Integer findBookById(List<Book> books, int id, Locale currentLocale) {
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getId() == id) {
-                return i;
-            }
+    private void checkAuthor(Book book) {
+        //автора нет
+        if (authorRepository.countAllByName(book.getAuthor().getName()) == 0) {
+            Author newAuthor = authorService.save(book.getAuthor());
+            book.setAuthor(newAuthor);
+        } else {
+            Author oldAuthor = authorService.findByName(book.getAuthor().getName()).get(0);
+            book.setAuthor(oldAuthor);
         }
-        System.out.println(error +
-                messageSource.getMessage("service.notFoundBookById", null, currentLocale) +
-                reset);
-        return null;
+    }
+
+    /**
+     * Проверяет наличие жанра в базе данных. Если жанр не существует, добавляет новый жанр.
+     * Если жанр существует, обновляет объект книги с данными существующего жанра.
+     *
+     * @param book Книга, для которой необходимо проверить и установить жанр.
+     */
+    private void checkGenre(Book book) {
+        if (genreRepository.countAllByName(book.getGenre().getName()) == 0) {
+            Genre newGenre = genreRepository.save(book.getGenre());
+            book.setGenre(newGenre);
+        } else {
+            Genre oldGenre = genreRepository.findByName(book.getGenre().getName());
+            book.setGenre(oldGenre);
+        }
     }
 }
