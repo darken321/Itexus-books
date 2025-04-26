@@ -21,5 +21,6 @@ public class DatabaseInitializerRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        databaseInitializer.clearDatabase();
 //        databaseInitializer.populateDatabase();
+//        databaseInitializer.populateImages();
     }
 }

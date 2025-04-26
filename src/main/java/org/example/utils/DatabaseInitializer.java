@@ -7,10 +7,14 @@ import org.example.model.Genre;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.GenreRepository;
+import org.example.service.BookService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -22,6 +26,7 @@ public class DatabaseInitializer {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
+    private final BookService bookService;
 
     private final SessionFactory sessionFactory;
 
@@ -73,6 +78,23 @@ public class DatabaseInitializer {
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void populateImages() throws IOException {
+        String[] imagePaths = {
+                "src/main/resources/static/images/image1.jpg",
+                "src/main/resources/static/images/image2.jpg",
+                "src/main/resources/static/images/image3.jpg",
+                "src/main/resources/static/images/image4.jpg",
+                "src/main/resources/static/images/image5.jpg"
+        };
+        List<Book> books = bookService.readAll();
+
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            String imagePath = imagePaths[i];
+            bookService.addBookWithImage(book, imagePath);
         }
     }
 }

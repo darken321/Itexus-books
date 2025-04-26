@@ -9,6 +9,7 @@ import org.example.repository.BookRepository;
 import org.example.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class BookService {
     private final GenreRepository genreRepository;
     private final AuthorRepository authorRepository;
     private final AuthorService authorService;
+    private final ImageService imageService;
 
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
@@ -139,5 +141,22 @@ public class BookService {
             Genre oldGenre = genreRepository.findByName(book.getGenre().getName());
             book.setGenre(oldGenre);
         }
+    }
+
+    /**
+     * Добавляет новую книгу с изображением в репозиторий.
+     *
+     * Этот метод загружает изображение, путь к которому указан в imagePath, в базу данных MongoDB с использованием GridFS.
+     * После загрузки изображения, его уникальный идентификатор сохраняется в объекте книги.
+     * Затем книга с этим идентификатором сохраняется в репозитории PostgreSQL.
+     *
+     * @param book объект книги, который необходимо добавить.
+     * @param imagePath путь к файлу изображения, который необходимо загрузить.
+     * @throws IOException если возникает ошибка при загрузке изображения.
+     */
+    public void addBookWithImage(Book book, String imagePath) throws IOException {
+        String imageFileId = imageService.uploadImage(imagePath);
+        book.setImageFileId(imageFileId);
+        bookRepository.save(book);
     }
 }

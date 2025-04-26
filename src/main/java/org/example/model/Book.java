@@ -41,6 +41,9 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    @Column(name = "image_File_id")
+    private String ImageFileId;
+
     public Book(String title, String description) {
         this.title = title;
         this.description = description;
