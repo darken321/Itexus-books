@@ -1,15 +1,23 @@
 package org.example.service;
 
+import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.example.model.Author;
 import org.example.model.Book;
 import org.example.model.Genre;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.GenreRepository;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -28,7 +36,7 @@ public class BookService {
     private final GenreRepository genreRepository;
     private final AuthorRepository authorRepository;
     private final AuthorService authorService;
-    private final ImageService imageService;
+    private final GridFsTemplate gridFsTemplate;
 
     /**
      * Создает новую книгу и добавляет ее в репозиторий.
@@ -144,19 +152,74 @@ public class BookService {
     }
 
     /**
-     * Добавляет новую книгу с изображением в репозиторий.
+     * Добавляет изображение к книге с указанным ID.
+     * Этот метод загружает изображение в базу данных MongoDB с использованием GridFS,
+     * обновляет объект книги с идентификатором загруженного изображения и сохраняет изменения в базе данных PostgreSQL.
      *
-     * Этот метод загружает изображение, путь к которому указан в imagePath, в базу данных MongoDB с использованием GridFS.
-     * После загрузки изображения, его уникальный идентификатор сохраняется в объекте книги.
-     * Затем книга с этим идентификатором сохраняется в репозитории PostgreSQL.
-     *
-     * @param book объект книги, который необходимо добавить.
-     * @param imagePath путь к файлу изображения, который необходимо загрузить.
+     * @param bookId ID книги, к которой нужно добавить изображение.
+     * @param file файл изображения, который необходимо загрузить.
      * @throws IOException если возникает ошибка при загрузке изображения.
+     * @throws NoSuchElementException если книга с указанным ID не найдена.
      */
-    public void addBookWithImage(Book book, String imagePath) throws IOException {
-        String imageFileId = imageService.uploadImage(imagePath);
+    public void addBookImage(int bookId, MultipartFile file) throws IOException {
+        // Проверяем, существует ли книга с указанным ID
+        Optional<Book> optionalBook = findById(bookId);
+        if (optionalBook.isEmpty()) {
+            throw new NoSuchElementException("Book with ID " + bookId + " not found");
+        }
+
+        Book book = optionalBook.get();
+
+        // Сохраняем файл и обновляем книгу
+        String imageFileId;
+        try (InputStream inputStream = file.getInputStream()) {
+            ObjectId fileId = gridFsTemplate.store(inputStream, file.getOriginalFilename(), "image/jpeg");
+            imageFileId = fileId.toString();
+        }
         book.setImageFileId(imageFileId);
         bookRepository.save(book);
+    }
+
+    /**
+     * Получает изображение книги по её ID.
+     * Этот метод извлекает объект книги из базы данных PostgreSQL, получает идентификатор файла изображения,
+     * хранящегося в MongoDB, и возвращает данные изображения в виде массива байтов.
+     *
+     * @param bookId ID книги, изображение которой нужно получить.
+     * @return Массив байтов, представляющий данные изображения.
+     * @throws IOException если возникает ошибка при чтении данных изображения.
+     * @throws NoSuchElementException если книга с указанным ID не найдена.
+     */
+    public byte[] getBookImageById(int bookId) throws IOException {
+        GridFSFile file = getFileFromMongo(bookId);
+        GridFsResource imageResource = gridFsTemplate.getResource(file);
+        return imageResource.getInputStream().readAllBytes();
+    }
+
+    /**
+     * Получает имя файла картинки из mongoDB по ID книги.
+     * @param bookId ID книги, имя файла которой нужно получить.
+     * @return имя файла.
+     */
+    public String getFileNameFromMongo(int bookId) {
+        GridFSFile file = getFileFromMongo(bookId);
+        return file.getFilename();
+    }
+
+
+    /**
+     * Получает файл фотографии из mongoDB по id книги
+     * @param bookId ID книги, файл фотографии которой нужно получить
+     * @return объект типа GridFSFile, содержащий метаданные о файле
+     */
+    private GridFSFile getFileFromMongo(int bookId) {
+        Optional<Book> optionalBook = findById(bookId);
+        if (optionalBook.isEmpty()) {
+            throw new NoSuchElementException("Book with ID " + bookId + " not found");
+        }
+
+        Book book = optionalBook.get();
+        String imageFileId = book.getImageFileId();
+        return gridFsTemplate.findOne(new Query(Criteria.where("_id").is(new ObjectId(imageFileId))));
     }
 }

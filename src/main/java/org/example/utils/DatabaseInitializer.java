@@ -11,8 +11,12 @@ import org.example.service.BookService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -92,9 +96,15 @@ public class DatabaseInitializer {
         List<Book> books = bookService.readAll();
 
         for (int i = 0; i < books.size(); i++) {
-            Book book = books.get(i);
             String imagePath = imagePaths[i];
-            bookService.addBookWithImage(book, imagePath);
+            MultipartFile file = convertFileToMultipartFile(imagePath);
+            bookService.addBookImage(i, file);
         }
+    }
+
+    private MultipartFile convertFileToMultipartFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        FileInputStream input = new FileInputStream(file);
+        return new MockMultipartFile("file", file.getName(), "image/jpeg", input);
     }
 }

@@ -5,9 +5,16 @@ import org.example.DTO.BookDto;
 import org.example.mapper.BookMapper;
 import org.example.model.Book;
 import org.example.service.BookService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -105,5 +112,78 @@ public class BookController {
         }
         bookService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Метод загружает файл изображения для книги по её ID.
+     *
+     * @param bookId ID книги, к которой нужно загрузить изображение.
+     * @param file   файл изображения, который необходимо загрузить.
+     * @return ResponseEntity с обновленной книгой.
+     */
+    @PostMapping(value = "/{bookId}/image", consumes = "multipart/form-data")
+    public ResponseEntity<String> uploadImage(
+            @PathVariable int bookId,
+            @RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("File is empty");
+        }
+
+        try {
+            bookService.addBookImage(bookId, file);
+            return ResponseEntity.ok("File " + file.getOriginalFilename() + " added to book with id " + bookId);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * Метод для получения изображения книги из MongoDB по ID книги.
+     *
+     * @param bookId ID книги, изображение которой нужно получить.
+     * @return ResponseEntity с изображением в виде массива байтов.
+     */
+
+    @GetMapping("/{bookId}/image")
+    public ResponseEntity<byte[]> getBookImage(@PathVariable("bookId") int bookId) {
+        try {
+            byte[] imageData = bookService.getBookImageById(bookId);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(imageData);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * Метод для скачивания изображения книги из MongoDB по ID книги.
+     *
+     * @param bookId ID книги, изображение которой нужно скачать.
+     * @return ResponseEntity с изображением в виде массива байтов и заголовком Content-Disposition.
+     */
+    @GetMapping("/{bookId}/download-image")
+    public ResponseEntity<byte[]> downloadBookImage(@PathVariable("bookId") int bookId) {
+        try {
+            byte[] imageData = bookService.getBookImageById(bookId);
+            String fileName = bookService.getFileNameFromMongo(bookId);
+
+            // Кодирую имя файла для корректного отображения не-ASCII символов
+            String encodedFileName = UriUtils.encode(fileName, StandardCharsets.UTF_8);
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + encodedFileName)
+                    .body(imageData);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
