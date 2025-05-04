@@ -1,7 +1,9 @@
 package org.example.service;
 
 import com.mongodb.client.gridfs.model.GridFSFile;
+import com.mongodb.client.gridfs.model.GridFSUploadOptions;
 import lombok.RequiredArgsConstructor;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.example.model.Author;
 import org.example.model.Book;
@@ -9,9 +11,9 @@ import org.example.model.Genre;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.GenreRepository;
+import org.springframework.core.io.Resource;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,7 +75,7 @@ public class BookService {
      * Возвращает список книг по части имени автора.
      *
      * @param authorName часть имени автора
-     * @return
+     * @return список книг по части имени автора.
      */
     public List<Book> findByAuthorName(String authorName) {
         return bookRepository.findByAuthorNameContainingIgnoreCase(authorName);
@@ -157,27 +159,25 @@ public class BookService {
      * обновляет объект книги с идентификатором загруженного изображения и сохраняет изменения в базе данных PostgreSQL.
      *
      * @param bookId ID книги, к которой нужно добавить изображение.
-     * @param file файл изображения, который необходимо загрузить.
-     * @throws IOException если возникает ошибка при загрузке изображения.
+     * @param file   файл изображения, который необходимо загрузить.
+     * @throws IOException            если возникает ошибка при загрузке изображения.
      * @throws NoSuchElementException если книга с указанным ID не найдена.
      */
     public void addBookImage(int bookId, MultipartFile file) throws IOException {
-        // Проверяем, существует ли книга с указанным ID
-        Optional<Book> optionalBook = findById(bookId);
-        if (optionalBook.isEmpty()) {
-            throw new NoSuchElementException("Book with ID " + bookId + " not found");
-        }
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new NoSuchElementException("Book not found"));
 
-        Book book = optionalBook.get();
+        GridFSUploadOptions options = new GridFSUploadOptions()
+                .chunkSizeBytes(5 * 1024 * 1024) // 5MB чанки
+                .metadata(new Document("contentType", file.getContentType()));
 
         // Сохраняем файл и обновляем книгу
-        String imageFileId;
         try (InputStream inputStream = file.getInputStream()) {
+            // Используем GridFS для сохранения файла в MongoDB
             ObjectId fileId = gridFsTemplate.store(inputStream, file.getOriginalFilename(), "image/jpeg");
-            imageFileId = fileId.toString();
+            book.setImageFileId(fileId.toString());
+            bookRepository.save(book);
         }
-        book.setImageFileId(imageFileId);
-        bookRepository.save(book);
     }
 
     /**
@@ -186,18 +186,19 @@ public class BookService {
      * хранящегося в MongoDB, и возвращает данные изображения в виде массива байтов.
      *
      * @param bookId ID книги, изображение которой нужно получить.
-     * @return Массив байтов, представляющий данные изображения.
+     * @return объект типа {@link Resource}, представляющий данные изображения.
      * @throws IOException если возникает ошибка при чтении данных изображения.
      * @throws NoSuchElementException если книга с указанным ID не найдена.
      */
-    public byte[] getBookImageById(int bookId) throws IOException {
+
+    public Resource getBookImageById(int bookId) throws IOException {
         GridFSFile file = getFileFromMongo(bookId);
-        GridFsResource imageResource = gridFsTemplate.getResource(file);
-        return imageResource.getInputStream().readAllBytes();
+        return gridFsTemplate.getResource(file);
     }
 
     /**
      * Получает имя файла картинки из mongoDB по ID книги.
+     *
      * @param bookId ID книги, имя файла которой нужно получить.
      * @return имя файла.
      */
@@ -206,9 +207,9 @@ public class BookService {
         return file.getFilename();
     }
 
-
     /**
      * Получает файл фотографии из mongoDB по id книги
+     *
      * @param bookId ID книги, файл фотографии которой нужно получить
      * @return объект типа GridFSFile, содержащий метаданные о файле
      */
