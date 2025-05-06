@@ -1,0 +1,1 @@
+ALTER TABLE books ADD COLUMN image_file_id VARCHAR(255);
